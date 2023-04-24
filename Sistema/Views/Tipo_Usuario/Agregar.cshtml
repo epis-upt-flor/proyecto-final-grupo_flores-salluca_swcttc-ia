@@ -1,0 +1,54 @@
+﻿@model SistemaArtemis.Models.Tipo_Usuario
+@{
+    ViewBag.Title = "Agregar";
+    Layout = "~/Views/Shared/_AdministradorLayout.cshtml";
+}
+
+<div class="container-fluid">
+
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 bg-second-primary">
+            <h6 class="m-0 font-weight-bold text-white">Agregar Tipo Usuario</h6>
+        </div>
+
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-3">
+                    @*<p href="~/Tecnico/TrabajosDisponibles" class="btn btn-warning">Aceptar Nuevo Trabajo</p>*@
+                    @*<a href="~/Administrador/Index" class="btn btn-dark">Regresar</a>*@
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    
+
+                    @using (Html.BeginForm("Guardar", "Tipo_Usuario", FormMethod.Post, new { id = "frm-categoria" }))
+                    {
+                        @Html.HiddenFor(x => x.Id_Tipo_Usuario)
+                        <div class="card"></div>
+                        <div class="card" style="align-content:center">
+                            <div class="card-header">Información Tipo Usuario</div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    @Html.LabelFor(x => x.Nombre)
+                                    @Html.TextBoxFor(x => x.Nombre, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(x => x.Nombre, null, new { @class = "label label-danger" })
+                                </div>
+
+                            </div>
+                            <div>
+                                <button type="submit" class="btn btn-primary">Guardar</button>
+                                <a href="~/Tipo_Usuario" class="btn btn-danger">Cancelar</a>
+                            </div>
+                        </div>
+
+                    }
+
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+</div>

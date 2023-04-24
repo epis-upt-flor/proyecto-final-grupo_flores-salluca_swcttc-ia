@@ -1,0 +1,57 @@
+﻿@model List<SistemaArtemis.Models.Tipo_Usuario>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdministradorLayout.cshtml";
+}
+
+<div class="container-fluid">
+
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 bg-second-primary">
+            <h6 class="m-0 font-weight-bold text-white">Tipo Usuario</h6>
+        </div>
+
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-6">
+                    <a href="~/Tipo_Usuario/Agregar" class="btn btn-info"><i class="fas fa-user-plus"></i> Nuevo Registro</a>
+                    <h2 class="page-linl"></h2>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <table class="table table-bordered" id="tbdata" cellspacing="0" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Nombre</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var m in Model)
+                            {
+                                <tr>
+                                    <td>@(m. Id_Tipo_Usuario)</td>
+                                    <td>@(m.Nombre)</td>
+                                    <td>
+                                        <a href="~/Tipo_Usuario/Agregar/@m.Id_Tipo_Usuario" class="btn btn-primary btn-sm"><i class="fas fa-pencil-alt"></i></a>
+                                        <a onclick="return confirm('Esta Seguro que desea eliminar el registro?')" href="~/Tipo_Usuario/Eliminar/@m.Id_Tipo_Usuario" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a>
+                                    </td>
+
+                                </tr>
+                            }
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+</div>

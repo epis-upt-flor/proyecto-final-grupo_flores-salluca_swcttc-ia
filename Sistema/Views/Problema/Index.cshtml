@@ -1,0 +1,73 @@
+﻿@model SistemaArtemis.Models.Problema
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_TecnicoLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 bg-second-primary">
+            <h6 class="m-0 font-weight-bold text-white">Detalle del Problemas</h6>
+        </div>
+
+
+        <hr />
+        <dl class="dl-horizontal" style="padding-left: 35px;">
+            <dt>
+                @Html.DisplayNameFor(model => model.Cliente.Nombre)&nbsp;de Cliente
+            </dt>
+            <dd>
+                @*@Html.DisplayFor(model => model.Cliente.Nombre)*@
+                @Html.DisplayFor(model => model.Cliente.Nombre) &nbsp;&nbsp;
+                @Html.DisplayFor(model => model.Cliente.Apellido)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Descripcion)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Documento)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Documento)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Estado)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Estado)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Fecha_Inicio)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Fecha_Inicio)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Fecha_Fin)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Fecha_Fin)
+            </dd>
+
+
+
+
+        </dl>
+    </div>
+    <div class="text-right">
+        @*<a href="~/Tecnico/Index" class="btn btn-warning">Aceptar Trabajo</a>*@
+        <a href="~/Tecnico/TrabajosDisponibles" class="btn btn-danger">Cancelar</a>
+    </div>
+
+</div>

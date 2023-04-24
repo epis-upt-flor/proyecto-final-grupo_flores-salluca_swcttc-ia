@@ -1,0 +1,57 @@
+﻿
+@{
+    ViewBag.Title = "VisualizarCalificacion1";
+    Layout = "~/Views/Shared/_TecnicoLayout.cshtml";
+}
+
+
+
+<div class="container-fluid">
+
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 bg-second-primary">
+            <h6 class="m-0 font-weight-bold text-white">Mis Calificaciones</h6>
+        </div>
+
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-3">
+                    <a href="~/Tecnico/TrabajosDisponibles" class="btn btn-warning">Aceptar Nuevo Trabajo</a>
+                    <a href="~/Tecnico/Index" class="btn btn-dark">Regresar</a>
+                    <h2 class="page-linl"></h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <table class="table table-bordered" id="tbdata" cellspacing="0" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Comentario</th>
+                                <th>Calificación</th>
+                                <th>Nro.Servicio</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Se realizo el trabajo conforme, muy buena calidad, un buen servicio</td>
+                                <td>8</td>
+                                <td>1</td>
+                            </tr>
+
+                            
+                        </tbody>
+                        
+                    </table>
+                   
+                </div>
+                
+               
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+

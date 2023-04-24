@@ -1,0 +1,66 @@
+﻿
+@{
+    ViewBag.Title = "ListarCliente";
+    Layout = "~/Views/Shared/_ClienteLayout.cshtml";
+}
+
+
+<div class="container-fluid">
+
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 bg-second-primary">
+            <h6 class="m-0 font-weight-bold text-white">Listar Servicios</h6>
+        </div>
+
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-3">
+                    @*<p href="~/Tecnico/TrabajosDisponibles" class="btn btn-warning">Aceptar Nuevo Trabajo</p>*@
+                    <a href="~/Cliente/Index" class="btn btn-dark">Regresar</a>
+                    <h2 class="pagegeader"></h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <table class="table table-bordered" id="tbdata" cellspacing="0" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Descripción</th>
+                                <th>Fecha Inicio</th>
+                                <th>Fecha Fin</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Mantenimiento y Limpieza para casa</td>
+                                <td>2023-04-20</td>
+                                <td>2023-04-30</td>
+                                <td> <span class="badge badge-danger">En Proceso</span></td>
+                                <td>
+                                    <button class="btn btn-primary btn-sm">
+                                        <i class="fas fa-pencil-alt"></i>
+                                    </button>
+                                    <button class="btn btn-danger btn-sm">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </td>
+
+                            </tr>
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,65 @@
+﻿@model SistemaArtemis.Models.Usuario
+@{
+    ViewBag.Title = "Agregar";
+    Layout = "~/Views/Shared/_AdministradorLayout.cshtml";
+    List<SistemaArtemis.Models.Tipo_Usuario> tipousuarios = ViewBag.tipo;
+}
+
+
+@using (Html.BeginForm("Guardar", "Usuario", FormMethod.Post, new { id = "frm-categoria" }))
+{
+    @Html.HiddenFor(x => x.Id_Usuario)
+    <div class="card">
+        <div class="card-header">Informacion del Usuario</div>
+        <div class="card-body">
+            <div class="form-group">
+                @Html.LabelFor(x => x.Nombre)
+                @Html.TextBoxFor(x => x.Nombre, new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.Nombre, null, new { @class = "label label-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(x => x.Apellido)
+                @Html.TextBoxFor(x => x.Apellido, new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.Apellido, null, new { @class = "label label-danger" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(x => x.Correo)
+                @Html.TextBoxFor(x => x.Correo, new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.Correo, null, new { @class = "label label-danger" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(x => x.Password)
+                @Html.PasswordFor(x => x.Password, new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.Password, null, new { @class = "label label-danger" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(x => x.Estado)
+                <select name="ESTADO" class="form-control">
+                    <option @(Model.Estado == 1 ? "Selected" : "") value="1">Activo</option>
+                    <option @(Model.Estado == 2 ? "Selected" : "") value="2">Inactivo</option>
+                </select>
+                @Html.ValidationMessageFor(x => x.Estado, null, new { @class = "label label-danger" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(x => x.Tipo_Usuario)
+                <select name="Id_Tipo_Usuario" class="form-control">
+                    <option @(Model.Id_Tipo_Usuario == null ? "selected" : "") value="">--Seleccione--</option>
+                    <option @(Model.Id_Tipo_Usuario == 2 ? "selected" : "") value="1">Administrador</option>
+                    <option @(Model.Id_Tipo_Usuario == 2 ? "selected" : "") value="2">Tecnico</option>
+                    <option @(Model.Id_Tipo_Usuario == 3 ? "selected" : "") value="3">Cliente</option>
+                </select>
+                @Html.ValidationMessageFor(x => x.Id_Tipo_Usuario, null, new { @class = "label label-danger" })
+            </div>
+
+         </div>
+
+        <div class="text-right">
+            <button type="submit" class="btn btn-primary">Guardar</button>
+            <a href="~/Usuario" class="btn btn-danger">Cancelar</a>
+        </div>
+        <br /><br /><br />
+
+
+    </div>
+}
