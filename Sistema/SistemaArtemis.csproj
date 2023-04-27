@@ -1921,6 +1921,9 @@
     <Compile Include="Models\Conexion.cs" />
     <Compile Include="Models\Estado_Servicio.cs" />
     <Compile Include="Models\Estado_Tecnico.cs" />
+    <Compile Include="Models\Login\HashHelper.cs" />
+    <Compile Include="Models\Login\ResponseModel.cs" />
+    <Compile Include="Models\Login\SessionHelper.cs" />
     <Compile Include="Models\Model1.cs" />
     <Compile Include="Models\Modelo_Ia.cs" />
     <Compile Include="Models\Problema.cs" />
@@ -2190,6 +2193,8 @@
     <Content Include="Views\Usuario\Agregar.cshtml" />
     <Content Include="Views\Tipo_Usuario\Agregar.cshtml" />
     <Content Include="Views\Tipo_Usuario\Index.cshtml" />
+    <Content Include="Views\Tecnico\Perfil.cshtml" />
+    <Content Include="Views\Cliente\Perfil.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -47,6 +47,27 @@ namespace SistemaArtemis.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Servicio> Servicio { get; set; }
 
+        public Cliente Obtener(int id)
+        {
+            var clientes = new Cliente();
+            try
+            {
+                using (var db = new Model1())
+                {
+                    clientes = db.Cliente
+                        .Include("Usuario")
+                        .Where(x => x.Id_Usuario == id)
+                                .SingleOrDefault();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return clientes;
+        }
+
 
 
         public void Guardar()

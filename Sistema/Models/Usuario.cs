@@ -76,7 +76,7 @@ namespace SistemaArtemis.Models
                     respuesta = Convert.ToInt32(cmd.Parameters["Resultado"].Value);
 
                 }
-                catch (Exception )
+                catch (Exception)
                 {
                     respuesta = 0;
                 }
@@ -221,6 +221,7 @@ namespace SistemaArtemis.Models
                 using (var db = new Model1())
                 {
                     usuario = db.Usuario.Include("Tipo_Usuario")
+                        .Include("Tecnico").Include("Cliente")
                         .Where(x => x.Correo == Correo)
                         .SingleOrDefault();
                 }
@@ -232,6 +233,7 @@ namespace SistemaArtemis.Models
             }
             return usuario;
         }
+
 
 
 

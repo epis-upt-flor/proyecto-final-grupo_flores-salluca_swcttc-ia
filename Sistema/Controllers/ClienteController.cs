@@ -12,7 +12,7 @@ namespace SistemaArtemis.Controllers
     public class ClienteController : Controller
     {
         Tecnico objTecnico = new Tecnico();
-        // Cliente objCliente = new Cliente();
+        Cliente objCliente = new Cliente();
         private Model1 db = new Model1();
 
 
@@ -36,6 +36,16 @@ namespace SistemaArtemis.Controllers
         {
             return View();
         }
+
+        public ActionResult Perfil(int id = 0)
+        {
+            if (id != 0)
+                return View(objCliente.Obtener(id));
+            else
+                return Redirect("~/Cliente");
+            //return View();
+        }
+
 
 
         public ActionResult Guardar(Cliente model)

@@ -1,0 +1,101 @@
+﻿@model SistemaArtemis.Models.Tecnico
+@{
+    ViewBag.Title = "Perfil";
+    Layout = "~/Views/Shared/_TecnicoLayout.cshtml";
+}
+
+
+@using (Html.BeginForm("Guardar", "Tecnico", FormMethod.Post, new { id = "frm-categoria" }))
+{
+
+    @Html.HiddenFor(x => x.Id_Tecnico)
+    <div class="content-wrapper">
+
+        <div class="card shadow mb-6">
+            <div class="card-header py-3 bg-second-primary">
+                <h6 class="m-0 font-weight-bold text-white"><i class="fas fa-user"></i> Mis Datos</h6>
+            </div>
+            <div class="card-body">
+                <form>
+                    <div class="form-row">
+                        <div class="form-group col-sm-12">
+                            <img id="imgFoto" src="https://img.freepik.com/vector-premium/actualizacion-datos-o-sincronizacion-proceso-barras-personas-planas-actualizacion-computadora-portatil-telefono-inteligente_123447-4910.jpg?w=826" class="rounded mx-auto d-block" style="width: 200px; height: 200px;">
+                        </div>
+
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-sm-12">
+                            @*<label for="txtNombre">Nombre</label>*@
+                            @Html.LabelFor(x => x.Nombre)
+                            @Html.TextBoxFor(x => x.Nombre, new { @class = "form-control", disabled = "disabled" })
+                            @Html.ValidationMessageFor(x => x.Nombre, null, new { @class = "label label-danger" })
+
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-sm-12">
+                            @*<label for="txtNombre">Nombre</label>*@
+                            @Html.LabelFor(x => x.Apellido)
+                            @Html.TextBoxFor(x => x.Apellido, new { @class = "form-control", disabled = "disabled" })
+                            @Html.ValidationMessageFor(x => x.Apellido, null, new { @class = "label label-danger" })
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-sm-12">
+                            @*<label for="txtNombre">Nombre</label>*@
+                            @Html.LabelFor(x => x.Telefono)
+                            @Html.TextBoxFor(x => x.Telefono, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.Telefono, null, new { @class = "label label-danger" })
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-sm-12">
+                            @*<label for="txtNombre">Nombre</label>*@
+                            @Html.LabelFor(x => x.Especialidad)
+                            @Html.TextBoxFor(x => x.Especialidad, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.Especialidad, null, new { @class = "label label-danger" })
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-sm-12">
+                            @*<label for="txtNombre">Nombre</label>*@
+                            @Html.LabelFor(x => x.Estado_Tecnico)
+                            @Html.TextBoxFor(x => x.Estado_Tecnico.Descripcion, new { @class = "form-control", disabled = "disabled" })
+
+                        </div>
+                    </div>
+                    @*<div class="form-row">
+                            <div class="form-group col-sm-12">
+                                <label for="txtCorreo">Correo</label>
+                                <input type="email" class="form-control form-control-sm" id="txtCorreo">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-sm-12">
+                                <label for="txTelefono">Telefono</label>
+                                <input type="text" class="form-control form-control-sm" id="txTelefono">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-sm-12">
+                                <label for="txtRol">Rol</label>
+                                <input type="text" class="form-control form-control-sm" disabled id="txtRol">
+                            </div>*@
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <button type="submit" class="btn btn-success btn-sm btn-block" id="btnGuardarCambios">Guardar Cambios</button>
+
+                        </div>
+                        <div class="col-sm-3">
+                            <a href="~/Tecnico" class="btn btn-danger  btn-sm btn-block">Cancelar</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+    </div>
+
+}

@@ -11,7 +11,7 @@ namespace SistemaArtemis.Controllers
 {
     public class TecnicoController : Controller
     {
-        //private Tecnico objtecnico = new Tecnico();
+        private Tecnico objtecnico = new Tecnico();
         private Servicio objservicio = new Servicio();
         private Model1 db = new Model1();
 
@@ -21,6 +21,16 @@ namespace SistemaArtemis.Controllers
             return View();
 
         }
+
+        public ActionResult Perfil(int id = 0)
+        {
+            if (id != 0)
+                return View(objtecnico.Obtener(id));
+            else
+                return Redirect("~/Tecnico");
+            //return View();
+        }
+
 
         public ActionResult TrabajosDisponibles()
         {

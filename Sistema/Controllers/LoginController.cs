@@ -38,27 +38,27 @@ namespace SistemaArtemis.Controllers
                 if (reader.Read())
                 {
                     usuario.Id_Tipo_Usuario = Convert.ToInt32(reader["Id_Tipo_Usuario"]);
-                    usuario.Id_Usuario = Convert.ToInt32(reader["Id_Usuario"]);
-
+                    //usuario.Id_Usuario = Convert.ToInt32(reader["Id_Usuario"]);
+                    Session["Correo"] = usuario.Correo;
                 }
                  
             }
 
             if (usuario.Id_Tipo_Usuario == 1)
             {
-                ViewBag.idusu = usuario.Id_Usuario;
+                //ViewBag.idusu = usuario.Id_Usuario;
                 return RedirectToAction("Index", "Administrador");
 
             }
             else if (usuario.Id_Tipo_Usuario == 2)
             {
-                ViewBag.idusu = usuario.Id_Usuario;
+                //ViewBag.idusu = usuario.Id_Usuario;
                 return RedirectToAction("Index", "Tecnico");
 
             }
             else if (usuario.Id_Tipo_Usuario == 3)
             {
-                ViewBag.idusu = usuario.Id_Usuario;
+                //ViewBag.idusu = usuario.Id_Usuario;
                 return RedirectToAction("Index", "Cliente");
 
             }
