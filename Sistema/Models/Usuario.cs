@@ -9,6 +9,7 @@ namespace SistemaArtemis.Models
     using System.Data.Entity.Spatial;
     using System.Data.SqlClient;
     using System.Linq;
+    using SistemaArtemis.Models.Login;
 
     [Table("Usuario")]
     public partial class Usuario
@@ -231,7 +232,42 @@ namespace SistemaArtemis.Models
             }
             return usuario;
         }
-       
+
+
+
+
+        public ResponseModel Acceder(string Correo, string Password)
+        {
+            var rm = new ResponseModel();
+
+            try
+            {
+                using (var db = new Model1())
+                {
+                    Password = HashHelper.MD5(Password);
+
+                    var usuario = db.Usuario.Where(x => x.Correo == Correo)
+                                            .Where(x => x.Password == Password)
+                                            .SingleOrDefault();
+
+                    if (usuario != null)
+                    {
+                        SessionHelper.AddUserToSession(Id_Usuario.ToString());
+                        rm.SetResponse(true);
+                    }
+                    else
+                    {
+                        rm.SetResponse(false, "Usuario y/o Password incorrectos...");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            return rm;
+        }
+
 
 
     }
