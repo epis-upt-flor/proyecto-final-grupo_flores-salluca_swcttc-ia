@@ -7,8 +7,6 @@
     SistemaArtemis.Models.Usuario usuario = new SistemaArtemis.Models.Usuario();
     var usuarios = usuario.ObtenerDatos((string)Session["Correo"]);
 
-
-
 }
 
 <!DOCTYPE html>
@@ -120,7 +118,7 @@
                 </li>*@
 
             <!-- Divider -->
-            <hr class="sidebar-divider">
+            <hr class="sidebar-divider"> 
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
@@ -155,7 +153,7 @@
                                      src="~/Source/img/undraw_profile.svg">
                             </a>
 
-
+                            @*{ int id_Tecnico = 2;}*@
 
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"

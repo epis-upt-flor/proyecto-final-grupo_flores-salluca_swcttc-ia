@@ -31,6 +31,20 @@ namespace SistemaArtemis.Controllers
             //return View();
         }
 
+        public ActionResult Guardar(Tecnico model)
+        {
+            if (ModelState.IsValid)
+            {
+                model.Guardar();
+                return Redirect("~/Tecnico/Index");
+            }
+            else
+            {
+                model.Guardar();
+                return View("~/Tecnico/Perfil");
+            }
+        }
+
 
         public ActionResult TrabajosDisponibles()
         {
@@ -56,18 +70,12 @@ namespace SistemaArtemis.Controllers
 
         }
 
-        public ActionResult Guardar(Tecnico model)
-        {
-            if (ModelState.IsValid)
-            {
-                model.Guardar();
-                return Redirect("~/Tecnico/Index");
-            }
-            else
-            {
-                return View("~/Tecnico/TrabajosDísponibles");
-            }
-        }
+    
+
+
+
+
+
 
 
 
@@ -95,6 +103,8 @@ namespace SistemaArtemis.Controllers
             
             return View();
         }
+
+
 
         // POST: Tecnico/Create
         [HttpPost]

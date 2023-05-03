@@ -1906,6 +1906,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdministradorController.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
+    <Compile Include="Controllers\Estado_TecnicoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ProblemaController.cs" />
@@ -2195,6 +2196,8 @@
     <Content Include="Views\Tipo_Usuario\Index.cshtml" />
     <Content Include="Views\Tecnico\Perfil.cshtml" />
     <Content Include="Views\Cliente\Perfil.cshtml" />
+    <Content Include="Views\Problema\ListarProblemaCliente.cshtml" />
+    <Content Include="Views\Problema\Agregar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -2204,6 +2207,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Estado_Tecnico\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

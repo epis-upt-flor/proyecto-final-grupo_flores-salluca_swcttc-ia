@@ -53,11 +53,11 @@ namespace SistemaArtemis.Controllers
             if (ModelState.IsValid)
             {
                 model.Guardar();
-                return Redirect("~/Cliente/index");
+                return Redirect("~/Cliente/Index");
             }
             else
             {
-                return View("~/Cliente/Agregar");
+                return View("~/Cliente/Perfil");
             }
         }
 

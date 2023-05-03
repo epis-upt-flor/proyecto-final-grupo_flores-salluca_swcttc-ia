@@ -99,9 +99,9 @@ namespace SistemaArtemis.Models
 
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
         }
 

@@ -265,7 +265,7 @@ namespace SistemaArtemis.Models
             }
             catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
             return rm;
         }

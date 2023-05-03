@@ -4,8 +4,11 @@ namespace SistemaArtemis.Models
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity;
     using System.Data.Entity.Spatial;
     using System.Linq;
+    using System.Runtime.Remoting;
+    using System.Web.Mvc;
 
     [Table("Problema")]
     public partial class Problema
@@ -43,6 +46,8 @@ namespace SistemaArtemis.Models
 
 
         //Model1 db = new Model1();
+
+
 
 
         public List<Problema> Listar()
@@ -84,8 +89,96 @@ namespace SistemaArtemis.Models
 
             return sc;
         }
+        public List<Problema> ListarProblema(int id)
+        {
+            var misproblemas = new List<Problema>();
+            try
+            {
+                using (var db = new Model1())
+                {
+                    var icliente = db.Cliente.Where(u => u.Id_Usuario == id).Select(u => u.Id_Cliente).SingleOrDefault();
+
+                    if (icliente != 0)
+                    {
+                        misproblemas = db.Problema
+                            .Include("Cliente")
+                            .Where(x => x.Id_Cliente == icliente)
+                            .ToList();
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return misproblemas;
+        }
+
+        public int ObtenerIdCliente(int id)
+        {
+            int idCliente = 0;
+            try
+            {
+                using (var db = new Model1())
+                {
+                    var cliente = db.Cliente.SingleOrDefault(c => c.Id_Usuario == id);
+                    if (cliente != null)
+                    {
+                        idCliente = cliente.Id_Cliente;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return idCliente;
+        }
 
 
+        public void Guardar()
+        {
+            try
+            {
+                using (var db = new Model1())
+                {
+                    if (this.Id_Problema > 0)
+                    {
+                        db.Entry(this).State = EntityState.Modified;
+                    }
+                    else
+                    {
+                        db.Entry(this).State = EntityState.Added;
+                    }
+                    db.SaveChanges();
+
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        ///METODO Eliminar
+        public void Eliminar()
+        {
+            try
+            {
+                using (var db = new Model1())
+                {
+
+                    db.Entry(this).State = EntityState.Deleted;
+
+                    db.SaveChanges();
+
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
     }
 }

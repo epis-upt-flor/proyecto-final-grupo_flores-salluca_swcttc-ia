@@ -1,0 +1,98 @@
+﻿@model List<SistemaArtemis.Models.Problema>
+@{
+    ViewBag.Title = "ListarProblemaCliente";
+    Layout = "~/Views/Shared/_ClienteLayout.cshtml";
+
+}
+
+@*<h2>ListarProblemaCliente</h2>*@
+
+<div class="container-fluid">
+
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 bg-second-primary">
+            <h6 class="m-0 font-weight-bold text-white">Mis Servicios - Descripción del Trabajo </h6>
+        </div>
+
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-3">
+                    @*<p href="~/Tecnico/TrabajosDisponibles" class="btn btn-warning">Aceptar Nuevo Trabajo</p>*@
+                    <a href="~/Cliente/Index" class="btn btn-dark">Regresar</a>
+                    <h2 class="pagegeader"></h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <table class="table table-bordered" id="tbdata" cellspacing="0" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Descripción</th>
+                                <th>Cotización</th>
+                                <th>Inicio de la Publicación</th>
+                                <th>Fin de la Publicación</th>
+                                <th>Estado</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{ var i = 0;}
+                            @foreach (var t in Model)
+                            {
+                                i++;
+                                <tr>
+                                    <td>@i</td>
+                                    <td>@t.Descripcion</td>
+                                    <td>@t.Documento</td>
+                                    <td>@t.Fecha_Inicio.ToString("dd/MM/yyyy")</td>
+                                    <td>@t.Fecha_Fin.ToString("dd/MM/yyyy")</td>
+
+                                    @if (t.Estado == "Pendiente")
+                                    {
+                                        <td> <span class="badge badge-success">Pendiente</span></td>
+                                    }
+                                    @if (t.Estado == "En Proceso")
+                                    {
+                                        <td> <span class="badge badge-warning">En Proceso</span></td>
+                                    }
+                                    @if (t.Estado == "Finalizado")
+                                    {
+                                        <td> <span class="badge badge-danger">Finalizado</span></td>
+                                    }
+
+
+
+
+                                </tr>
+                            }
+                            @*<tr>
+            <td>1</td>
+            <td>Mantenimiento y Limpieza para casa</td>
+            <td>2023-04-20</td>
+            <td>2023-04-30</td>
+            <td> <span class="badge badge-danger">En Proceso</span></td>
+            <td>
+                <button class="btn btn-primary btn-sm">
+                    <i class="fas fa-pencil-alt"></i>
+                </button>
+                <button class="btn btn-danger btn-sm">
+                    <i class="fas fa-trash-alt"></i>
+                </button>
+            </td>
+
+        </tr>*@
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
