@@ -31,10 +31,12 @@ namespace SistemaArtemis.Models
         [StringLength(20)]
         public string Estado { get; set; }
 
-        [Column(TypeName = "date")]
+        //[Column(TypeName = "date")]
+        [DataType(DataType.Date)]
         public DateTime Fecha_Inicio { get; set; }
 
-        [Column(TypeName = "date")]
+        //[Column(TypeName = "date")]
+        [DataType(DataType.Date)]
         public DateTime Fecha_Fin { get; set; }
 
         public int Id_Cliente { get; set; }
@@ -46,8 +48,6 @@ namespace SistemaArtemis.Models
 
 
         //Model1 db = new Model1();
-
-
 
 
         public List<Problema> Listar()
@@ -135,6 +135,7 @@ namespace SistemaArtemis.Models
 
             return idCliente;
         }
+  
 
 
         public void Guardar()
@@ -160,6 +161,9 @@ namespace SistemaArtemis.Models
                 throw;
             }
         }
+
+
+
         ///METODO Eliminar
         public void Eliminar()
         {
