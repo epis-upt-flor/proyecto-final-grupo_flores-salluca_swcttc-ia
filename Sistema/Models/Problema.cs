@@ -7,8 +7,6 @@ namespace SistemaArtemis.Models
     using System.Data.Entity;
     using System.Data.Entity.Spatial;
     using System.Linq;
-    using System.Runtime.Remoting;
-    using System.Web.Mvc;
 
     [Table("Problema")]
     public partial class Problema
@@ -31,12 +29,10 @@ namespace SistemaArtemis.Models
         [StringLength(20)]
         public string Estado { get; set; }
 
-        //[Column(TypeName = "date")]
-        [DataType(DataType.Date)]
+        [Column(TypeName = "date")]
         public DateTime Fecha_Inicio { get; set; }
 
-        //[Column(TypeName = "date")]
-        [DataType(DataType.Date)]
+        [Column(TypeName = "date")]
         public DateTime Fecha_Fin { get; set; }
 
         public int Id_Cliente { get; set; }
@@ -45,10 +41,6 @@ namespace SistemaArtemis.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Servicio> Servicio { get; set; }
-
-
-        //Model1 db = new Model1();
-
 
         public List<Problema> Listar()
         {
@@ -64,9 +56,7 @@ namespace SistemaArtemis.Models
             {
                 throw ex;
             }
-
             return problema;
-
         }
 
         public Problema Obtener(int id)
@@ -79,16 +69,16 @@ namespace SistemaArtemis.Models
                     sc = db.Problema
                         .Include("Cliente")
                         .Where(x => x.Id_Cliente == id)
-                                .SingleOrDefault();
+                        .SingleOrDefault();
                 }
             }
             catch (Exception)
             {
                 throw;
             }
-
             return sc;
         }
+
         public List<Problema> ListarProblema(int id)
         {
             var misproblemas = new List<Problema>();
@@ -96,8 +86,10 @@ namespace SistemaArtemis.Models
             {
                 using (var db = new Model1())
                 {
-                    var icliente = db.Cliente.Where(u => u.Id_Usuario == id).Select(u => u.Id_Cliente).SingleOrDefault();
-
+                    var icliente = db.Cliente
+                        .Where(u => u.Id_Usuario == id)
+                        .Select(u =>u.Id_Cliente)
+                        .SingleOrDefault();
                     if (icliente != 0)
                     {
                         misproblemas = db.Problema
@@ -132,11 +124,8 @@ namespace SistemaArtemis.Models
             {
                 throw;
             }
-
             return idCliente;
         }
-  
-
 
         public void Guardar()
         {
@@ -153,7 +142,6 @@ namespace SistemaArtemis.Models
                         db.Entry(this).State = EntityState.Added;
                     }
                     db.SaveChanges();
-
                 }
             }
             catch (Exception)
@@ -183,6 +171,5 @@ namespace SistemaArtemis.Models
                 throw;
             }
         }
-
     }
 }

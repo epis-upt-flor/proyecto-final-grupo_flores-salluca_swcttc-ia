@@ -15,10 +15,11 @@
 
         <div class="card-body">
             <div class="row">
-                @*<div class="col-sm-3">
-                    <p href="~/Tecnico/TrabajosDisponibles" class="btn btn-warning">Aceptar Nuevo Trabajo</p>
-                    <p href="~/Tecnico/Index" class="btn btn-success">Regresar</p>
-                </div>*@
+                <div class="col-sm-3">
+                    @*<p href="~/Tecnico/TrabajosDisponibles" class="btn btn-warning">Aceptar Nuevo Trabajo</p>*@
+                    <a href="~/Cliente/Index" class="btn btn-dark">Regresar</a>
+                    <h2 class="pagegeader"></h2>
+                </div>
             </div>
             <div class="row">
                 <div class="col-sm-12">
@@ -29,9 +30,9 @@
                                 <th>Nombre</th>
                                 <th>Apellido</th>
                                 <th>Telefono</th>
-                                <th>Especialidad</th>
+                                @*<th>Especialidad</th>*@
                                 <th>Estado</th>
-                                <th></th>
+                                <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -42,7 +43,8 @@
                                     <td>@(m.Nombre)</td>
                                     <td>@(m.Apellido)</td>
                                     <td>@(m.Telefono)</td>
-                                    <td>@(m.Especialidad)</td>
+                                    @*<td>@ (m.Id_Especialidad)</td>*@
+
                                     @if (m.Id_Estado_Tecnico == 1)
                                     {
                                         <td> <span class="badge badge-info">Activo</span></td>

@@ -25,12 +25,7 @@ namespace SistemaArtemis.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Usuario> Usuario { get; set; }
 
-
-
-
         ///METODO LISTAR
-
-
         public List<Tipo_Usuario> Listar()
         {
             var tipousuario = new List<Tipo_Usuario>();
@@ -45,32 +40,26 @@ namespace SistemaArtemis.Models
             {
                 throw ex;
             }
-
-
             return tipousuario;
-
         }
+
         public List<Tipo_Usuario> Buscar(string criterio)
         {
             var categorias = new List<Tipo_Usuario>();
-
             try
             {
                 using (var db = new Model1())
                 {
-                    categorias = db.Tipo_Usuario.Where(x => x.Nombre.Contains(criterio))
-                                .ToList();
-
+                    categorias = db.Tipo_Usuario
+                        .Where(x => x.Nombre.Contains(criterio))
+                        .ToList();
                 }
             }
             catch (Exception)
             {
                 throw;
             }
-
             return categorias;
-
-
         }
 
         public Tipo_Usuario Obtener(int id)
@@ -80,15 +69,15 @@ namespace SistemaArtemis.Models
             {
                 using (var db = new Model1())
                 {
-                    categoria = db.Tipo_Usuario.Where(x => x.Id_Tipo_Usuario == id)
-                                .SingleOrDefault();
+                    categoria = db.Tipo_Usuario
+                        .Where(x => x.Id_Tipo_Usuario == id)
+                        .SingleOrDefault();
                 }
             }
             catch (Exception)
             {
                 throw;
             }
-
             return categoria;
         }
 
@@ -107,7 +96,6 @@ namespace SistemaArtemis.Models
                         db.Entry(this).State = EntityState.Added;
                     }
                     db.SaveChanges();
-
                 }
             }
             catch (Exception)
@@ -115,17 +103,15 @@ namespace SistemaArtemis.Models
                 throw;
             }
         }
+
         public void Eliminar()
         {
             try
             {
                 using (var db = new Model1())
                 {
-
                     db.Entry(this).State = EntityState.Deleted;
-
                     db.SaveChanges();
-
                 }
             }
             catch (Exception)

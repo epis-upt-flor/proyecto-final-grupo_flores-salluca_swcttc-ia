@@ -18,8 +18,12 @@ namespace SistemaArtemis.Models
         [Column("Calificacion")]
         public int? Calificacion1 { get; set; }
 
+        public int? Id_Cliente { get; set; }
+
         public int? Id_Servicio { get; set; }
 
         public virtual Servicio Servicio { get; set; }
+
+        public virtual Cliente Cliente { get; set; }
     }
 }

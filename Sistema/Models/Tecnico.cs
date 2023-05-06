@@ -4,10 +4,8 @@ namespace SistemaArtemis.Models
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data;
     using System.Data.Entity;
     using System.Data.Entity.Spatial;
-    using System.Data.SqlClient;
     using System.Linq;
 
     [Table("Tecnico")]
@@ -16,8 +14,8 @@ namespace SistemaArtemis.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Tecnico()
         {
+            RTecnico_TipoEspecialidad = new HashSet<RTecnico_TipoEspecialidad>();
             Servicio = new HashSet<Servicio>();
-            Tecnico_TipoEspecialidad = new HashSet<Tecnico_TipoEspecialidad>();
         }
 
         [Key]
@@ -35,24 +33,23 @@ namespace SistemaArtemis.Models
         [StringLength(20)]
         public string Telefono { get; set; }
 
-        [Required]
-        [StringLength(250)]
-        public string Especialidad { get; set; }
+        public int Id_Especialidad { get; set; }
 
-        public int? Id_Estado_Tecnico { get; set; }
+        public int Id_Estado_Tecnico { get; set; }
 
         public int Id_Usuario { get; set; }
 
+        public virtual Especialidad Especialidad { get; set; }
+
         public virtual Estado_Tecnico Estado_Tecnico { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RTecnico_TipoEspecialidad> RTecnico_TipoEspecialidad { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Servicio> Servicio { get; set; }
 
         public virtual Usuario Usuario { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Tecnico_TipoEspecialidad> Tecnico_TipoEspecialidad { get; set; }
-
 
 
 
@@ -66,7 +63,6 @@ namespace SistemaArtemis.Models
                     tecnicos = db.Tecnico.Include("Estado_Tecnico")
                         .Include("Tecnico_TipoEspecialidad")
                         .Include("Usuario")
-                        
                         .Where(x => x.Id_Usuario == id)
                                 .SingleOrDefault();
                 }
@@ -75,12 +71,10 @@ namespace SistemaArtemis.Models
             {
                 throw;
             }
-
             return tecnicos;
         }
 
 
-   
         public void Guardar()
         {
             try
@@ -96,7 +90,6 @@ namespace SistemaArtemis.Models
                         db.Entry(this).State = EntityState.Added; //nuevo registro
                     }
                     db.SaveChanges();
-
                 }
             }
             catch (Exception ex)
@@ -121,9 +114,7 @@ namespace SistemaArtemis.Models
             {
                 throw;
             }
-
             return tecnico;
-
         }
 
 
@@ -131,14 +122,16 @@ namespace SistemaArtemis.Models
         public List<Tecnico> Buscar(string criterio)
         {
             var categorias = new List<Tecnico>();
-
             try
             {
                 using (var db = new Model1())
                 {
-                    categorias = db.Tecnico.Include("Tipo_Usuario").Where(x => x.Nombre.Contains(criterio) ||
-                                x.Apellido.Contains(criterio) || x.Especialidad.Contains(criterio))
-                                .ToList();
+                    categorias = db.Tecnico
+                        .Include("Tipo_Usuario")
+                        .Where(x => x.Nombre.Contains(criterio) ||
+                                x.Apellido.Contains(criterio) )//|| 
+                               // x.Especialidad.Contains(criterio))
+                        .ToList();
 
                 }
             }

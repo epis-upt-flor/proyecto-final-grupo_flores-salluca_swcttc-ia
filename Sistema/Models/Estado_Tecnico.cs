@@ -28,9 +28,6 @@ namespace SistemaArtemis.Models
         public virtual ICollection<Tecnico> Tecnico { get; set; }
 
 
-        //Model1 db = new Model1();
-
-        //Listar EstadoTecnico
         public List<Estado_Tecnico> Listar()
         {
             var sc = new List<Estado_Tecnico>();
@@ -53,24 +50,20 @@ namespace SistemaArtemis.Models
         public List<Estado_Tecnico> Buscar(string criterio)
         {
             var estadotecnico = new List<Estado_Tecnico>();
-
             try
             {
                 using (var db = new Model1())
                 {
-                    estadotecnico = db.Estado_Tecnico.Where(x => x.Descripcion.Contains(criterio))
-                                .ToList();
-
+                    estadotecnico = db.Estado_Tecnico
+                        .Where(x => x.Descripcion.Contains(criterio))
+                        .ToList();
                 }
             }
             catch (Exception)
             {
                 throw;
             }
-
             return estadotecnico;
-
-
         }
 
 
@@ -81,15 +74,15 @@ namespace SistemaArtemis.Models
             {
                 using (var db = new Model1())
                 {
-                    estadotecnico = db.Estado_Tecnico.Where(x => x.Id_Estado_Tecnico == id)
-                                .SingleOrDefault();
+                    estadotecnico = db.Estado_Tecnico
+                        .Where(x => x.Id_Estado_Tecnico == id)
+                        .SingleOrDefault();
                 }
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-
             return estadotecnico;
         }
 
@@ -108,7 +101,6 @@ namespace SistemaArtemis.Models
                         db.Entry(this).State = EntityState.Added;
                     }
                     db.SaveChanges();
-
                 }
             }
             catch (Exception)
@@ -116,17 +108,15 @@ namespace SistemaArtemis.Models
                 throw;
             }
         }
+
         public void Eliminar()
         {
             try
             {
                 using (var db = new Model1())
                 {
-
                     db.Entry(this).State = EntityState.Deleted;
-
                     db.SaveChanges();
-
                 }
             }
             catch (Exception)
@@ -134,7 +124,6 @@ namespace SistemaArtemis.Models
                 throw;
             }
         }
-
 
     }
 }

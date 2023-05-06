@@ -30,35 +30,20 @@ namespace SistemaArtemis.Models
         [Column(TypeName = "date")]
         public DateTime Fecha_Fin { get; set; }
 
-        public int Id_Cliente { get; set; }
-
         public int Id_Tecnico { get; set; }
 
         public int Id_Problema { get; set; }
-
-        public int Id_Tipo_Especialidad { get; set; }
 
         public int Id_Estado_Servicio { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Calificacion> Calificacion { get; set; }
 
-        public virtual Cliente Cliente { get; set; }
-
         public virtual Estado_Servicio Estado_Servicio { get; set; }
 
         public virtual Problema Problema { get; set; }
 
         public virtual Tecnico Tecnico { get; set; }
-
-        public virtual TipoEspecialidad TipoEspecialidad { get; set; }
-
-        //Model1 db = new Model1();
-
-
-
-  
-
 
 
         public List<Servicio> Listar()
@@ -75,17 +60,13 @@ namespace SistemaArtemis.Models
                            .Include("TipoEspecialidad")
                            .Where(s => s.Id_Estado_Servicio == 1)
                      .ToList();
-
-
                 }
             }
             catch (Exception)
             {
                 throw;
             }
-
             return serv;
-
         }
 
 
@@ -107,8 +88,6 @@ namespace SistemaArtemis.Models
             }
             return misservicios;
         }
-
-
 
 
         public void Guardar()
@@ -136,3 +115,4 @@ namespace SistemaArtemis.Models
 
     }
 }
+

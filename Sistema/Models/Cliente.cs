@@ -4,10 +4,8 @@ namespace SistemaArtemis.Models
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data;
     using System.Data.Entity;
     using System.Data.Entity.Spatial;
-    using System.Data.SqlClient;
     using System.Linq;
 
     [Table("Cliente")]
@@ -16,8 +14,8 @@ namespace SistemaArtemis.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Cliente()
         {
+            Calificacion = new HashSet<Calificacion>();
             Problema = new HashSet<Problema>();
-            Servicio = new HashSet<Servicio>();
         }
 
         [Key]
@@ -39,15 +37,13 @@ namespace SistemaArtemis.Models
 
         public int Id_Usuario { get; set; }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Calificacion> Calificacion { get; set; }
+
         public virtual Usuario Usuario { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Problema> Problema { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Servicio> Servicio { get; set; }
-
-
 
 
         public List<Cliente> Listar1(int id)
@@ -66,7 +62,6 @@ namespace SistemaArtemis.Models
             {
                 throw;
             }
-
             return sc;
         }
 
@@ -81,14 +76,13 @@ namespace SistemaArtemis.Models
                     clientes = db.Cliente
                         .Include("Usuario")
                         .Where(x => x.Id_Usuario == id)
-                                .SingleOrDefault();
+                        .SingleOrDefault();
                 }
             }
             catch (Exception)
             {
                 throw;
             }
-
             return clientes;
         }
 
@@ -109,7 +103,6 @@ namespace SistemaArtemis.Models
                         db.Entry(this).State = EntityState.Added; //nuevo registro
                     }
                     db.SaveChanges();
-
                 }
             }
             catch (Exception ex)
@@ -133,11 +126,8 @@ namespace SistemaArtemis.Models
             {
                 throw;
             }
-
             return sc;
-
         }
-
 
     }
 }

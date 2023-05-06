@@ -14,15 +14,16 @@ namespace SistemaArtemis.Models
 
         public virtual DbSet<Calificacion> Calificacion { get; set; }
         public virtual DbSet<Cliente> Cliente { get; set; }
+        public virtual DbSet<Especialidad> Especialidad { get; set; }
         public virtual DbSet<Estado_Servicio> Estado_Servicio { get; set; }
         public virtual DbSet<Estado_Tecnico> Estado_Tecnico { get; set; }
         public virtual DbSet<Modelo_Ia> Modelo_Ia { get; set; }
         public virtual DbSet<Problema> Problema { get; set; }
+        public virtual DbSet<RTecnico_TipoEspecialidad> RTecnico_TipoEspecialidad { get; set; }
         public virtual DbSet<Servicio> Servicio { get; set; }
         public virtual DbSet<Tecnico> Tecnico { get; set; }
-        public virtual DbSet<Tecnico_TipoEspecialidad> Tecnico_TipoEspecialidad { get; set; }
+        public virtual DbSet<Tipo_Especialidad> Tipo_Especialidad { get; set; }
         public virtual DbSet<Tipo_Usuario> Tipo_Usuario { get; set; }
-        public virtual DbSet<TipoEspecialidad> TipoEspecialidad { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -48,9 +49,13 @@ namespace SistemaArtemis.Models
                 .WithRequired(e => e.Cliente)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<Cliente>()
-                .HasMany(e => e.Servicio)
-                .WithRequired(e => e.Cliente)
+            modelBuilder.Entity<Especialidad>()
+                .Property(e => e.Especialidad1)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Especialidad>()
+                .HasMany(e => e.Tecnico)
+                .WithRequired(e => e.Especialidad)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Estado_Servicio>()
@@ -65,6 +70,11 @@ namespace SistemaArtemis.Models
             modelBuilder.Entity<Estado_Tecnico>()
                 .Property(e => e.Descripcion)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<Estado_Tecnico>()
+                .HasMany(e => e.Tecnico)
+                .WithRequired(e => e.Estado_Tecnico)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Modelo_Ia>()
                 .Property(e => e.Descripcion)
@@ -112,36 +122,27 @@ namespace SistemaArtemis.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<Tecnico>()
-                .Property(e => e.Especialidad)
-                .IsUnicode(false);
+                .HasMany(e => e.RTecnico_TipoEspecialidad)
+                .WithRequired(e => e.Tecnico)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Tecnico>()
                 .HasMany(e => e.Servicio)
                 .WithRequired(e => e.Tecnico)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<Tecnico>()
-                .HasMany(e => e.Tecnico_TipoEspecialidad)
-                .WithRequired(e => e.Tecnico)
+            modelBuilder.Entity<Tipo_Especialidad>()
+                .Property(e => e.TipoEspecialidad)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Tipo_Especialidad>()
+                .HasMany(e => e.RTecnico_TipoEspecialidad)
+                .WithRequired(e => e.Tipo_Especialidad)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Tipo_Usuario>()
                 .Property(e => e.Nombre)
                 .IsUnicode(false);
-
-            modelBuilder.Entity<TipoEspecialidad>()
-                .Property(e => e.Descripcion)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<TipoEspecialidad>()
-                .HasMany(e => e.Servicio)
-                .WithRequired(e => e.TipoEspecialidad)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<TipoEspecialidad>()
-                .HasMany(e => e.Tecnico_TipoEspecialidad)
-                .WithRequired(e => e.TipoEspecialidad)
-                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Usuario>()
                 .Property(e => e.Nombre)

@@ -1,5 +1,6 @@
 namespace SistemaArtemis.Models
 {
+    using SistemaArtemis.Models.Login;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -9,7 +10,6 @@ namespace SistemaArtemis.Models
     using System.Data.Entity.Spatial;
     using System.Data.SqlClient;
     using System.Linq;
-    using SistemaArtemis.Models.Login;
 
     [Table("Usuario")]
     public partial class Usuario
@@ -84,9 +84,6 @@ namespace SistemaArtemis.Models
             return respuesta;
         }
 
-
-
-
         public List<Usuario> Listar()
         {
             var usuarios = new List<Usuario>();
@@ -106,8 +103,6 @@ namespace SistemaArtemis.Models
 
         }
 
-
-
         public Usuario Obtener(int id)
         {
             var usuarios = new Usuario();
@@ -115,8 +110,10 @@ namespace SistemaArtemis.Models
             {
                 using (var db = new Model1())
                 {
-                    usuarios = db.Usuario.Include("Tipo_Usuario").Where(x => x.Id_Usuario == id)
-                                .SingleOrDefault();
+                    usuarios = db.Usuario
+                        .Include("Tipo_Usuario")
+                        .Where(x => x.Id_Usuario == id)
+                        .SingleOrDefault();
                 }
             }
             catch (Exception)
@@ -152,10 +149,6 @@ namespace SistemaArtemis.Models
             }
         }
 
-
-
-
-
         public List<Usuario> Buscar(string criterio)
         {
             var categorias = new List<Usuario>();
@@ -164,11 +157,13 @@ namespace SistemaArtemis.Models
             {
                 using (var db = new Model1())
                 {
-                    categorias = db.Usuario.Include("Tipo_Usuario").Where(x => x.Nombre.Contains(criterio) ||
-                                x.Apellido.Contains(criterio) || x.Correo.Contains(criterio) ||
-                                x.Tipo_Usuario.Nombre.Contains(criterio))
-                                .ToList();
-
+                    categorias = db.Usuario
+                        .Include("Tipo_Usuario")
+                        .Where(x => x.Nombre.Contains(criterio)
+                        || x.Apellido.Contains(criterio) 
+                        || x.Correo.Contains(criterio) 
+                        || x.Tipo_Usuario.Nombre.Contains(criterio))
+                        .ToList();
                 }
             }
             catch (Exception)
@@ -180,20 +175,14 @@ namespace SistemaArtemis.Models
 
         }
 
-
-
-
         public void Eliminar()
         {
             try
             {
                 using (var db = new Model1())
                 {
-
                     db.Entry(this).State = EntityState.Deleted;
-
                     db.SaveChanges();
-
                 }
             }
             catch (Exception ex)
@@ -205,7 +194,6 @@ namespace SistemaArtemis.Models
         //login
         public bool Autenticar()
         {
-
             return db.Usuario
                    .Where(x => x.Correo == this.Correo
                    && x.Password == this.Password)
@@ -225,7 +213,6 @@ namespace SistemaArtemis.Models
                         .Where(x => x.Correo == Correo)
                         .SingleOrDefault();
                 }
-
             }
             catch (Exception)
             {
@@ -235,13 +222,9 @@ namespace SistemaArtemis.Models
         }
 
 
-
-
-
         public ResponseModel Acceder(string Correo, string Password)
         {
             var rm = new ResponseModel();
-
             try
             {
                 using (var db = new Model1())
@@ -251,7 +234,6 @@ namespace SistemaArtemis.Models
                     var usuario = db.Usuario.Where(x => x.Correo == Correo)
                                             .Where(x => x.Password == Password)
                                             .SingleOrDefault();
-
                     if (usuario != null)
                     {
                         SessionHelper.AddUserToSession(Id_Usuario.ToString());
@@ -269,11 +251,7 @@ namespace SistemaArtemis.Models
             }
             return rm;
         }
-
-
-
     }
-     
-    
 }
+
 
