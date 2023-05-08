@@ -1,0 +1,70 @@
+﻿@model SistemaArtemis.Models.Servicio
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_TecnicoLayout.cshtml";
+    var problemas = ViewBag.Prob as List<SistemaArtemis.Models.Problema>;
+}
+
+@*@using (Html.BeginForm("GuardarDocumento", "Problema", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.HiddenFor(x => x.Id_Problema)
+        <div class="form-group">
+            <label for="documento">Documento:</label>
+            <input type="file" name="documento" id="documento" accept=".pdf,.doc,.docx" onchange="updateFileName()">
+        </div>
+        <div id="file-name"></div>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+    }
+
+    <script>
+        function updateFileName() {
+            var input = document.getElementById('documento');
+            var fileName = input.value.split('\\').pop();
+            var fileLabel = document.getElementById('file-name');
+            fileLabel.innerText = fileName;
+        }
+    </script>*@
+
+
+
+<h2>Create</h2>
+
+@using (Html.BeginForm("Guardar", "Servicio", FormMethod.Post))
+{
+    @Html.HiddenFor(x => x.Id_Servicio)
+
+    <div class="card">
+        <div class="card-header">Registrar Servicio</div>
+        <div class="card-body">
+            @foreach (var problema in problemas)
+            {
+                <div class="form-group">
+                    @Html.HiddenFor(x => x.Descripcion, new { @Value = problema.Descripcion })
+                </div>
+                <div class="form-group">
+                    @Html.HiddenFor(x => x.Fecha_Inicio, new { @Value = problema.Fecha_Inicio })
+                </div>
+                <div class="form-group">
+                    @Html.HiddenFor(x => x.Fecha_Fin, new { @Value = problema.Fecha_Fin })
+                </div>
+                <div class="form-group">
+                    @Html.HiddenFor(x => x.Id_Tecnico, new { @Value = @Session["Id_Tecnico"] })
+                </div>
+                <div class="form-group">
+                    @Html.HiddenFor(x => x.Id_Problema, new { @Value = problema.Id_Problema })
+                </div>
+                <div class="form-group">
+                    @Html.HiddenFor(x => x.Id_Estado_Servicio, new { @Value = 2 })
+                </div>
+            }
+
+            <div class="text-right">
+                <input type="submit" value="Guardar" class="btn btn-default" />
+                <a href="~/Problema" class="btn btn-danger">Cancelar</a>
+            </div>
+            <br /><br /><br />
+        </div>
+    </div>
+}
+
+

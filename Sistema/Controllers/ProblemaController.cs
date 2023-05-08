@@ -1,7 +1,9 @@
 ﻿using SistemaArtemis.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
+using System.IO;
 using System.Linq;
 using System.Runtime.Remoting;
 using System.Web;
@@ -37,11 +39,27 @@ namespace SistemaArtemis.Controllers
                 //problema.Guardar();
                 return RedirectToAction("~/Cliente/Index");
             }
-
-            //ViewBag.Id_Cliente = new SelectList(db.Problema, "Id_Cliente", "Nombre", problema.Id_Cliente);
             return View(problema);
         }
 
+
+        [HttpPost]
+        public ActionResult GuardarDocumento(Problema problema, HttpPostedFileBase documento)
+        {
+            if (documento != null && documento.ContentLength > 0)
+            {
+                var fileName = Path.GetFileName(documento.FileName);
+                var path = Path.Combine(Server.MapPath("~/App_Data/Documentos"), fileName);
+                documento.SaveAs(path);
+                problema.Documento = fileName;
+            }
+            using (var db = new Model1())
+            {
+                db.Entry(problema).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+            return RedirectToAction("Index");
+        }
 
 
 
@@ -58,31 +76,32 @@ namespace SistemaArtemis.Controllers
 
         public ActionResult PublicarProblema()
         {
-            // Inicializar el modelo con la fecha actual
-            objProblema.Fecha_Inicio = DateTime.Now;
-
-            return View(objProblema);
+            return View();
         }
-
-        public ActionResult Agregar(int id = 0)
-        {
-            ViewBag.TCliente = objProblema.ObtenerIdCliente(id);
-            return View(id == 0 ? new Problema() : objProblema.Obtener(id));
-        }
-        
-
         public ActionResult Guardar(Problema model)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid == false)
             {
                 model.Guardar();
                 return Redirect("~/Cliente/index");
             }
             else
             {
-                return View("~/Problema/Agregar");
+                return View(model);
             }
+
         }
+
+
+        //public ActionResult Agregar(int id = 0)
+        //{
+        //    ViewBag.Problema = objProblema.Listar();
+
+        //    return View(id == 0 ? new Problema() // Agregarmos un nuevo objeto
+        //        : objProblema.Obtener(id) //Devuelve el id del objeto
+        //        );
+        //}
+       
 
         public ActionResult Eliminar(int id)
         {

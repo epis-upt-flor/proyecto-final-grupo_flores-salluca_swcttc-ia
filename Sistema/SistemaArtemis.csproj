@@ -2200,8 +2200,9 @@
     <Content Include="Views\Tecnico\Perfil.cshtml" />
     <Content Include="Views\Cliente\Perfil.cshtml" />
     <Content Include="Views\Problema\ListarProblemaCliente.cshtml" />
-    <Content Include="Views\Problema\Agregar.cshtml" />
     <Content Include="Views\Problema\Create.cshtml" />
+    <Content Include="Views\Servicio\List.cshtml" />
+    <Content Include="Views\Servicio\Create.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

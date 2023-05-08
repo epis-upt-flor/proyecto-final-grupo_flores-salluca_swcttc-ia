@@ -1,0 +1,60 @@
+﻿@model List<SistemaArtemis.Models.Problema>
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_TecnicoLayout.cshtml";
+}
+
+
+
+<div class="container-fluid">
+
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 bg-second-primary">
+            <h6 class="m-0 font-weight-bold text-white">Trabajos Disponibles</h6>
+        </div>
+
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-3">
+                    <a href="~/Tecnico/Index" class="btn btn-dark">Regresar</a>
+                    <h2 class="page-linl"></h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <table class="table table-bordered" id="tbdata" cellspacing="0" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Datos del Cliente</th>
+                                <th>Descripción</th>
+                                <th>Fecha Publicación</th>
+                                <th>Fecha Finalizacion</th>
+                                <th>Estado</th> 
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{ var i = 0;}
+                            @foreach (var t in Model)
+                            {
+                                i++;
+                                <tr>
+                                    <td>@i</td>
+                                    <td>@t.Cliente.Nombre @t.Cliente.Apellido</td>
+                                    <td>@t.Descripcion</td>
+                                    <td>@t.Fecha_Inicio.ToString("dd/MM/yyyy")</td>
+                                    <td>@t.Fecha_Fin.ToString("dd/MM/yyyy")</td>
+                                    <td>@t.Estado</td>
+                                    <td>
+                                        <a href="~/Servicio/Create/@t.Id_Problema" class="btn btn-success"><i class=""></i> Postular</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

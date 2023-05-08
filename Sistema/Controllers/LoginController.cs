@@ -31,33 +31,29 @@ namespace SistemaArtemis.Controllers
                 oConexion.Open();
 
                 SqlDataReader reader = cmd.ExecuteReader();
-
                 if (reader.Read())
                 {
                     usuario.Id_Tipo_Usuario = Convert.ToInt32(reader["Id_Tipo_Usuario"]);
-                    //usuario.Id_Usuario = Convert.ToInt32(reader["Id_Usuario"]);
+                    usuario.Id_Usuario = Convert.ToInt32(reader["Id_Usuario"]);
                     Session["Correo"] = usuario.Correo;
-                }
-                 
+                }                 
             }
 
             if (usuario.Id_Tipo_Usuario == 1)
-            {
-                //ViewBag.idusu = usuario.Id_Usuario;
+            {               
                 return RedirectToAction("Index", "Administrador");
-
             }
             else if (usuario.Id_Tipo_Usuario == 2)
             {
-                //ViewBag.idusu = usuario.Id_Usuario;
+                var tecnico = new Tecnico().Listar().Find(x => x.Id_Usuario == usuario.Id_Usuario);
+                Session["Id_Tecnico"] = tecnico.Id_Tecnico;
                 return RedirectToAction("Index", "Tecnico");
-
             }
             else if (usuario.Id_Tipo_Usuario == 3)
             {
-                //ViewBag.idusu = usuario.Id_Usuario;
+                var cliente = new Cliente().Listar().Find(x => x.Id_Usuario == usuario.Id_Usuario);
+                Session["Id_Cliente"] = cliente.Id_Cliente;
                 return RedirectToAction("Index", "Cliente");
-
             }
             else
             {
@@ -89,7 +85,6 @@ namespace SistemaArtemis.Controllers
                 Password = usuario.Password,
                 Estado = 1,
                 Id_Tipo_Usuario = usuario.Id_Tipo_Usuario,
-
             };
 
             int idusuario_respuesta = usuario.Registrar(oUsuario);
@@ -109,7 +104,6 @@ namespace SistemaArtemis.Controllers
        
         public ActionResult LogOut()
         {
-
             FormsAuthentication.SignOut();
             Session.Abandon();
             return RedirectToAction("Home", "Index");

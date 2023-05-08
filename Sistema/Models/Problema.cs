@@ -20,7 +20,7 @@ namespace SistemaArtemis.Models
         [Key]
         public int Id_Problema { get; set; }
 
-        [StringLength(100)]
+        [StringLength(250)]
         public string Descripcion { get; set; }
 
         [StringLength(100)]
@@ -37,26 +37,65 @@ namespace SistemaArtemis.Models
 
         public int Id_Cliente { get; set; }
 
+        [ForeignKey("Id_Cliente")]
         public virtual Cliente Cliente { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Servicio> Servicio { get; set; }
 
-        public List<Problema> Listar()
+        //public List<Problema> Listar()
+        //{
+        //    var problema = new List<Problema>();
+        //    try
+        //    {
+        //        using (var db = new Model1())
+        //        {
+        //            problema = db.Problema.ToList();
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //    return problema;
+        //}
+
+        public List<Problema> Listar(int id)
         {
-            var problema = new List<Problema>();
+            var problemas = new List<Problema>();
             try
             {
                 using (var db = new Model1())
                 {
-                    problema = db.Problema.ToList();
+                    problemas = db.Problema.Where(p => p.Id_Problema == id).ToList();
                 }
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-            return problema;
+            return problemas;
+        }
+
+
+        public List<Problema> ListProblem()
+        {
+            var problemas = new List<Problema>();
+            try
+            {
+                using (var db = new Model1())
+                {
+                    problemas = db.Problema                           
+                           .Include("Cliente")
+                           .Where(s => s.Estado == "Pendiente")
+                     .ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return problemas;
         }
 
         public Problema Obtener(int id)
@@ -68,7 +107,7 @@ namespace SistemaArtemis.Models
                 {
                     sc = db.Problema
                         .Include("Cliente")
-                        .Where(x => x.Id_Cliente == id)
+                        .Where(x => x.Id_Problema == id)
                         .SingleOrDefault();
                 }
             }

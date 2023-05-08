@@ -47,7 +47,7 @@
             
             <div class="form-group">
                 @Html.LabelFor(model => model.Id_Cliente, htmlAttributes: new { @class = "control-label" })
-                @Html.TextBoxFor(model => model.Id_Cliente, new { @class = "form-control", @readonly = "readonly", @Value = ViewBag.Cliente })
+                @Html.TextBoxFor(model => model.Id_Cliente, new { @class = "form-control", @readonly = "readonly", @Value = @Session["Id_Cliente"] })
                 @Html.ValidationMessageFor(model => model.Id_Cliente, "", new { @class = "text-danger" })
             </div>
 

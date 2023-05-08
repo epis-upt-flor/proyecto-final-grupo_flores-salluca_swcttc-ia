@@ -55,19 +55,20 @@ namespace SistemaArtemis.Models
                 {
                     serv = db.Servicio
                            .Include("Tecnico")
-                           .Include("Cliente")
                            .Include("Problema")
                            .Include("TipoEspecialidad")
                            .Where(s => s.Id_Estado_Servicio == 1)
                      .ToList();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
             return serv;
         }
+
+
 
 
         public List<Servicio> MisServicios(int id)
@@ -111,6 +112,26 @@ namespace SistemaArtemis.Models
             {
                 throw;
             }
+        }
+
+        public Servicio Obtener(int id)
+        {
+            var servicio = new Servicio();
+            try
+            {
+                using (var db = new Model1())
+                {
+                    servicio = db.Servicio.Include("Problema")
+                        .Where(x => x.Id_Problema == id)
+                        .SingleOrDefault();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return servicio;
         }
 
     }
