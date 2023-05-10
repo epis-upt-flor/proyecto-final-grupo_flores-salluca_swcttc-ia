@@ -1,6 +1,13 @@
-﻿@model SistemaArtemis.Models.Usuario
+﻿// `@model SistemaArtemis.Models.Usuario` especifica el tipo de modelo que la vista Razor espera
+// recibir del controlador. En este caso, el tipo de modelo es `Usuario` del namespace
+// `SistemaArtemis.Models`. Esto permite que la vista acceda y muestre las propiedades del modelo
+// `Usuario`.
+@model SistemaArtemis.Models.Usuario
 @{
     Layout = null;
+    // Asignar el valor de la propiedad "tipo" en el ViewBag a una nueva Lista de objetos Tipo_Usuario
+    // denominada "tipousuario". Es probable que la propiedad "tipo" se establezca en el controlador y
+    // se pase a la vista mediante ViewBag.
     List<SistemaArtemis.Models.Tipo_Usuario> tipousuario = ViewBag.tipo;
 }
 

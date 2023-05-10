@@ -45,6 +45,16 @@ namespace SistemaArtemis.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Problema> Problema { get; set; }
 
+        /// <summary>
+        /// Esta función recupera una lista de clientes con su información de usuario asociada en función de una
+        /// ID de usuario dada.
+        /// </summary>
+        /// <param name="id">El parámetro "id" es un valor entero que se utiliza para filtrar la lista de
+        /// clientes en función del ID del usuario asociado. El método devuelve una lista de clientes que tienen
+        /// un ID de usuario que coincide con el parámetro "id" proporcionado.</param>
+        /// <returns>
+        /// Una lista de objetos Cliente que tienen un Usuario con la identificación especificada.
+        /// </returns>
 
         public List<Cliente> Listar1(int id)
         {
@@ -66,6 +76,19 @@ namespace SistemaArtemis.Models
         }
 
 
+        /// <summary>
+        /// Esta función recupera un objeto de cliente de una base de datos en función de un ID de usuario
+        /// dado.
+        /// </summary>
+        /// <param name="id">El parámetro "id" es un valor entero que representa el identificador único de un
+        /// cliente en una base de datos. Este método recupera un objeto de cliente de la base de datos en
+        /// función del valor "id" proporcionado.</param>
+        /// <returns>
+        /// El método devuelve una única instancia de la clase "Cliente", que se obtiene de una base de datos
+        /// utilizando el parámetro "id" proporcionado. El método utiliza Entity Framework para consultar la
+        /// base de datos e incluye la entidad "Usuario" relacionada. Si no se encuentra ningún registro
+        /// coincidente, el método devuelve nulo.
+        /// </returns>
         public Cliente Obtener(int id)
         {
             var clientes = new Cliente();
@@ -88,6 +111,10 @@ namespace SistemaArtemis.Models
 
 
 
+       /// <summary>
+       /// La función guarda un registro en una base de datos utilizando Entity Framework, ya sea como
+       /// un registro nuevo o como uno existente.
+       /// </summary>
         public void Guardar()
         {
             try
@@ -111,7 +138,13 @@ namespace SistemaArtemis.Models
             }
         }
 
-        // listar Cliente
+      
+        /// <summary>
+        /// Esta función de C# recupera una lista de clientes de una base de datos mediante Entity Framework.
+        /// </summary>
+        /// <returns>
+        /// Una lista de objetos de tipo "Cliente".
+        /// </returns>
         public List<Cliente> Listar()
         {
             var sc = new List<Cliente>();

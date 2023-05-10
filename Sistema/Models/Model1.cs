@@ -93,10 +93,6 @@ namespace SistemaArtemis.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<Problema>()
-                .Property(e => e.Documento)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Problema>()
                 .Property(e => e.Estado)
                 .IsUnicode(false);
 
@@ -107,6 +103,10 @@ namespace SistemaArtemis.Models
 
             modelBuilder.Entity<Servicio>()
                 .Property(e => e.Descripcion)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Servicio>()
+                .Property(e => e.Documento)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Tecnico>()

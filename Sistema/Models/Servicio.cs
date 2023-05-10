@@ -30,6 +30,9 @@ namespace SistemaArtemis.Models
         [Column(TypeName = "date")]
         public DateTime Fecha_Fin { get; set; }
 
+        [StringLength(250)]
+        public string Documento { get; set; }
+
         public int Id_Tecnico { get; set; }
 
         public int Id_Problema { get; set; }
@@ -55,8 +58,7 @@ namespace SistemaArtemis.Models
                 {
                     serv = db.Servicio
                            .Include("Tecnico")
-                           .Include("Problema")
-                           .Include("TipoEspecialidad")
+                           .Include("Problema")                       
                            .Where(s => s.Id_Estado_Servicio == 1)
                      .ToList();
                 }
@@ -68,9 +70,53 @@ namespace SistemaArtemis.Models
             return serv;
         }
 
+        /// <summary>
+        /// Esta función recupera una lista de problemas asociados con una identificación de cliente
+        /// específica.
+        /// </summary>
+        /// <param name="id">El parámetro id es un número entero que representa el id del usuario para
+        /// el que queremos listar los problemas.</param>
+        /// <returns>
+        /// El método devuelve una lista de objetos Problema.
+        /// </returns>
+        public List<Problema> ListarProblema(int id)
+        {
+            var misproblemas = new List<Problema>();
+            try
+            {
+                using (var db = new Model1())
+                {
+                    var icliente = db.Cliente
+                        .Where(u => u.Id_Usuario == id)
+                        .Select(u => u.Id_Cliente)
+                        .SingleOrDefault();
+                    if (icliente != 0)
+                    {
+                        misproblemas = db.Problema
+                            .Include("Cliente")
+                            .Where(x => x.Id_Cliente == icliente)
+                            .ToList();
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return misproblemas;
+        }
 
 
-
+       /// <summary>
+       /// La función recupera una lista de servicios asignados a un técnico con una identificación de
+       /// usuario específica y un estado de servicio específico.
+       /// </summary>
+       /// <param name="id">El parámetro id es un número entero que representa el id del usuario para el
+       /// que se debe recuperar la lista de servicios.</param>
+       /// <returns>
+       /// El método devuelve una lista de objetos de Servicio.
+       /// </returns>
+       
         public List<Servicio> MisServicios(int id)
         {
             var misservicios = new List<Servicio>();
@@ -78,9 +124,20 @@ namespace SistemaArtemis.Models
             {
                 using (var db = new Model1())
                 {
-                    misservicios = db.Servicio
-                        .Include("Tecnico").ToList()
-                        .FindAll(x => x.Id_Tecnico == id);
+                    var itecnico = db.Tecnico
+                        .Where(u => u.Id_Usuario == id)
+                        .Select(u => u.Id_Tecnico)
+                        .SingleOrDefault();
+                    if (itecnico != 0)
+                    {
+                        misservicios = db.Servicio
+                            .Include("Tecnico")
+                            .Include("Estado_Servicio")
+                            .Include("Problema")
+                            .Where(x => x.Id_Tecnico == itecnico && x.Id_Estado_Servicio == 2)
+                            .ToList();
+                    }
+                   
                 }
             }
             catch (Exception)
@@ -90,6 +147,10 @@ namespace SistemaArtemis.Models
             return misservicios;
         }
 
+        /// <summary>
+        /// Esta función guarda los cambios realizados en un objeto de servicio en una base de datos utilizando
+        /// Entity Framework.
+        /// </summary>
 
         public void Guardar()
         {
@@ -113,6 +174,8 @@ namespace SistemaArtemis.Models
                 throw;
             }
         }
+
+
 
         public Servicio Obtener(int id)
         {

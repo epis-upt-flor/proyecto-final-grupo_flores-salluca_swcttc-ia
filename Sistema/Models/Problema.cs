@@ -23,9 +23,6 @@ namespace SistemaArtemis.Models
         [StringLength(250)]
         public string Descripcion { get; set; }
 
-        [StringLength(100)]
-        public string Documento { get; set; }
-
         [StringLength(20)]
         public string Estado { get; set; }
 
@@ -43,23 +40,17 @@ namespace SistemaArtemis.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Servicio> Servicio { get; set; }
 
-        //public List<Problema> Listar()
-        //{
-        //    var problema = new List<Problema>();
-        //    try
-        //    {
-        //        using (var db = new Model1())
-        //        {
-        //            problema = db.Problema.ToList();
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw ex;
-        //    }
-        //    return problema;
-        //}
+      
 
+        /// <summary>
+        /// Esta función de C# recupera una lista de problemas en función de un ID determinado.
+        /// </summary>
+        /// <param name="id">El parámetro "id" es un valor entero que se utiliza para filtrar la lista de
+        /// objetos "Problema" según su propiedad "Id_Problema". El método devuelve una lista de objetos
+        /// "Problema" que tienen el mismo valor "Id_Problema" que el</param>
+        /// <returns>
+        /// Una lista de objetos Problema que tienen un Id_Problema igual al parámetro de entrada "id".
+        /// </returns>
         public List<Problema> Listar(int id)
         {
             var problemas = new List<Problema>();
@@ -78,6 +69,14 @@ namespace SistemaArtemis.Models
         }
 
 
+       /// <summary>
+       /// Esta función recupera una lista de problemas pendientes de una base de datos, incluida la
+       /// información relacionada con el cliente.
+       /// </summary>
+       /// <returns>
+       /// Una lista de objetos "Problema" que tienen la propiedad "Estado" establecida en "Pendiente" y
+       /// se recuperan de la base de datos junto con sus objetos "Cliente".
+       /// </returns>
         public List<Problema> ListProblem()
         {
             var problemas = new List<Problema>();
@@ -97,6 +96,16 @@ namespace SistemaArtemis.Models
             }
             return problemas;
         }
+
+       /// <summary>
+       /// Esta función de C# recupera un objeto problemático de una base de datos por su ID, incluida
+       /// la información del cliente relacionada.
+       /// </summary>
+       /// <param name="id">un número entero que representa el identificador único del problema que se
+       /// recuperará de la base de datos.</param>
+       /// <returns>
+       /// El método devuelve un objeto de tipo "Problema".
+       /// </returns>
 
         public Problema Obtener(int id)
         {
@@ -118,6 +127,55 @@ namespace SistemaArtemis.Models
             return sc;
         }
 
+
+        /// <summary>
+        /// Esta función guarda los cambios realizados en una entidad de base de datos.
+        /// </summary>
+        public void Guardar()
+        {
+            try
+            {
+                using (var db = new Model1())
+                {
+                    if (this.Id_Problema > 0)
+                    {
+                        db.Entry(this).State = EntityState.Modified;
+                    }
+                    else
+                    {
+                        db.Entry(this).State = EntityState.Added;
+                    }
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
+        ///METODO Eliminar
+        /// <summary>
+        /// Esta función elimina una entidad de una base de datos mediante Entity Framework en C#.
+        /// </summary>
+        public void Eliminar()
+        {
+            try
+            {
+                using (var db = new Model1())
+                {
+                    db.Entry(this).State = EntityState.Deleted;
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        
         public List<Problema> ListarProblema(int id)
         {
             var misproblemas = new List<Problema>();
@@ -164,51 +222,6 @@ namespace SistemaArtemis.Models
                 throw;
             }
             return idCliente;
-        }
-
-        public void Guardar()
-        {
-            try
-            {
-                using (var db = new Model1())
-                {
-                    if (this.Id_Problema > 0)
-                    {
-                        db.Entry(this).State = EntityState.Modified;
-                    }
-                    else
-                    {
-                        db.Entry(this).State = EntityState.Added;
-                    }
-                    db.SaveChanges();
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-
-
-        ///METODO Eliminar
-        public void Eliminar()
-        {
-            try
-            {
-                using (var db = new Model1())
-                {
-
-                    db.Entry(this).State = EntityState.Deleted;
-
-                    db.SaveChanges();
-
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
         }
     }
 }

@@ -53,6 +53,15 @@ namespace SistemaArtemis.Models
 
 
 
+        /// <summary>
+        /// Esta función recupera la información de un técnico de una base de datos basada en su ID de
+        /// usuario.
+        /// </summary>
+        /// <param name="id">un número entero que representa la ID del técnico que se recuperará de la
+        /// base de datos.</param>
+        /// <returns>
+        /// El método está devolviendo un objeto de tipo "Tecnico".
+        /// </returns>
         public Tecnico Obtener(int id)
         {
             var tecnicos = new Tecnico();
@@ -75,6 +84,10 @@ namespace SistemaArtemis.Models
         }
 
 
+        /// <summary>
+        /// La función guarda un registro en una base de datos utilizando Entity Framework, ya sea como
+        /// un registro nuevo o como una actualización de un registro existente.
+        /// </summary>
         public void Guardar()
         {
             try
@@ -100,6 +113,12 @@ namespace SistemaArtemis.Models
 
 
 
+       /// <summary>
+       /// Esta función recupera una lista de todos los técnicos de una base de datos.
+       /// </summary>
+       /// <returns>
+       /// Una lista de objetos de tipo "Tecnico".
+       /// </returns>
         public List<Tecnico> Listar()
         {
             var tecnico = new List<Tecnico>();
@@ -119,6 +138,17 @@ namespace SistemaArtemis.Models
 
 
         //Buscar
+       /// <summary>
+       /// Esta función busca técnicos según un criterio dado y devuelve una lista de técnicos
+       /// coincidentes.
+       /// </summary>
+       /// <param name="criterio">una cadena que representa los criterios de búsqueda que se utilizarán
+       /// para encontrar objetos Tecnico coincidentes en la base de datos. Puede ser el nombre o
+       /// apellido de un Técnico.</param>
+       /// <returns>
+       /// Una lista de objetos de tipo "Tecnico" que coinciden con los criterios de búsqueda
+       /// especificados por el parámetro "criterio".
+       /// </returns>
         public List<Tecnico> Buscar(string criterio)
         {
             var categorias = new List<Tecnico>();

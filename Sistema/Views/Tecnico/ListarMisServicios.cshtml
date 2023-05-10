@@ -14,11 +14,11 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-sm-3">
-                    <a href="~/Tecnico/TrabajosDisponibles" class="btn btn-warning">Aceptar Nuevo Trabajo</a>
+                    <a href="~/Servicio/List" class="btn btn-warning">Aceptar Nuevo Trabajo</a>
                     <a href="~/Tecnico/Index" class="btn btn-dark">Regresar</a>
                     <h2 class="pagegeader"></h2>
                 </div>
-                </div>
+            </div>
             <div class="row">
                 <div class="col-sm-12">
                     <table class="table table-bordered" id="tbdata" cellspacing="0" style="width:100%">
@@ -26,38 +26,37 @@
                             <tr>
                                 <th>Id</th>
                                 <th>Descripción</th>
-                                <th>Especialidad</th>
+                                <th>Fecha Inicio</th>
+                                <th>Fecha Fin</th>
+                                <th>Cotización</th>
+                                <th>Tecnico</th>
                                 <th>Estado</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Reparación cabledo electrico de la sala</td>
-                                <td>Electronico</td>
-                                <td>En Proceso</td>
-                            </tr>
-                            @*{ var i = 0;}
-         @foreach (var t in Model)
-         {
-             i++;
-             <tr>
-                 <td>@i</td>
-                 <td>@t.Descripcion</td>
-                 <td>@t.Id_Tipo_Especialidad</td>
-                 <td>@t.Id_Estado_Servicio</td>
 
-                 <td>
-                     <p class="text-center" style="margin-inline: 5px;">
-                         @*<a href="~/Tecnico/Index/@t.Id_Tecnico" class="btn btn-primary"><i class=""></i> Registrarse</a>
-        }*@
+                        <tbody>
+                            @{ var i = 0;}
+                            @foreach (var t in Model)
+                            {
+                                i++;
+                                <tr>
+                                    <td>@i</td>
+                                    <td>@t.Descripcion</td>
+                                    <td>@t.Fecha_Inicio.ToString("dd/MM/yyyy")</td>
+                                    <td>@t.Fecha_Fin.ToString("dd/MM/yyyy")</td>
+                                    <td>@t.Documento</td>
+                                    <td>@t.Tecnico.Nombre</td>
+                                    <td>@t.Estado_Servicio.Descripcion</td>
+                                </tr>
+                            }
 
                         </tbody>
+
                     </table>
-                </div>
+               </div>
             </div>
         </div>
     </div>
 </div>
-
+    
 

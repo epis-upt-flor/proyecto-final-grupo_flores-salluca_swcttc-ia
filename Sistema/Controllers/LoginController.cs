@@ -18,6 +18,17 @@ namespace SistemaArtemis.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Esta es una función de C# que maneja una solicitud POST para iniciar sesión en un usuario y
+        /// redirigirlo a la página adecuada según su tipo de usuario.
+        /// </summary>
+        /// <param name="Usuario">Una clase que representa a un usuario, con propiedades como Correo
+        /// electrónico (correo electrónico), Contraseña, User_Type_Id (ID de tipo de usuario) y User_Id
+        /// (ID de usuario).</param>
+        /// <returns>
+        /// El método devuelve un ActionResult, que puede ser una redirección a otra acción o vista, o
+        /// una vista con datos.
+        /// </returns>
         [HttpPost]
         public ActionResult Index(Usuario usuario)
         {
@@ -39,6 +50,15 @@ namespace SistemaArtemis.Controllers
                 }                 
             }
 
+            /* Este bloque de código verifica el tipo de usuario que intenta iniciar sesión en función
+            de su propiedad `Id_Tipo_Usuario`. Si el usuario es administrador (tipo 1), el método lo
+            redirige a la acción `Index` del controlador `Administrador`. Si el usuario es un
+            técnico (tipo 2), el método recupera la propiedad `Id_Tecnico` del técnico y la almacena
+            en la sesión antes de redirigirlo a la acción `Índice` del controlador `Tecnico`. Si el
+            usuario es un cliente (tipo 3), el método recupera la propiedad `Id_Cliente` del cliente
+            y la almacena en la sesión antes de redirigirlo a la acción `Índice` del controlador
+            `Cliente`. Si el usuario no es uno de estos tipos, el método establece un mensaje en el
+            objeto 'TempData' y devuelve la vista 'Índice'. */
             if (usuario.Id_Tipo_Usuario == 1)
             {               
                 return RedirectToAction("Index", "Administrador");
@@ -63,17 +83,54 @@ namespace SistemaArtemis.Controllers
 
         }
 
+      /// <summary>
+      /// La función comprueba si un usuario determinado es válido mediante la autenticación de sus
+      /// credenciales.
+      /// </summary>
+      /// <param name="Usuario">"Usuario" es una clase o tipo de dato que representa a un usuario en el
+      /// sistema. El método "IsValid" toma una instancia de esta clase como parámetro llamado
+      /// "usuario".</param>
+      /// <returns>
+      /// El método `IsValid` devuelve un valor booleano. Está devolviendo el resultado de llamar al
+      /// método `Autenticar` sobre el objeto `usuario`.
+      /// </returns>
         private bool IsValid(Usuario usuario)
         {
             return usuario.Autenticar();
         }
 
+
+
         // GET: Login
+        /// <summary>
+        /// Esta función devuelve una vista para registrar un nuevo usuario con valores predeterminados
+        /// para el nombre, el correo electrónico, la contraseña y el tipo de usuario del usuario.
+        /// </summary>
+        /// <returns>
+        /// Una vista con una nueva instancia de la clase Usuario inicializada con valores
+        /// predeterminados para sus propiedades.
+        /// </returns>
         public ActionResult Registrarse()
         {
             return View(new Usuario() { Nombre = "", Apellido = "", Correo = "", Password = "", Estado = ' ', Id_Tipo_Usuario = ' ' });
         }
 
+
+
+
+        /// <summary>
+        /// Esta es una función de C# que registra un nuevo usuario y lo redirige a la página de inicio de
+        /// sesión si tiene éxito.
+        /// </summary>
+        /// <param name="Usuario">Es una clase que representa a un usuario en el sistema, con propiedades
+        /// como Nombre (name), Apellido (apellido), Correo (email), Password (contraseña), Estado (status)
+        /// e Id_Tipo_Usuario (identificación del tipo de usuario). El método es una acción HTTP POST para
+        /// registrar un nuevo</param>
+        /// <returns>
+        /// Si el registro es exitoso, el método devuelve una redirección a la acción "Índice" del
+        /// controlador "Iniciar sesión". Si hay un error durante el registro, el método devuelve la misma
+        /// vista con un mensaje de error.
+        /// </returns>
         [HttpPost]
         public ActionResult Registrarse(Usuario usuario)
         {
@@ -102,6 +159,14 @@ namespace SistemaArtemis.Controllers
 
         }
        
+        /// <summary>
+        /// La función Cerrar sesión cierra la sesión del usuario, abandona la sesión y redirige a la página
+        /// de inicio.
+        /// </summary>
+        /// <returns>
+        /// El método devuelve un resultado `RedirectToAction` que redirige al usuario a la acción "Inicio"
+        /// del controlador "Índice".
+        /// </returns>
         public ActionResult LogOut()
         {
             FormsAuthentication.SignOut();

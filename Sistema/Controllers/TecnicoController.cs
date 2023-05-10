@@ -22,6 +22,19 @@ namespace SistemaArtemis.Controllers
 
         }
 
+        /// <summary>
+        /// Esta función devuelve una vista del perfil de un técnico en función de su ID, o redirige a la página
+        /// de inicio del técnico si no se proporciona una ID.
+        /// </summary>
+        /// <param name="id">El parámetro id es un número entero que se utiliza para identificar un registro u
+        /// objeto específico en el sistema. En este caso, se utiliza para recuperar la información de perfil de
+        /// un técnico con la identificación especificada. Si no se proporciona la identificación o es igual a
+        /// 0, el método redirige al usuario a la</param>
+        /// <returns>
+        /// Si el parámetro `id` no es igual a 0, el método devuelve una vista con los datos obtenidos del
+        /// método `Obtener` del objeto `objtecnico` para el `id` especificado. Si `id` es igual a 0, el método
+        /// redirige a la acción `Tecnico`.
+        /// </returns>
         public ActionResult Perfil(int id = 0)
         {
             if (id != 0)
@@ -31,6 +44,18 @@ namespace SistemaArtemis.Controllers
             //return View();
         }
 
+        /// <summary>
+        /// La función guarda el perfil de un técnico y lo redirige a la página de índice si el estado del
+        /// modelo es válido; de lo contrario, regresa a la página de perfil.
+        /// </summary>
+        /// <param name="Tecnico">Es un modelo o clase que representa a un técnico en el sistema. Es probable
+        /// que el código forme parte de una aplicación web que permite a los usuarios crear y administrar
+        /// perfiles de técnicos. El método "Guardar" se utiliza para guardar la información del técnico en una
+        /// base de datos u otro medio de almacenamiento. El código comprueba si el modelo</param>
+        /// <returns>
+        /// Si ModelState es válido, el método devolverá una redirección a la vista de índice del controlador
+        /// Tecnico. Si ModelState no es válido, el método devolverá la vista Perfil del controlador Tecnico.
+        /// </returns>
         public ActionResult Guardar(Tecnico model)
         {
             if (ModelState.IsValid)
@@ -46,17 +71,41 @@ namespace SistemaArtemis.Controllers
         }
 
 
+       /// <summary>
+       /// Esta función devuelve una vista con una lista de trabajos disponibles.
+       /// </summary>
+       /// <returns>
+       /// El método `TrabajosDisponibles` está devolviendo una `Vista` con el resultado de llamar al
+       /// método `Listar` del objeto `objservicio`.
+       /// </returns>
         public ActionResult TrabajosDisponibles()
         {
             return View(objservicio.Listar());
         }
 
-        public ActionResult ListarMisServicios()
+        /// <summary>
+        /// Esta función devuelve una vista de los servicios pertenecientes a un usuario específico.
+        /// </summary>
+        /// <param name="id">El parámetro "id" es un valor entero que se utiliza para identificar a un
+        /// usuario específico. Se pasa al método "MisServicios" del objeto "objservicio" para recuperar una
+        /// lista de servicios asociados a ese usuario. El método devuelve la lista de servicios a la vista
+        /// "Lista</param>
+        /// <returns>
+        /// El método `ListarMisServicios` está devolviendo una vista con los datos obtenidos del método
+        /// `MisServicios` del objeto `objservicio`, que toma un parámetro `id`.
+        /// </returns>
+        public ActionResult ListarMisServicios(int id)
         {
-            return View();
+            return View(objservicio.MisServicios(id));
         }
 
 
+        /// <summary>
+        /// Esta función devuelve una vista para visualizar un determinado tipo de calificación.
+        /// </summary>
+        /// <returns>
+        /// El método está devolviendo un resultado Ver.
+        /// </returns>
         public ActionResult VisualizarCalificacion1()
         {
             return View();

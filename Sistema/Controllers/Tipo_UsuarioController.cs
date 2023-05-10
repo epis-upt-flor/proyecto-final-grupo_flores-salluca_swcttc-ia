@@ -12,7 +12,9 @@ namespace SistemaArtemis.Controllers
     public class Tipo_UsuarioController : Controller
     {
         private Tipo_Usuario objTipoUsuario = new Tipo_Usuario();
+
         private Model1 db = new Model1();
+        
 
         public ActionResult Index(string criterio)
         {

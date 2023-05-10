@@ -18,6 +18,13 @@ namespace SistemaArtemis.Controllers
             return View();
         }
 
+       /// <summary>
+       /// Esta función devuelve una vista con una lista de puestos de trabajo disponibles.
+       /// </summary>
+       /// <returns>
+       /// El método `EmpleosDisponibles` está devolviendo una `Vista` con el resultado de llamar al
+       /// método `Listar` del objeto `objServicio`.
+       /// </returns>
         public ActionResult EmpleosDisponibles()
         {
             return View(objServicio.Listar());

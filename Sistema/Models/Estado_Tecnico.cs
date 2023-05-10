@@ -28,6 +28,12 @@ namespace SistemaArtemis.Models
         public virtual ICollection<Tecnico> Tecnico { get; set; }
 
 
+        /// <summary>
+        /// Esta función de C# recupera una lista de objetos Estado_Tecnico de una base de datos.
+        /// </summary>
+        /// <returns>
+        /// Una lista de objetos de tipo Estado_Tecnico.
+        /// </returns>
         public List<Estado_Tecnico> Listar()
         {
             var sc = new List<Estado_Tecnico>();
@@ -46,6 +52,16 @@ namespace SistemaArtemis.Models
             return sc;
         }
 
+
+        /// <summary>
+        /// Esta función de C# busca una lista de objetos Estado_Tecnico en función de un criterio dado.
+        /// </summary>
+        /// <param name="criterio">una cadena que representa el criterio de búsqueda de los objetos
+        /// Estado_Tecnico. El método busca objetos Estado_Tecnico cuya propiedad Descripción contenga
+        /// la cadena de criterio especificada.</param>
+        /// <returns>
+        /// Una lista de objetos Estado_Tecnico que coinciden con los criterios de búsqueda.
+        /// </returns>
 
         public List<Estado_Tecnico> Buscar(string criterio)
         {
@@ -67,6 +83,15 @@ namespace SistemaArtemis.Models
         }
 
 
+        /// <summary>
+        /// Esta función de C# recupera un solo objeto Estado_Tecnico de una base de datos en función de
+        /// su ID.
+        /// </summary>
+        /// <param name="id">un número entero que representa el identificador único del objeto
+        /// Estado_Tecnico que debe recuperarse de la base de datos.</param>
+        /// <returns>
+        /// El método está devolviendo un objeto de tipo Estado_Tecnico.
+        /// </returns>
         public Estado_Tecnico Obtener(int id)
         {
             var estadotecnico = new Estado_Tecnico();
@@ -86,6 +111,9 @@ namespace SistemaArtemis.Models
             return estadotecnico;
         }
 
+       /// <summary>
+       /// La función guarda los cambios realizados en una entidad de base de datos.
+       /// </summary>
         public void Guardar()
         {
             try
@@ -109,6 +137,9 @@ namespace SistemaArtemis.Models
             }
         }
 
+        /// <summary>
+        /// Esta función elimina una entidad de una base de datos mediante Entity Framework en C#.
+        /// </summary>
         public void Eliminar()
         {
             try
