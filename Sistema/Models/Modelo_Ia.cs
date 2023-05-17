@@ -12,14 +12,16 @@ namespace SistemaArtemis.Models
         public int Id_Modelo { get; set; }
 
         [StringLength(100)]
-        public string Descripcion { get; set; }
-
-        [StringLength(20)]
-        public string Estado { get; set; }
+        public string TipoEspecialidad { get; set; }
 
         [Column(TypeName = "date")]
         public DateTime? Ultimo_Entrenamiento { get; set; }
 
-        public decimal? precision { get; set; }
+        [StringLength(20)]
+        public string Estado { get; set; }
+
+        public int? Id_Especialidad { get; set; }
+
+        public virtual Especialidad Especialidad { get; set; }
     }
 }

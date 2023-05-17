@@ -2009,7 +2009,6 @@
     <Content Include="Views\Cliente\ListarTecnicos.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Login\Registrarse.cshtml" />
-    <Content Include="Views\Problema\Index.cshtml" />
     <Content Include="Views\Tecnico\Index.cshtml" />
     <Content Include="Views\Tecnico\TrabajosDisponibles.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />

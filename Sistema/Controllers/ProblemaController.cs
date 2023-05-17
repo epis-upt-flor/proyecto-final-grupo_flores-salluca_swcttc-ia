@@ -53,24 +53,6 @@ namespace SistemaArtemis.Controllers
         }
 
 
-
-        /// <summary>
-        /// Esta función devuelve una vista con datos obtenidos de una llamada de método con un parámetro
-        /// entero.
-        /// </summary>
-        /// <param name="id">El parámetro "id" es un valor entero que se pasa al método de acción "Índice". Se
-        /// utiliza para recuperar un registro específico de la base de datos utilizando el método "Obtener" del
-        /// objeto "objProblema" y luego pasarlo a la vista correspondiente.</param>
-        /// <returns>
-        /// El método `Index` está devolviendo una `Vista` con el resultado de llamar al método `Obtener` del
-        /// objeto `objProblema` con el parámetro `id` pasado al método.
-        /// </returns>
-
-        public ActionResult Index(int id)
-        {
-            return View(objProblema.Obtener(id));
-        }
-
         /// <summary>
         /// Esta función devuelve una vista con una lista de problemas para un ID de cliente específico.
         /// </summary>
@@ -87,7 +69,11 @@ namespace SistemaArtemis.Controllers
         }
 
 
-     
+        public ActionResult PublicarProblema()
+        {
+            return View();
+        }
+
         /// <summary>
         /// Esta función guarda un modelo "Problema" y redirige al índice "Cliente" si el estado del modelo es
         /// válido, de lo contrario devuelve la vista del modelo.
@@ -114,10 +100,7 @@ namespace SistemaArtemis.Controllers
 
         }      
 
-           public ActionResult PublicarProblema()
-        {
-            return View();
-        }
+     
 
         public ActionResult Eliminar(int id)
         {

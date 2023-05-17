@@ -49,6 +49,7 @@ namespace SistemaArtemis.Models
         public virtual Tipo_Usuario Tipo_Usuario { get; set; }
 
 
+
         Model1 db = new Model1();
 
 
@@ -79,9 +80,9 @@ namespace SistemaArtemis.Models
                     cmd.Parameters.Add("Resultado", SqlDbType.Int).Direction = ParameterDirection.Output;
                     cmd.CommandType = CommandType.StoredProcedure;
 
-                   /* `oConexion.Open();` está abriendo una conexión a la base de datos usando el
-                   objeto SqlConnection `oConexion`. Esto es necesario antes de ejecutar cualquier
-                   comando SQL en la base de datos. */
+                    /* `oConexion.Open();` está abriendo una conexión a la base de datos usando el
+                    objeto SqlConnection `oConexion`. Esto es necesario antes de ejecutar cualquier
+                    comando SQL en la base de datos. */
                     oConexion.Open();
 
                     /* `cmd.ExecuteNonQuery();` está ejecutando el procedimiento almacenado
@@ -211,8 +212,8 @@ namespace SistemaArtemis.Models
                     categorias = db.Usuario
                         .Include("Tipo_Usuario")
                         .Where(x => x.Nombre.Contains(criterio)
-                        || x.Apellido.Contains(criterio) 
-                        || x.Correo.Contains(criterio) 
+                        || x.Apellido.Contains(criterio)
+                        || x.Correo.Contains(criterio)
                         || x.Tipo_Usuario.Nombre.Contains(criterio))
                         .ToList();
                 }
@@ -296,19 +297,19 @@ namespace SistemaArtemis.Models
         }
 
 
-       /// <summary>
-       /// La función "Acceder" verifica si el correo electrónico y la contraseña de un usuario
-       /// coinciden con los almacenados en la base de datos y devuelve una respuesta que indica si el
-       /// inicio de sesión fue exitoso o no.
-       /// </summary>
-       /// <param name="Correo">Una cadena que representa la dirección de correo electrónico del usuario
-       /// que intenta iniciar sesión.</param>
-       /// <param name="Password">Una variable de cadena que contiene la contraseña ingresada por el
-       /// usuario.</param>
-       /// <returns>
-       /// El método devuelve un objeto ResponseModel.
-       /// </returns>
-       
+        /// <summary>
+        /// La función "Acceder" verifica si el correo electrónico y la contraseña de un usuario
+        /// coinciden con los almacenados en la base de datos y devuelve una respuesta que indica si el
+        /// inicio de sesión fue exitoso o no.
+        /// </summary>
+        /// <param name="Correo">Una cadena que representa la dirección de correo electrónico del usuario
+        /// que intenta iniciar sesión.</param>
+        /// <param name="Password">Una variable de cadena que contiene la contraseña ingresada por el
+        /// usuario.</param>
+        /// <returns>
+        /// El método devuelve un objeto ResponseModel.
+        /// </returns>
+
         public ResponseModel Acceder(string Correo, string Password)
         {
             var rm = new ResponseModel();
@@ -340,5 +341,3 @@ namespace SistemaArtemis.Models
         }
     }
 }
-
-

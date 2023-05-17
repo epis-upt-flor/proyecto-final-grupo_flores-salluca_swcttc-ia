@@ -77,16 +77,12 @@ namespace SistemaArtemis.Models
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Modelo_Ia>()
-                .Property(e => e.Descripcion)
+                .Property(e => e.TipoEspecialidad)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Modelo_Ia>()
                 .Property(e => e.Estado)
                 .IsUnicode(false);
-
-            modelBuilder.Entity<Modelo_Ia>()
-                .Property(e => e.precision)
-                .HasPrecision(5, 4);
 
             modelBuilder.Entity<Problema>()
                 .Property(e => e.Descripcion)
@@ -103,10 +99,6 @@ namespace SistemaArtemis.Models
 
             modelBuilder.Entity<Servicio>()
                 .Property(e => e.Descripcion)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Servicio>()
-                .Property(e => e.Documento)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Tecnico>()

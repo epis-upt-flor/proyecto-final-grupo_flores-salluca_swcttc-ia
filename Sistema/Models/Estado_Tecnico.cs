@@ -111,9 +111,9 @@ namespace SistemaArtemis.Models
             return estadotecnico;
         }
 
-       /// <summary>
-       /// La función guarda los cambios realizados en una entidad de base de datos.
-       /// </summary>
+        /// <summary>
+        /// La función guarda los cambios realizados en una entidad de base de datos.
+        /// </summary>
         public void Guardar()
         {
             try

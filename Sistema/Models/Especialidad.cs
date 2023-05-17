@@ -12,6 +12,7 @@ namespace SistemaArtemis.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Especialidad()
         {
+            Modelo_Ia = new HashSet<Modelo_Ia>();
             Tecnico = new HashSet<Tecnico>();
             Tipo_Especialidad = new HashSet<Tipo_Especialidad>();
         }
@@ -22,6 +23,9 @@ namespace SistemaArtemis.Models
         [Column("Especialidad")]
         [StringLength(50)]
         public string Especialidad1 { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Modelo_Ia> Modelo_Ia { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tecnico> Tecnico { get; set; }

@@ -45,6 +45,7 @@ namespace SistemaArtemis.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Problema> Problema { get; set; }
 
+
         /// <summary>
         /// Esta función recupera una lista de clientes con su información de usuario asociada en función de una
         /// ID de usuario dada.
@@ -111,10 +112,10 @@ namespace SistemaArtemis.Models
 
 
 
-       /// <summary>
-       /// La función guarda un registro en una base de datos utilizando Entity Framework, ya sea como
-       /// un registro nuevo o como uno existente.
-       /// </summary>
+        /// <summary>
+        /// La función guarda un registro en una base de datos utilizando Entity Framework, ya sea como
+        /// un registro nuevo o como uno existente.
+        /// </summary>
         public void Guardar()
         {
             try
@@ -138,7 +139,7 @@ namespace SistemaArtemis.Models
             }
         }
 
-      
+
         /// <summary>
         /// Esta función de C# recupera una lista de clientes de una base de datos mediante Entity Framework.
         /// </summary>

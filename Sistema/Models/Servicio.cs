@@ -58,7 +58,7 @@ namespace SistemaArtemis.Models
                 {
                     serv = db.Servicio
                            .Include("Tecnico")
-                           .Include("Problema")                       
+                           .Include("Problema")
                            .Where(s => s.Id_Estado_Servicio == 1)
                      .ToList();
                 }
@@ -107,16 +107,16 @@ namespace SistemaArtemis.Models
         }
 
 
-       /// <summary>
-       /// La función recupera una lista de servicios asignados a un técnico con una identificación de
-       /// usuario específica y un estado de servicio específico.
-       /// </summary>
-       /// <param name="id">El parámetro id es un número entero que representa el id del usuario para el
-       /// que se debe recuperar la lista de servicios.</param>
-       /// <returns>
-       /// El método devuelve una lista de objetos de Servicio.
-       /// </returns>
-       
+        /// <summary>
+        /// La función recupera una lista de servicios asignados a un técnico con una identificación de
+        /// usuario específica y un estado de servicio específico.
+        /// </summary>
+        /// <param name="id">El parámetro id es un número entero que representa el id del usuario para el
+        /// que se debe recuperar la lista de servicios.</param>
+        /// <returns>
+        /// El método devuelve una lista de objetos de Servicio.
+        /// </returns>
+
         public List<Servicio> MisServicios(int id)
         {
             var misservicios = new List<Servicio>();
@@ -137,7 +137,7 @@ namespace SistemaArtemis.Models
                             .Where(x => x.Id_Tecnico == itecnico && x.Id_Estado_Servicio == 2)
                             .ToList();
                     }
-                   
+
                 }
             }
             catch (Exception)
@@ -199,4 +199,5 @@ namespace SistemaArtemis.Models
 
     }
 }
+
 

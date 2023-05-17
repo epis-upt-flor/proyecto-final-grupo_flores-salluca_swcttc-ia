@@ -70,7 +70,7 @@ namespace SistemaArtemis.Models
                 using (var db = new Model1())
                 {
                     tecnicos = db.Tecnico.Include("Estado_Tecnico")
-                        .Include("Tecnico_TipoEspecialidad")
+                        .Include("Especialidad")
                         .Include("Usuario")
                         .Where(x => x.Id_Usuario == id)
                                 .SingleOrDefault();
@@ -113,12 +113,12 @@ namespace SistemaArtemis.Models
 
 
 
-       /// <summary>
-       /// Esta función recupera una lista de todos los técnicos de una base de datos.
-       /// </summary>
-       /// <returns>
-       /// Una lista de objetos de tipo "Tecnico".
-       /// </returns>
+        /// <summary>
+        /// Esta función recupera una lista de todos los técnicos de una base de datos.
+        /// </summary>
+        /// <returns>
+        /// Una lista de objetos de tipo "Tecnico".
+        /// </returns>
         public List<Tecnico> Listar()
         {
             var tecnico = new List<Tecnico>();
@@ -138,17 +138,17 @@ namespace SistemaArtemis.Models
 
 
         //Buscar
-       /// <summary>
-       /// Esta función busca técnicos según un criterio dado y devuelve una lista de técnicos
-       /// coincidentes.
-       /// </summary>
-       /// <param name="criterio">una cadena que representa los criterios de búsqueda que se utilizarán
-       /// para encontrar objetos Tecnico coincidentes en la base de datos. Puede ser el nombre o
-       /// apellido de un Técnico.</param>
-       /// <returns>
-       /// Una lista de objetos de tipo "Tecnico" que coinciden con los criterios de búsqueda
-       /// especificados por el parámetro "criterio".
-       /// </returns>
+        /// <summary>
+        /// Esta función busca técnicos según un criterio dado y devuelve una lista de técnicos
+        /// coincidentes.
+        /// </summary>
+        /// <param name="criterio">una cadena que representa los criterios de búsqueda que se utilizarán
+        /// para encontrar objetos Tecnico coincidentes en la base de datos. Puede ser el nombre o
+        /// apellido de un Técnico.</param>
+        /// <returns>
+        /// Una lista de objetos de tipo "Tecnico" que coinciden con los criterios de búsqueda
+        /// especificados por el parámetro "criterio".
+        /// </returns>
         public List<Tecnico> Buscar(string criterio)
         {
             var categorias = new List<Tecnico>();
@@ -159,8 +159,8 @@ namespace SistemaArtemis.Models
                     categorias = db.Tecnico
                         .Include("Tipo_Usuario")
                         .Where(x => x.Nombre.Contains(criterio) ||
-                                x.Apellido.Contains(criterio) )//|| 
-                               // x.Especialidad.Contains(criterio))
+                                x.Apellido.Contains(criterio))//|| 
+                                                              // x.Especialidad.Contains(criterio))
                         .ToList();
 
                 }

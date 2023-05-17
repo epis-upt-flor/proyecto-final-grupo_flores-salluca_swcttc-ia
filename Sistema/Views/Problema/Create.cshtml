@@ -13,7 +13,7 @@
 @using (Html.BeginForm())
 {
     
-    @Html.HiddenFor(Model => Model.Id_Problema)
+    @Html.HiddenFor(model => model.Id_Problema)
     
     <div class="card">
         <div class="card-header">Informacion del Problema</div>
@@ -25,11 +25,6 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.Documento, htmlAttributes: new { @class = "control-label" })
-                @Html.EditorFor(model => model.Documento, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Documento, "", new { @class = "text-danger" })
-            </div>
-            <div class="form-group">
                 @Html.LabelFor(model => model.Estado, htmlAttributes: new { @class = "control-label" })
                 @Html.EditorFor(model => model.Estado, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Estado, "", new { @class = "text-danger" })
@@ -40,7 +35,7 @@
                 @Html.ValidationMessageFor(model => model.Fecha_Inicio, "", new { @class = "text-danger" })
             </div>
             <div class="form-group">
-                <label for="Fecha">Fecha Fin</label>
+                @Html.LabelFor(model => model.Fecha_Fin, htmlAttributes: new { @class = "control-label" })
                 @Html.EditorFor(model => model.Fecha_Fin, new { htmlAttributes = new { @class = "form-control", type = "date" } })
                 @Html.ValidationMessageFor(model => model.Fecha_Fin, "", new { @class = "text-danger" })
             </div>

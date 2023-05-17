@@ -20,7 +20,7 @@ namespace SistemaArtemis.Models
         [Key]
         public int Id_Problema { get; set; }
 
-        [StringLength(250)]
+        [StringLength(100)]
         public string Descripcion { get; set; }
 
         [StringLength(20)]
@@ -34,13 +34,12 @@ namespace SistemaArtemis.Models
 
         public int Id_Cliente { get; set; }
 
-        [ForeignKey("Id_Cliente")]
         public virtual Cliente Cliente { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Servicio> Servicio { get; set; }
 
-      
+
 
         /// <summary>
         /// Esta función de C# recupera una lista de problemas en función de un ID determinado.
@@ -69,14 +68,14 @@ namespace SistemaArtemis.Models
         }
 
 
-       /// <summary>
-       /// Esta función recupera una lista de problemas pendientes de una base de datos, incluida la
-       /// información relacionada con el cliente.
-       /// </summary>
-       /// <returns>
-       /// Una lista de objetos "Problema" que tienen la propiedad "Estado" establecida en "Pendiente" y
-       /// se recuperan de la base de datos junto con sus objetos "Cliente".
-       /// </returns>
+        /// <summary>
+        /// Esta función recupera una lista de problemas pendientes de una base de datos, incluida la
+        /// información relacionada con el cliente.
+        /// </summary>
+        /// <returns>
+        /// Una lista de objetos "Problema" que tienen la propiedad "Estado" establecida en "Pendiente" y
+        /// se recuperan de la base de datos junto con sus objetos "Cliente".
+        /// </returns>
         public List<Problema> ListProblem()
         {
             var problemas = new List<Problema>();
@@ -84,7 +83,7 @@ namespace SistemaArtemis.Models
             {
                 using (var db = new Model1())
                 {
-                    problemas = db.Problema                           
+                    problemas = db.Problema
                            .Include("Cliente")
                            .Where(s => s.Estado == "Pendiente")
                      .ToList();
@@ -97,15 +96,15 @@ namespace SistemaArtemis.Models
             return problemas;
         }
 
-       /// <summary>
-       /// Esta función de C# recupera un objeto problemático de una base de datos por su ID, incluida
-       /// la información del cliente relacionada.
-       /// </summary>
-       /// <param name="id">un número entero que representa el identificador único del problema que se
-       /// recuperará de la base de datos.</param>
-       /// <returns>
-       /// El método devuelve un objeto de tipo "Problema".
-       /// </returns>
+        /// <summary>
+        /// Esta función de C# recupera un objeto problemático de una base de datos por su ID, incluida
+        /// la información del cliente relacionada.
+        /// </summary>
+        /// <param name="id">un número entero que representa el identificador único del problema que se
+        /// recuperará de la base de datos.</param>
+        /// <returns>
+        /// El método devuelve un objeto de tipo "Problema".
+        /// </returns>
 
         public Problema Obtener(int id)
         {
@@ -175,7 +174,7 @@ namespace SistemaArtemis.Models
             }
         }
 
-        
+
         public List<Problema> ListarProblema(int id)
         {
             var misproblemas = new List<Problema>();
@@ -185,7 +184,7 @@ namespace SistemaArtemis.Models
                 {
                     var icliente = db.Cliente
                         .Where(u => u.Id_Usuario == id)
-                        .Select(u =>u.Id_Cliente)
+                        .Select(u => u.Id_Cliente)
                         .SingleOrDefault();
                     if (icliente != 0)
                     {

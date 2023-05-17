@@ -17,6 +17,8 @@ namespace SistemaArtemis.Controllers
         private Servicio objServicio = new Servicio();
         //private Tecnico objTecnico= new Tecnico();
 
+        Model1 db=new Model1();
+
         public ActionResult Index()
         {
             return View();
@@ -33,34 +35,41 @@ namespace SistemaArtemis.Controllers
             return View(objproblema.ListProblem());
         }
 
-      
+
+  
         /// <summary>
-        /// Esta función de C# guarda un modelo de servicio y lo redirige a la página de índice del
-        /// técnico si el estado del modelo es válido; de lo contrario, regresa a la vista de trabajos
-        /// disponibles.
+        /// Esta función guarda un modelo de servicio y actualiza el estado de un problema relacionado a
+        /// "En proceso".
         /// </summary>
-        /// <param name="Servicio">Es una clase modelo que representa un objeto de servicio. El método
-        /// "Guardar" es un método de acción que se llama cuando se envía un formulario para guardar el
-        /// objeto de servicio. El método primero verifica si el estado del modelo es válido y, si lo
-        /// es, llama al método "Guardar" en el servicio.</param>
+        /// <param name="Servicio">una clase de modelo que contiene datos relacionados con un servicio
+        /// que se está realizando.</param>
         /// <returns>
-        /// Si ModelState es válido, el método devuelve una redirección a la acción Index del
-        /// controlador Tecnico. Si el ModelState no es válido, el método devuelve una vista de la
-        /// acción TrabajosDisponibles del controlador Tecnico.
+        /// Si el estado del modelo es válido, el método devuelve una redirección a la acción "Index"
+        /// del controlador "Tecnico". Si el estado del modelo no es válido, el método devuelve la vista
+        /// "Guardar" con errores de validación.
         /// </returns>
         public ActionResult Guardar(Servicio model)
         {
             if (ModelState.IsValid)
             {
                 model.Guardar();
+
+               /* Estas líneas de código están actualizando el estado de un problema relacionado con un
+               servicio que se está realizando. */
+                Problema problema = db.Problema.Find(model.Id_Problema);
+                problema.Estado ="En Proceso";
+                db.SaveChanges();
+
+
                 return Redirect("~/Tecnico/Index");// ~/Miembro_Proyecto/Index"
             }
             else
             {
-                return View("~/Tecnico/TrabajosDisponibles"); //Agregar
+                // Si el modelo no es válido, regresa la vista con los errores de validación
+                return View(model);
             }
         }
-        
+
 
         /// <summary>
         /// Esta función devuelve una vista para crear un nuevo servicio o editar uno existente, con una
