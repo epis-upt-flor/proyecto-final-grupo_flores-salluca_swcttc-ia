@@ -50,7 +50,7 @@ namespace SistemaArtemis.Controllers
         /// </returns>
         public ActionResult Guardar(Servicio model)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid==false)
             {
                 model.Guardar();
 

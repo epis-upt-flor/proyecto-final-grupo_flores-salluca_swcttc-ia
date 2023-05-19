@@ -70,7 +70,7 @@ namespace SistemaArtemis.Models
                 using (var db = new Model1())
                 {
                     tecnicos = db.Tecnico.Include("Estado_Tecnico")
-                        .Include("Especialidad")
+                        //.Include("Especialidad")
                         .Include("Usuario")
                         .Where(x => x.Id_Usuario == id)
                                 .SingleOrDefault();

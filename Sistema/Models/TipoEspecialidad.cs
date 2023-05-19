@@ -5,6 +5,8 @@ namespace SistemaArtemis.Models
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using System.Linq;
+    using System.Web.Mvc;
 
     [Table("TipoEspecialidad")]
     public partial class TipoEspecialidad
@@ -27,5 +29,8 @@ namespace SistemaArtemis.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tecnico_TipoEspecialidad> Tecnico_TipoEspecialidad { get; set; }
+
+
+
     }
 }

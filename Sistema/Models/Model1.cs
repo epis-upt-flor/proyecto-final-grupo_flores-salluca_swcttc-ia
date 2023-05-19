@@ -50,7 +50,7 @@ namespace SistemaArtemis.Models
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Especialidad>()
-                .Property(e => e.Especialidad1)
+                .Property(e => e.Nombre)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Especialidad>()

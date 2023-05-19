@@ -5,6 +5,7 @@ namespace SistemaArtemis.Models
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using System.Linq;
 
     public partial class Tipo_Especialidad
     {
@@ -26,5 +27,87 @@ namespace SistemaArtemis.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RTecnico_TipoEspecialidad> RTecnico_TipoEspecialidad { get; set; }
+
+
+
+
+        //public List<Tipo_Especialidad> Listar(int id = 0)
+        //{
+        //    var tiposEspecialidad = new List<Tipo_Especialidad>();
+        //    try
+        //    {
+        //        using (var db = new Model1())
+        //        {
+        //            var idEspecialidad = db.Tecnico
+        //                .Where(tec => tec.Id_Tecnico == id)
+        //                .Select(tec => tec.Id_Especialidad)
+        //                .FirstOrDefault();
+
+        //            tiposEspecialidad = db.Tipo_Especialidad
+        //                .Where(te => te.Id_Especialidad == idEspecialidad)
+        //                .ToList();
+        //        }
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw;
+        //    }
+        //    return tiposEspecialidad;
+        //}
+        //public RTecnico_TipoEspecialidad Obtener(int id)
+        //{
+        //    var tecnicos = new RTecnico_TipoEspecialidad();
+        //    try
+        //    {
+        //        using (var db = new Model1())
+        //        {
+        //            tecnicos = db.RTecnico_TipoEspecialidad
+        //                .Include("Tipo_Especialidad")
+        //                .Include("Tecnico")                      
+        //                .Include("Usuario")
+        //                .Where(x => x.Id_Tecnico == id)
+        //                        .SingleOrDefault();
+        //        }
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw;
+        //    }
+        //    return tecnicos;
+        //}
+
+
+        public List<Tipo_Especialidad> Listar(int id = 0)
+        {
+            var tiposEspecialidad = new List<Tipo_Especialidad>();
+            try
+            {
+                using (var db = new Model1())
+                {
+                    var idTecnico = db.Tecnico
+                        .Where(tec => tec.Id_Usuario == id)
+                        .Select(tec => tec.Id_Tecnico)
+                        .FirstOrDefault();
+
+                    if (idTecnico != 0)
+                    {
+                        var idEspecialidad = db.Tecnico
+                            .Where(tec => tec.Id_Tecnico == idTecnico)
+                            .Select(tec => tec.Id_Especialidad)
+                            .FirstOrDefault();
+
+                        tiposEspecialidad = db.Tipo_Especialidad
+                            .Where(te => te.Id_Especialidad == idEspecialidad)
+                            .ToList();
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return tiposEspecialidad;
+        }
+
     }
 }

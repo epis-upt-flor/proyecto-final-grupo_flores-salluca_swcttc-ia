@@ -57,7 +57,10 @@ namespace SistemaArtemis.Models
             {
                 using (var db = new Model1())
                 {
-                    problemas = db.Problema.Where(p => p.Id_Problema == id).ToList();
+                    problemas = db.Problema
+                        .Include("Cliente")
+                        .Include("Servicio")
+                        .Where(p => p.Id_Problema == id).ToList();
                 }
             }
             catch (Exception ex)

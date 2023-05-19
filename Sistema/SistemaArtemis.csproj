@@ -1910,6 +1910,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ProblemaController.cs" />
+    <Compile Include="Controllers\RTecnico_TipoEspecialidadController.cs" />
     <Compile Include="Controllers\ServicioController.cs" />
     <Compile Include="Controllers\TecnicoController.cs" />
     <Compile Include="Controllers\Tipo_UsuarioController.cs" />
@@ -2202,6 +2203,8 @@
     <Content Include="Views\Problema\Create.cshtml" />
     <Content Include="Views\Servicio\List.cshtml" />
     <Content Include="Views\Servicio\Create.cshtml" />
+    <Content Include="Views\RTecnico_TipoEspecialidad\Create.cshtml" />
+    <Content Include="Views\RTecnico_TipoEspecialidad\List.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -59,13 +59,52 @@
                 <a class="nav-link" href="~/Tecnico/Index">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>PANEL TECNICO  </span>
-                    
+
 
                 </a>
             </li>
 
 
-            <!-- BArra Lateral MENU  -->
+            <!-- BArra Lateral MENU
+
+
+
+    <!-- MENU GESTIONAR USUARIO -->
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                <label>Gestion de Tecnico</label>
+            </div>
+            <!-- MENU GESTIONAR USUARIO -->
+            <div class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                   aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Mis Especialidades</span>
+                </a>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Modulos:</h6>
+                        <a class="collapse-item" href="~/RTecnico_TipoEspecialidad/Create/@usuarios.Id_Usuario">Registrar Especialidad</a>
+                        <a class="collapse-item" href="~/RTecnico_TipoEspecialidad/List/@usuarios.Id_Usuario">Listar Especialidad</a>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- MENU GESTIONAR ENTREGABLE -->
+            <hr class="sidebar-divider">
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                GesTionar Trabajos
+            </div>
+
+
+
+
+
+
             <!-- Nav Item - Gestionar Servicio Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseAdministracion">
@@ -74,7 +113,6 @@
                 </a>
                 <div id="collapseAdministracion" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="~/Servicio/List">Trabajos Disponibles</a>
                         @*<a class="collapse-item" href="#">Publicar Servicio</a>*@
                     </div>
                 </div>
@@ -108,16 +146,16 @@
             </li>
             <!-- Nav Item - Reportes Collapse Menu -->
             @*<li class="nav-item">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseReportes">
-                        <i class="fas fa-fw fa-chart-area"></i>
-                        <span>Reportes</span>
-                    </a>
-                    <div id="collapseReportes" class="collapse" data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <a class="collapse-item" href="~/Servicios/ReporteServicios">Reporte de Servicios</a>
-                        </div>
-                    </div>
-                </li>*@
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseReportes">
+                <i class="fas fa-fw fa-chart-area"></i>
+                <span>Reportes</span>
+            </a>
+            <div id="collapseReportes" class="collapse" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="~/Servicios/ReporteServicios">Reporte de Servicios</a>
+                </div>
+            </div>
+        </li>*@
 
             <!-- Divider -->
             <hr class="sidebar-divider">

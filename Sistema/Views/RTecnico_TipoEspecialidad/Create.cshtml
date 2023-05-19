@@ -1,0 +1,58 @@
+﻿@model SistemaArtemis.Models.RTecnico_TipoEspecialidad
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_TecnicoLayout.cshtml";
+   // List<SistemaArtemis.Models.Tipo_Especialidad> tiposEspecialidad = ViewBag.tipo;
+}
+
+
+@using (Html.BeginForm("Guardar", "RTecnico_TipoEspecialidad", FormMethod.Post, new { id = "frm-categoria" }))
+{
+
+    @Html.HiddenFor(x => x.Id)
+    <div class="content-wrapper">
+
+        <div class="card shadow mb-6">
+            <div class="card-header py-3 bg-second-primary">
+                <h6 class="m-0 font-weight-bold text-white"><i class="fas fa-user"></i> Mis Datos</h6>
+            </div>
+            <div class="card-body">
+                <form>
+                    <div class="form-row">
+                        <div class="form-group col-sm-12">
+                            @Html.LabelFor(x => x.Id_Tecnico)
+                            @Html.TextBoxFor(x => x.Id_Tecnico, new { @class = "form-control", @readonly = "readonly", @Value = @Session["Id_Tecnico"] })
+                            @Html.ValidationMessageFor(x => x.Id_Tecnico, null, new { @class = "label label-danger" })
+                        </div>
+                    </div>
+
+                    @*<div class="form-group">
+                            @Html.LabelFor(x => x.Id_Tipo_Especialidad)
+                            <select name="Id_Especialidad" class="form-control">
+                                <option @(Model.Id_Tipo_Especialidad.Equals("") ? "selected" : "") value="">--Seleccione--</option>
+                                @foreach (var t in tiposEspecialidad)
+                                {
+                                    <option @(Model.Id_Tipo_Especialidad.Equals(t.Id_Especialidad) ? "selected" : "")
+                                            value="@t.Id_Especialidad">
+                                        @t.TipoEspecialidad
+                                    </option>
+                                }
+                            </select>
+                            @Html.ValidationMessageFor(x => x.Id_Tipo_Especialidad, null, new { @class = "label label-danger" })
+                        </div>*@
+
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <button type="submit" class="btn btn-success btn-sm btn-block">Guardar</button>
+
+                        </div>
+                        <div class="col-sm-3">
+                            <a href="~/Tecnico" class="btn btn-danger  btn-sm btn-block">Cancelar</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+}

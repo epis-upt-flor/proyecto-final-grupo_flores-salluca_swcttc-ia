@@ -13,6 +13,7 @@ namespace SistemaArtemis.Controllers
     {
         private Tecnico objtecnico = new Tecnico();
         private Servicio objservicio = new Servicio();
+        private Especialidad objTipo= new Especialidad();
         private Model1 db = new Model1();
 
 
@@ -37,6 +38,7 @@ namespace SistemaArtemis.Controllers
         /// </returns>
         public ActionResult Perfil(int id = 0)
         {
+            ViewBag.Tipo=objTipo.Listar();
             if (id != 0)
                 return View(objtecnico.Obtener(id));
             else
