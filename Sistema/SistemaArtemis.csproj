@@ -1934,7 +1934,6 @@
     <Compile Include="Models\Servicio.cs" />
     <Compile Include="Models\Tecnico.cs" />
     <Compile Include="Models\Tecnico_TipoEspecialidad.cs" />
-    <Compile Include="Models\TipoEspecialidad.cs" />
     <Compile Include="Models\Tipo_Especialidad.cs" />
     <Compile Include="Models\Tipo_Usuario.cs" />
     <Compile Include="Models\Usuario.cs" />

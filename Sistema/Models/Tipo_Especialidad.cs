@@ -99,6 +99,13 @@ namespace SistemaArtemis.Models
                         tiposEspecialidad = db.Tipo_Especialidad
                             .Where(te => te.Id_Especialidad == idEspecialidad)
                             .ToList();
+                        // Validar el campo "Id_Especialidad" de la tabla "Tipo_Especialidad" con el campo "id_Especialidad" de la tabla "Especialidad"
+                        tiposEspecialidad = tiposEspecialidad.Join(
+                            db.Especialidad,
+                            tipo => tipo.Id_Especialidad,
+                            especialidad => especialidad.Id_Especialidad,
+                            (tipo, especialidad) => tipo)
+                            .ToList();
                     }
                 }
             }

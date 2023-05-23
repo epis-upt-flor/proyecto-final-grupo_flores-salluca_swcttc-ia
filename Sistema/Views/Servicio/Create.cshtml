@@ -23,10 +23,10 @@
                     @Html.HiddenFor(x => x.Descripcion, new { @Value = problema.Descripcion })
                 </div>
                 <div class="form-group">
-                    @Html.HiddenFor(x => x.Fecha_Inicio, new { @type = "date", @Value = problema.Fecha_Inicio })
+                    @Html.HiddenFor(x => x.Fecha_Inicio, new {@Value = problema.Fecha_Inicio })
                 </div>
                 <div class="form-group">
-                    @Html.HiddenFor(x => x.Fecha_Fin, new { @type = "date", @Value = problema.Fecha_Fin })
+                    @Html.HiddenFor(x => x.Fecha_Fin, new {@Value = problema.Fecha_Fin })
                 </div>
                 <div class="form-group">
                     @Html.HiddenFor(x => x.Id_Tecnico, new { @Value =Convert.ToInt32(@Session["Id_Tecnico"] )})

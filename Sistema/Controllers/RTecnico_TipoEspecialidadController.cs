@@ -20,13 +20,7 @@ namespace SistemaArtemis.Controllers
         private Tecnico objtecnico = new Tecnico();
         private Model1 db = new Model1();
 
-        // GET: RTecnico_TipoEspecialidad
-        public ActionResult Index()
-        {
-            return View();
-        }
-
-        [HttpGet]
+             
         public ActionResult Create(int id)
         {
             ViewBag.Tipo = objTipoespecialidad.Listar(id);

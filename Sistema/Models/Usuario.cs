@@ -52,16 +52,12 @@ namespace SistemaArtemis.Models
 
         Model1 db = new Model1();
 
-
         /// <summary>
         /// La función registra un nuevo usuario en una base de datos mediante procedimientos
         /// almacenados y devuelve un valor entero como respuesta.
         /// </summary>
-        /// <param name="Usuario">Esta es una clase que representa a un usuario con propiedades como
-        /// Nombre, Apellido, Correo electrónico, Contraseña, Estado e ID de tipo de usuario.</param>
         /// <returns>
-        /// El método devuelve un valor entero, que es el resultado de la ejecución del procedimiento
-        /// almacenado.
+        /// El método devuelve un valor entero, que es el resultado de la ejecución del procedimiento almacenado.
         /// </returns>
         public int Registrar(Usuario oUsuario)
         {
@@ -80,18 +76,12 @@ namespace SistemaArtemis.Models
                     cmd.Parameters.Add("Resultado", SqlDbType.Int).Direction = ParameterDirection.Output;
                     cmd.CommandType = CommandType.StoredProcedure;
 
-                    /* `oConexion.Open();` está abriendo una conexión a la base de datos usando el
-                    objeto SqlConnection `oConexion`. Esto es necesario antes de ejecutar cualquier
-                    comando SQL en la base de datos. */
+                    /* `oConexion.Open();` está abriendo una conexión a la base de datos usando el objeto SqlConnection `oConexion`. Esto es necesario antes de ejecutar cualquier comando SQL en la base de datos. */
                     oConexion.Open();
 
                     /* `cmd.ExecuteNonQuery();` está ejecutando el procedimiento almacenado
-                    `sp_registrarUsuario` en la base de datos usando el objeto `SqlCommand` `cmd`.
-                    Este método no devuelve ningún dato, pero se utiliza para ejecutar sentencias
-                    SQL que no devuelven ningún dato, como las sentencias INSERT, UPDATE y DELETE.
-                    En este caso, se utiliza para insertar un nuevo usuario en la base de datos. */
+                    `sp_registrarUsuario` en la base de datos usando el objeto `SqlCommand` `cmd`.*/
                     cmd.ExecuteNonQuery();
-
                     respuesta = Convert.ToInt32(cmd.Parameters["Resultado"].Value);
 
                 }
@@ -150,6 +140,7 @@ namespace SistemaArtemis.Models
                 {
                     usuarios = db.Usuario
                         .Include("Tipo_Usuario")
+                        .Include("Tecnico")
                         .Where(x => x.Id_Usuario == id)
                         .SingleOrDefault();
                 }
@@ -283,8 +274,9 @@ namespace SistemaArtemis.Models
             {
                 using (var db = new Model1())
                 {
-                    usuario = db.Usuario.Include("Tipo_Usuario")
-                        .Include("Tecnico").Include("Cliente")
+                    usuario = db.Usuario
+                        .Include("Tecnico")                      
+                        .Include("Cliente")
                         .Where(x => x.Correo == Correo)
                         .SingleOrDefault();
                 }
@@ -295,6 +287,7 @@ namespace SistemaArtemis.Models
             }
             return usuario;
         }
+
 
 
         /// <summary>

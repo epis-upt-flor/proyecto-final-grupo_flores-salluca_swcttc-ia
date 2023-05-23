@@ -1,13 +1,6 @@
-﻿// `@model SistemaArtemis.Models.Usuario` especifica el tipo de modelo que la vista Razor espera
-// recibir del controlador. En este caso, el tipo de modelo es `Usuario` del namespace
-// `SistemaArtemis.Models`. Esto permite que la vista acceda y muestre las propiedades del modelo
-// `Usuario`.
-@model SistemaArtemis.Models.Usuario
+﻿@model SistemaArtemis.Models.Usuario
 @{
     Layout = null;
-    // Asignar el valor de la propiedad "tipo" en el ViewBag a una nueva Lista de objetos Tipo_Usuario
-    // denominada "tipousuario". Es probable que la propiedad "tipo" se establezca en el controlador y
-    // se pase a la vista mediante ViewBag.
     List<SistemaArtemis.Models.Tipo_Usuario> tipousuario = ViewBag.tipo;
 }
 
@@ -41,9 +34,9 @@
 
     <link href="~/Content/css/style.css" rel="stylesheet">
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 </head>
-
 
 <body class="not-transparent-header">
     <div class="container-wrapper">
@@ -57,8 +50,6 @@
                             <a href="~/Home/Index"><img src="~/Content/images/logo.jpg" /></a>
                         </div>
                     </div>
-
-
                     <div id="navbar" class="navbar-nav-wrapper navbar-arrow">
                         <ul class="nav navbar-nav" id="responsive-menu">
                             <li></li>
@@ -127,6 +118,8 @@
                                                             @Html.LabelFor(x => x.Correo)
                                                             @Html.TextBoxFor(x => x.Correo, new { @class = "form-control" })
                                                             @Html.ValidationMessageFor(x => x.Correo, null, new { @class = "label label-danger" })
+
+                                                            <div id="correoError" class="label label-danger"></div>
                                                         </div>
                                                     </div>
 
@@ -137,11 +130,12 @@
                                                             @Html.ValidationMessageFor(x => x.Password, null, new { @class = "label label-danger" })
                                                         </div>
                                                     </div>
-                                                   
+
+
 
                                                     <div class="col-sm-12 col-md-12">
                                                         <div class="form-group">
-                                                            @Html.LabelFor(x => x.Tipo_Usuario)
+                                                            <label>Nivel Usuario</label>
                                                             <select name="Id_Tipo_Usuario" class="form-control">
                                                                 <option @(Model.Id_Tipo_Usuario == null ? "selected" : "") value="">--Seleccione--</option>
                                                                 <option @(Model.Id_Tipo_Usuario == 2 ? "selected" : "") value="2">Tecnico</option>
@@ -151,12 +145,14 @@
                                                         </div>
                                                     </div>
                                                 </div>
+
                                             </div>
+
                                             <div class="modal-footer text-center">
-                                                <button type="submit" class="btn btn-primary">Enviar</button>
+                                               <button id="btnEnviar" type="submit" class="btn btn-primary" disabled>Enviar</button>
                                             </div>
                                         </div>
-                                     }
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -167,9 +163,56 @@
     </div>
 
 
+
+
     <div id="back-to-top">
         <a href="#"><i class="ion-ios-arrow-up"></i></a>
     </div>
+
+
+
+    <script>
+        $(document).ready(function () {
+            // Obtener el campo de correo electrónico
+            var correoInput = $('#Correo');
+            // Obtener el contenedor del mensaje de error
+            var errorContainer = $('#correoError');
+            // Obtener el botón de envío
+            var btnEnviar = $('#btnEnviar');
+
+            // Agregar evento de cambio al campo de correo electrónico
+            correoInput.on('change', function () {
+                // Obtener el valor actual del campo de correo electrónico
+                var correo = correoInput.val();
+
+                // Realizar una solicitud al servidor para verificar el correo electrónico
+                $.ajax({
+                    url: '/Login/VerificarCorreo',
+                    method: 'POST',
+                    data: { correo: correo },
+                    success: function (response) {
+                        // Si el correo existe, mostrar el mensaje de error y deshabilitar el botón de envío
+                        if (response.existe) {
+                            errorContainer.text('El correo electrónico ya existe. Por favor, elija otro.');
+                            btnEnviar.attr('disabled', 'disabled');
+                        } else {
+                            errorContainer.text('');
+                            btnEnviar.removeAttr('disabled');
+                        }
+                    },
+                    error: function () {
+                        // Manejar el error de la solicitud AJAX
+                        errorContainer.text('Error al verificar el correo electrónico.');
+                        btnEnviar.attr('disabled', 'disabled');
+                    }
+                });
+            });
+        });
+    </script>
+
+
+
+
 
     <script type="text/javascript" src="~/Content/js/jquery-1.11.3.min.js"></script>
     <script type="text/javascript" src="~/Content/js/jquery-migrate-1.2.1.min.js"></script>
