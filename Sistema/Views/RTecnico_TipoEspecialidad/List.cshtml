@@ -2,9 +2,8 @@
 @{
     ViewBag.Title = "List";
     Layout = "~/Views/Shared/_TecnicoLayout.cshtml";
-   // var idTecnico = (int)Session["Id_Tecnico"]; // Obtener el valor de Id_Tecnico de la sesión
+    
 }
-
 
 
 <div class="container-fluid">
@@ -16,7 +15,7 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-sm-3">
-                    <a href="~/Tecnico/Index" class="btn btn-dark">Regresar</a>
+                    <a href="~/Tecnico/Index" class="btn btn-dark">Regresar</a>                    
                     <h2 class="pagegeader"></h2>
                 </div>
             </div>
@@ -27,15 +26,19 @@
                             <tr>
                                 <th>Id</th>
                                 <th>Tipo Especialidad</th>
+                                <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @{ var i = 1;}
                             @foreach (var m in Model)
                             {
                                 <tr>
-                                    <td>@(m.Id_Tipo_Especialidad)</td>
+                                    <td>@(i++)</td>
                                     <td>@(m.TipoEspecialidad)</td>
+                                   
                                 </tr>
+                               
                             }
                         </tbody>
                     </table>
@@ -46,49 +49,4 @@
 </div>
 
 
-@*<div class="container-fluid">
-
-        <div class="card shadow mb-4">
-            <div class="card-header py-3 bg-second-primary">
-                <h6 class="m-0 font-weight-bold text-white">Mis Especialidades</h6>
-            </div>
-
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-sm-3">
-                        <a href="~/Tecnico/Index" class="btn btn-dark">Regresar</a>
-                        <h2 class="pagegeader"></h2>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <table class="table table-bordered" id="tbdata" cellspacing="0" style="width:100%">
-                            <thead>
-                                <tr>
-                                    <th>Id</th>
-                                    <th>Tipo Especialidad</th>
-
-
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var m in Model)
-                                {
-                                    <tr>
-                                        <td>@(m.Id_Tipo_Especialidad)</td>
-                                        <td>@(m.TipoEspecialidad)</td>
-                                    </tr>
-                                }
-                            </tbody>
-
-                        </table>
-
-                    </div>
-
-
-                </div>
-
-            </div>
-        </div>
-    </div>*@
 

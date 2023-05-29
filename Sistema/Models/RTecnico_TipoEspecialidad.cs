@@ -7,6 +7,7 @@ namespace SistemaArtemis.Models
     using System.Data.Entity;
     using System.Data.Entity.Spatial;
     using System.Linq;
+    using System.Runtime.Remoting.Contexts;
 
     public partial class RTecnico_TipoEspecialidad
     {
@@ -21,7 +22,7 @@ namespace SistemaArtemis.Models
         public virtual Tipo_Especialidad Tipo_Especialidad { get; set; }
 
 
-
+       
 
         public void Guardar()
         {
@@ -45,6 +46,68 @@ namespace SistemaArtemis.Models
                 throw;
             }
         }
+
+        public List<Tipo_Especialidad> Listar(int id)
+        {
+            var RtiposEspecialidad = new List<Tipo_Especialidad>();
+            try
+            {
+                using (var db = new Model1())
+                {
+                    var idEspecialidad = db.Tecnico
+                        .Where(tec => tec.Id_Tecnico == id)
+                        .Select(tec => tec.Id_Especialidad)
+                        .FirstOrDefault();
+
+                    if (idEspecialidad != 0)
+                    {
+                        RtiposEspecialidad = (
+                            from tec in db.Tecnico
+                            from esp in db.Especialidad
+                            from tipE in db.Tipo_Especialidad
+                            from rtec in db.RTecnico_TipoEspecialidad
+                            where tec.Id_Especialidad == esp.Id_Especialidad &&
+                                  tipE.Id_Especialidad == esp.Id_Especialidad &&
+                                  tipE.Id_Tipo_Especialidad == rtec.Id_Tipo_Especialidad &&
+                                  tec.Id_Tecnico == id &&
+                                  esp.Id_Especialidad == idEspecialidad
+                            select tipE
+                            ).ToList();
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return RtiposEspecialidad;
+        }
+
+
+
+
+        public RTecnico_TipoEspecialidad Obtener(int id)
+        {
+            var ie = new RTecnico_TipoEspecialidad();
+            try
+            {
+                using (var db = new Model1())
+                {
+                    ie = db.RTecnico_TipoEspecialidad
+                        .Include("Tipo_Especialidad")
+                        .Include("Tecnico")
+                        .Where(x => x.Id_Tipo_Especialidad == id)
+                        .SingleOrDefault();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return ie;
+        }
+
+
 
 
 
