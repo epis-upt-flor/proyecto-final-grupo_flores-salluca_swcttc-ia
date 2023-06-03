@@ -1,8 +1,8 @@
-﻿@model List<SistemaArtemis.Models.Tipo_Especialidad>
+﻿@model List<SistemaArtemis.Models.RTecnico_TipoEspecialidad>
 @{
     ViewBag.Title = "List";
     Layout = "~/Views/Shared/_TecnicoLayout.cshtml";
-    
+    List<SistemaArtemis.Models.Tipo_Especialidad> Nespecialidad = ViewBag.tipo;
 }
 
 
@@ -15,7 +15,7 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-sm-3">
-                    <a href="~/Tecnico/Index" class="btn btn-dark">Regresar</a>                    
+                    <a href="~/Tecnico/Index" class="btn btn-dark">Regresar</a>
                     <h2 class="pagegeader"></h2>
                 </div>
             </div>
@@ -30,15 +30,27 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @{ var i = 1;}
-                            @foreach (var m in Model)
-                            {
-                                <tr>
-                                    <td>@(i++)</td>
-                                    <td>@(m.TipoEspecialidad)</td>
-                                   
-                                </tr>
-                               
+                            @{
+                                var i = 1;
+                                foreach (var t in Nespecialidad)
+                                {
+                                    var matchingModels = Model.Where(m => m.Id_Tipo_Especialidad == t.Id_Tipo_Especialidad).ToList();
+                                    if (matchingModels.Any())
+                                    {
+                                        foreach (var m in matchingModels)
+                                        {
+                                            <tr>
+                                                <td>@(i++)</td>
+                                                <td>@t.TipoEspecialidad</td>
+                                                <td>
+                                                    <a href="#" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#confirmDeleteModal_@m.Id">
+                                                        <i class="fas fa-trash-alt"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                }
                             }
                         </tbody>
                     </table>
@@ -48,5 +60,26 @@
     </div>
 </div>
 
-
-
+<!-- Modal -->
+@foreach (var m in Model)
+{
+    <div class="modal fade" id="confirmDeleteModal_@m.Id" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel_@m.Id" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmDeleteModalLabel_@m.Id">Confirmar Eliminación</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>¿Estás seguro que deseas eliminar este registro?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <a href="~/RTecnico_TipoEspecialidad/Eliminar/@m.Id" class="btn btn-danger">Eliminar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+}

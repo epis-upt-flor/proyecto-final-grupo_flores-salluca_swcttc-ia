@@ -22,14 +22,14 @@ namespace SistemaArtemis.Controllers
 
         public ActionResult Create(int id = 0)
         {
-            ViewBag.Tipo = objTipoespecialidad.Listar(id);
+            var tiposEspecialidad = objTipoespecialidad.Listar(id);// lógica para obtener los tipos de especialidad desde tu base de datos o cualquier otra fuente de datos
+            ViewBag.tipo = tiposEspecialidad;
 
             var ie = id == 0
                 ? new RTecnico_TipoEspecialidad()
                 : objRTipoEspecialidad.Obtener(id);
 
             return View(ie);
-          
         }
 
         public ActionResult Guardar(RTecnico_TipoEspecialidad model)
@@ -38,19 +38,30 @@ namespace SistemaArtemis.Controllers
             {
                 model.Guardar();
                 return Redirect("~/Tecnico/Index");
-            }
+            }  
             else
-            {
-                
+            {                
                 return Redirect("~/RTecnico_TipoEspecialidad/Create");
             }
         }
 
-
         public ActionResult List(int id)
         {
-            return View(objRTipoEspecialidad.Listar(id));
+            var Nespecialidad = objTipoespecialidad.ListarTipoEspecialidad();// lógica para obtener los tipos de especialidad desde tu base de datos o cualquier otra fuente de datos
+            ViewBag.tipo = Nespecialidad;
+
+            return View(objRTipoEspecialidad.ListarR(id));
         }
+
+        public ActionResult Eliminar(int id)
+        {
+            objRTipoEspecialidad.Id = id;
+            objRTipoEspecialidad.Eliminar();
+            return Redirect("~/Tecnico/Index");
+        }
+
+
+
 
     }
 }

@@ -28,6 +28,8 @@ namespace SistemaArtemis.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RTecnico_TipoEspecialidad> RTecnico_TipoEspecialidad { get; set; }
 
+       
+
         public List<Tipo_Especialidad> Listar(int id)
         {
             var tiposEspecialidad = new List<Tipo_Especialidad>();
@@ -35,17 +37,25 @@ namespace SistemaArtemis.Models
             {
                 using (var db = new Model1())
                 {
-                    var idEspecialidad = db.Tecnico
-                        .Where(tec => tec.Id_Tecnico == id)
-                        .Select(tec => tec.Id_Especialidad)
+                    var idTecnico = db.Tecnico
+                        .Where(tec => tec.Id_Usuario == id) // Cambio aquí: Buscar por Id_Usuario en lugar de Id_Tecnico
+                        .Select(tec => tec.Id_Tecnico)
                         .FirstOrDefault();
 
-                    if (idEspecialidad != 0)
+                    if (idTecnico != 0)
                     {
-                        tiposEspecialidad = (from tipoes in db.Tipo_Especialidad
-                                             where tipoes.Id_Especialidad == idEspecialidad
-                                             && !db.RTecnico_TipoEspecialidad.Any(r => r.Id_Tecnico == id && r.Id_Tipo_Especialidad == tipoes.Id_Tipo_Especialidad)
-                                             select tipoes).ToList();
+                        var idEspecialidad = db.Tecnico
+                            .Where(tec => tec.Id_Tecnico == idTecnico)
+                            .Select(tec => tec.Id_Especialidad)
+                            .FirstOrDefault();
+
+                        if (idEspecialidad != 0)
+                        {
+                            tiposEspecialidad = (from tipoes in db.Tipo_Especialidad
+                                                 where tipoes.Id_Especialidad == idEspecialidad && 
+                                                 !db.RTecnico_TipoEspecialidad.Any(r => r.Id_Tecnico == idTecnico && r.Id_Tipo_Especialidad == tipoes.Id_Tipo_Especialidad)
+                                                 select tipoes).ToList();
+                        }
                     }
                 }
             }
@@ -56,73 +66,23 @@ namespace SistemaArtemis.Models
             return tiposEspecialidad;
         }
 
-
-
-        public List<Tipo_Especialidad> Listar1(int id)
+        public List<Tipo_Especialidad> ListarTipoEspecialidad()
         {
-            var tiposEspecialidad = new List<Tipo_Especialidad>();
+            var nespecialidad = new List<Tipo_Especialidad>();
             try
             {
                 using (var db = new Model1())
                 {
-                    var idEspecialidad = db.Tecnico
-                        .Where(tec => tec.Id_Tecnico == id)
-                        .Select(tec => tec.Id_Especialidad)
-                        .FirstOrDefault();
-
-                    if (idEspecialidad != 0)
-                    {
-                        tiposEspecialidad = (from tipoes in db.Tipo_Especialidad
-                                             where tipoes.Id_Especialidad == idEspecialidad
-                                             select tipoes).ToList();
-                    }
+                    nespecialidad = db.Tipo_Especialidad.ToList();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
-            return tiposEspecialidad;
+            return nespecialidad;
         }
-
-
-        //public List<Tipo_Especialidad> Listar1(int id = 0)
-        //{
-        //    var tiposEspecialidad = new List<Tipo_Especialidad>();
-        //    try
-        //    {
-        //        using (var db = new Model1())
-        //        {
-        //            var idEspecialidad = db.Tecnico
-        //                .Where(tec => tec.Id_Tecnico == id)
-        //                .Select(tec => tec.Id_Especialidad)
-        //                .FirstOrDefault();
-
-        //            if (idEspecialidad != 0)
-        //            {
-        //                tiposEspecialidad = db.Tipo_Especialidad
-        //                    .Where(te => te.Id_Especialidad == idEspecialidad)
-        //                    .ToList();
-
-        //                // Validar el campo "Id_Especialidad" de la tabla "Tipo_Especialidad" con el campo "id_Especialidad" de la tabla "Especialidad"
-        //                tiposEspecialidad = tiposEspecialidad.Join(
-        //                    db.Especialidad,
-        //                    tipo => tipo.Id_Especialidad,
-        //                    especialidad => especialidad.Id_Especialidad,
-        //                    (tipo, especialidad) => tipo)
-        //                    .ToList();
-        //            }
-        //        }
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw;
-        //    }
-        //    return tiposEspecialidad;
-        //}
-
-
-
+        
 
 
 

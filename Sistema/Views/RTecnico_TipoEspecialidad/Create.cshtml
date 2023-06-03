@@ -1,54 +1,77 @@
 ﻿@model SistemaArtemis.Models.RTecnico_TipoEspecialidad
 @{
     ViewBag.Title = "Create";
-    Layout = "~/Views/Shared/_TecnicoLayout.cshtml";    
+    Layout = "~/Views/Shared/_TecnicoLayout.cshtml";
     List<SistemaArtemis.Models.Tipo_Especialidad> tiposEspecialidad1 = ViewBag.tipo;
 }
 
-@using (Html.BeginForm("Guardar", "RTecnico_TipoEspecialidad", FormMethod.Post, new { id = "frm-categoria" }))
-{
-    //@Html.HiddenFor(x => x.Id)
-    <div class="content-wrapper">
-        <div class="card shadow mb-6">
-            <div class="card-header py-3 bg-second-primary">
-                <h6 class="m-0 font-weight-bold text-white"><i class="fas fa-user"></i> Agrega tus especialidades</h6>
+<div class="modal" tabindex="-1" role="dialog" id="modalAlerta" style="display: none;">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-warning text-white">
+                <h5 class="modal-title">Alerta</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-            <div class="card-body">
-                <form>
-                    <div class="form-row">
-                        <div class="form-group col-sm-12">                                                   
-                                @Html.HiddenFor(x => x.Id_Tecnico, new { @class = "form-control", @readonly = "readonly", @Value = @Session["Id_Tecnico"] })
-                               
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="Id_Tipo_Especialidad">Especialidad:</label>
-                        <select name="Id_Tipo_Especialidad" class="form-control">
-                            <option @(Model.Id_Tipo_Especialidad.Equals("") ? "selected" : "") value="">--Seleccione--</option>
-
-                            @foreach (var t in tiposEspecialidad1)
-                            {
-                                <option @(Model.Id_Tipo_Especialidad.Equals(t.Id_Tipo_Especialidad) ? "selected" : "")
-                                        value="@t.Id_Tipo_Especialidad">
-                                    @t.TipoEspecialidad 
-                                </option>
-                            }
-                        </select>
-                        @Html.ValidationMessageFor(x => x.Id_Tipo_Especialidad, null, new { @class = "label label-danger" })
-                    </div>
-
-                    <hr>
-                    <div class="row">
-                        <div class="col-sm-3">
-                            <button type="submit" class="btn btn-success btn-sm btn-block">Guardar</button>
-                        </div>
-                        <div class="col-sm-3">
-                            <a href="~/Tecnico" class="btn btn-danger  btn-sm btn-block">Cancelar</a>
-                        </div>
-                    </div>
-                </form>
+            <div class="modal-body">
+                <p class="text-center">Debe seleccionar una opción antes de guardar.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
             </div>
         </div>
     </div>
-}
+</div>
+
+<div class="content-wrapper">
+    <div class="card shadow mb-6">
+        <div class="card-header py-3 bg-second-primary">
+            <h6 class="m-0 font-weight-bold text-white"><i class="fas fa-user"></i> Agrega tus especialidades</h6>
+        </div>
+        <div class="card-body">
+            @using (Html.BeginForm("Guardar", "RTecnico_TipoEspecialidad", FormMethod.Post, new { id = "frm-categoria" }))
+            {
+                <div class="form-row">
+                    <div class="form-group col-sm-12">
+                        @Html.HiddenFor(x => x.Id_Tecnico, new { @class = "form-control", @readonly = "readonly", @Value = @Session["Id_Tecnico"] })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-sm-7">
+                        <select name="Id_Tipo_Especialidad" class="form-control" id="Id_Tipo_Especialidad">
+                            <option value="">--Seleccione--</option>
+                            @foreach (var t in tiposEspecialidad1)
+                            {
+                                <option value="@t.Id_Tipo_Especialidad">@t.TipoEspecialidad</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="col-sm-5">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <button type="submit" class="btn btn-success btn-sm btn-block" id="btnGuardar"> Guardar
+                                </button>
+                            </div>
+                            <div class="col-sm-6">                                
+                                <a href="~/Tecnico" class="btn btn-danger btn-sm btn-block">Cancelar
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById("frm-categoria").addEventListener("submit", function (event) {
+        var combo = document.getElementById("Id_Tipo_Especialidad");
+        if (combo.value === "") {
+            event.preventDefault();
+            $("#modalAlerta").modal("show");
+        }
+    });
+</script>
 
