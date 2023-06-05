@@ -6,14 +6,16 @@
     
 }
 
-<h2>Create</h2>
+@*<h2>Create</h2>*@
 
 @using (Html.BeginForm("Guardar", "Servicio", FormMethod.Post))
 {
     @Html.HiddenFor(x => x.Id_Servicio)
 
     <div class="card">
-        <div class="card-header">Registrar Servicio</div>
+        <div class="card-header py-3 bg-second-primary">
+            <h6 class="m-0 font-weight-bold text-white">Postular al servicio</h6>
+        </div>
         <div class="card-body">
 
             <div id="file-name"></div>

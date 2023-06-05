@@ -9,34 +9,22 @@ namespace SistemaArtemis.Models.Login
     public class SessionHelper
     {
 
-       /// <summary>
-       /// La función comprueba si hay un usuario autenticado en la sesión actual.
-       /// </summary>
-       /// <returns>
-       /// Un valor booleano que indica si hay un usuario autenticado en la sesión actual o no.
-       /// </returns>
+       /// <summary> La función comprueba si hay un usuario autenticado en la sesión actual.</summary>
+       /// <returns> Un valor booleano que indica si hay un usuario autenticado en la sesión actual o no.</returns>
         public static bool ExistUserInSession()
         {
             return HttpContext.Current.User.Identity.IsAuthenticated;
         }
 
-
-       /// <summary>
-       /// La función destruye la sesión del usuario cerrándolo mediante FormsAuthentication.
-       /// </summary>
+       /// <summary>La función destruye la sesión del usuario cerrándolo mediante FormsAuthentication</summary>
         public static void DestroyUserSession()
         {
             FormsAuthentication.SignOut();
         }
 
 
-        /// <summary>
-        /// Esta función recupera el ID de usuario de FormsAuthenticationTicket en el HttpContext
-        /// actual.
-        /// </summary>
-        /// <returns>
-        /// El método devuelve un valor entero que representa el ID de usuario.
-        /// </returns>
+        /// <summary> Esta función recupera el ID de usuario de FormsAuthenticationTicket en el HttpContext actual.</summary>
+        /// <returns> El método devuelve un valor entero que representa el ID de usuario.</returns>
         public static int GetUser()
         {
             int user_id = 0;
@@ -51,12 +39,8 @@ namespace SistemaArtemis.Models.Login
             return user_id;
         }
 
-        /// <summary>
-        /// Esta función agrega una ID de usuario a la sesión actual y actualiza la cookie de autenticación con
-        /// la nueva ID.
-        /// </summary>
-        /// <param name="id">El ID de usuario que desea agregar a la sesión. Suele ser un identificador único
-        /// para el usuario, como su nombre de usuario o una ID de base de datos.</param>
+        /// <summary> Esta función agrega una ID de usuario a la sesión actual y actualiza la cookie de autenticación con la nueva ID. </summary>
+        /// <param name="id">El ID de usuario que desea agregar a la sesión. Suele ser un identificador único para el usuario, como su nombre de usuario o una ID de base de datos.</param>
 
         public static void AddUserToSession(string id)
         {
@@ -65,13 +49,6 @@ namespace SistemaArtemis.Models.Login
 
             cookie.Name = FormsAuthentication.FormsCookieName;
             cookie.Expires = DateTime.Now.AddMonths(3);
-
-            /* Estas líneas de código descifran el valor de la cookie de autenticación usando el método
-            `FormsAuthentication.Decrypt` y luego crean un nuevo objeto `FormsAuthenticationTicket`
-            con la ID de usuario actualizada. Luego, el nuevo ticket se cifra mediante el método
-            `FormsAuthentication.Encrypt` y el valor de cookie actualizado se establece en las
-            cookies de respuesta. Esto se usa para actualizar la ID de usuario en la cookie de
-            autenticación cuando un usuario inicia sesión o cambia su ID. */
             var ticket = FormsAuthentication.Decrypt(cookie.Value);
             var newTicket = new FormsAuthenticationTicket(ticket.Version, ticket.Name, ticket.IssueDate,
                                                           ticket.Expiration, ticket.IsPersistent, id);
@@ -80,14 +57,8 @@ namespace SistemaArtemis.Models.Login
             HttpContext.Current.Response.Cookies.Add(cookie);
         }
 
-       /// <summary>
-       /// La función "AddUserToSession" se declara como interna y estática, toma un parámetro de objeto
-       /// y lanza una NotImplementedException.
-       /// </summary>
-       /// <param name="p">El parámetro "p" es del tipo "objeto" y es probable que se use para pasar
-       /// algunos datos u objetos relacionados con la adición de un usuario a una sesión. Sin embargo,
-       /// dado que el cuerpo del método arroja una "NotImplementedException", no está claro qué se
-       /// supone que debe hacer el método con el parámetro.</param>
+       /// <summary> La función "AddUserToSession" se declara como interna y estática, toma un parámetro de objeto y lanza una NotImplementedException.</summary>
+       /// <param name="p">El parámetro "p" es del tipo "objeto" y es probable que se use para pasar algunos datos u objetos relacionados con la adición de un usuario a una sesión. Sin embargo, dado que el cuerpo del método arroja una "NotImplementedException", no está claro qué se supone que debe hacer el método con el parámetro.</param>
         internal static void AddUserToSession(object p)
         {
             throw new NotImplementedException();

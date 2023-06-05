@@ -33,7 +33,9 @@ namespace SistemaArtemis.Models
         [StringLength(100)]
         public string Correo { get; set; }
 
-        [StringLength(50)]
+        [Required]
+        [StringLength(150)]
+        [DataType(DataType.Password)]
         public string Password { get; set; }
 
         public int? Estado { get; set; }
@@ -52,13 +54,8 @@ namespace SistemaArtemis.Models
 
         Model1 db = new Model1();
 
-        /// <summary>
-        /// La función registra un nuevo usuario en una base de datos mediante procedimientos
-        /// almacenados y devuelve un valor entero como respuesta.
-        /// </summary>
-        /// <returns>
-        /// El método devuelve un valor entero, que es el resultado de la ejecución del procedimiento almacenado.
-        /// </returns>
+        /// <summary>La función registra un nuevo usuario en una base de datos mediante procedimientos almacenados y devuelve un valor entero como respuesta.</summary>
+        /// <returns>El método devuelve un valor entero, que es el resultado de la ejecución del procedimiento almacenado.</returns>
         public int Registrar(Usuario oUsuario)
         {
             int respuesta = 0;
@@ -93,13 +90,8 @@ namespace SistemaArtemis.Models
             return respuesta;
         }
 
-        /// <summary>
-        /// Esta función recupera una lista de usuarios de una base de datos, incluidos sus tipos de
-        /// usuarios asociados.
-        /// </summary>
-        /// <returns>
-        /// Una lista de objetos de usuario, que incluye el objeto User_Type relacionado.
-        /// </returns>
+        /// <summary> Esta función recupera una lista de usuarios de una base de datos, incluidos sus tipos de usuarios asociados.</summary>
+        /// <returns>Una lista de objetos de usuario, que incluye el objeto User_Type relacionado.</returns>
 
         public List<Usuario> Listar()
         {
@@ -120,17 +112,10 @@ namespace SistemaArtemis.Models
 
 
 
-        /// <summary>
-        /// Esta función recupera un usuario por su ID de una base de datos, incluido su tipo de
-        /// usuario.
-        /// </summary>
-        /// <param name="id">un número entero que representa el identificador único del usuario que se
-        /// recuperará de la base de datos.</param>
-        /// <returns>
-        /// El método devuelve una única instancia de la clase "Usuario" que coincide con el parámetro
-        /// "id" proporcionado. La instancia se obtiene de una base de datos utilizando Entity Framework
-        /// e incluye la entidad "Tipo_Usuario" relacionada.
-        /// </returns>
+        /// <summary>Esta función recupera un usuario por su ID de una base de datos, incluido su tipo de usuario.</summary>
+        /// <param name="id">un número entero que representa el identificador único del usuario que se recuperará de la base de datos.</param>
+        /// <returns>El método devuelve una única instancia de la clase "Usuario" que coincide con el parámetro "id" proporcionado. La instancia se obtiene de una base de datos utilizando Entity Framework e incluye la entidad "Tipo_Usuario" relacionada.</returns>
+        
         public Usuario Obtener(int id)
         {
             var usuarios = new Usuario();
@@ -153,10 +138,7 @@ namespace SistemaArtemis.Models
         }
 
 
-        /// <summary>
-        /// La función guarda un registro en una base de datos utilizando Entity Framework, ya sea como
-        /// un registro nuevo o como uno existente.
-        /// </summary>
+        /// <summary>La función guarda un registro en una base de datos utilizando Entity Framework, ya sea como un registro nuevo o como uno existente.</summary>
         public void Guardar()
         {
             try
@@ -181,17 +163,9 @@ namespace SistemaArtemis.Models
             }
         }
 
-        /// <summary>
-        /// Esta función busca usuarios en una base de datos según un criterio dado.
-        /// </summary>
-        /// <param name="criterio">una cadena que representa los criterios de búsqueda que se utilizarán
-        /// para encontrar registros coincidentes en la base de datos. El método busca registros donde
-        /// las propiedades Nombre, Apellido, Correo o Tipo_Usuario.Nombre contengan los criterios de
-        /// búsqueda especificados.</param>
-        /// <returns>
-        /// Una lista de objetos Usuario que coinciden con los criterios de búsqueda especificados por
-        /// la cadena de entrada "criterio".
-        /// </returns>
+        /// <summary>Esta función busca usuarios en una base de datos según un criterio dado.</summary>
+        /// <param name="criterio">una cadena que representa los criterios de búsqueda que se utilizarán para encontrar registros coincidentes en la base de datos. El método busca registros dondelas propiedades Nombre, Apellido, Correo o Tipo_Usuario.Nombre contengan los criterios de búsqueda especificados.</param>
+        /// <returns>Una lista de objetos Usuario que coinciden con los criterios de búsqueda especificados por la cadena de entrada "criterio".</returns>
 
         public List<Usuario> Buscar(string criterio)
         {
@@ -248,6 +222,7 @@ namespace SistemaArtemis.Models
         /// </returns>
         public bool Autenticar()
         {
+
             return db.Usuario
                    .Where(x => x.Correo == this.Correo
                    && x.Password == this.Password)
@@ -308,6 +283,7 @@ namespace SistemaArtemis.Models
             var rm = new ResponseModel();
             try
             {
+                Password = HashHelper.MD5(Password);
                 using (var db = new Model1())
                 {
                     Password = HashHelper.MD5(Password);
@@ -332,5 +308,7 @@ namespace SistemaArtemis.Models
             }
             return rm;
         }
+
+
     }
 }

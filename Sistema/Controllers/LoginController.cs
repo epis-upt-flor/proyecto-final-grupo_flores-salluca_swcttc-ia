@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -32,6 +34,8 @@ namespace SistemaArtemis.Controllers
         [HttpPost]
         public ActionResult Index(Usuario usuario)
         {
+            usuario.Password = ConvertirSha256(usuario.Password);
+
             using (SqlConnection oConexion = new SqlConnection(Conexion.CN))
             {
                 SqlCommand cmd = new SqlCommand("sp_obtenerUsuario", oConexion);
@@ -119,7 +123,7 @@ namespace SistemaArtemis.Controllers
                 Nombre = usuario.Nombre,
                 Apellido = usuario.Apellido,
                 Correo = usuario.Correo,
-                Password = usuario.Password,
+                Password = ConvertirSha256(usuario.Password),
                 Estado = 1,
                 Id_Tipo_Usuario = usuario.Id_Tipo_Usuario
 
@@ -166,6 +170,24 @@ namespace SistemaArtemis.Controllers
         {
            bool correoExiste = db.Usuario.Any(u => u.Correo == correo);
            return correoExiste;
+        }
+
+        public static string ConvertirSha256(string texto)
+        {
+            //using System.Text;
+            //USAR LA REFERENCIA DE "System.Security.Cryptography"
+
+            StringBuilder Sb = new StringBuilder();
+            using (SHA256 hash = SHA256Managed.Create())
+            {
+                Encoding enc = Encoding.UTF8;
+                byte[] result = hash.ComputeHash(enc.GetBytes(texto));
+
+                foreach (byte b in result)
+                    Sb.Append(b.ToString("x2"));
+            }
+
+            return Sb.ToString();
         }
 
     }
