@@ -60,24 +60,18 @@
                                     {
                                         <td> <span class="badge badge-danger">Finalizado</span></td>
                                     }
+
+                                    <td>
+                                        <a href="@Url.Action("IndexAsync", "RecAPI", new { texto = @t.Descripcion })" class="btn btn-success">Recomendar</a>
+                                    </td>
+
+                                    <td>
+                                        <a href="#" class="btn btn-success">Visualizar</a>
+                                    </td>
+
+
                                 </tr>
                             }
-                            @*<tr>
-            <td>1</td>
-            <td>Mantenimiento y Limpieza para casa</td>
-            <td>2023-04-20</td>
-            <td>2023-04-30</td>
-            <td> <span class="badge badge-danger">En Proceso</span></td>
-            <td>
-                <button class="btn btn-primary btn-sm">
-                    <i class="fas fa-pencil-alt"></i>
-                </button>
-                <button class="btn btn-danger btn-sm">
-                    <i class="fas fa-trash-alt"></i>
-                </button>
-            </td>
-
-        </tr>*@
                         </tbody>
 
                     </table>

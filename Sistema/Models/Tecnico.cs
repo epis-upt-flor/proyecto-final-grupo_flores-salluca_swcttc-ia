@@ -174,6 +174,24 @@ namespace SistemaArtemis.Models
 
         }
 
+        //Listar tecnico especificos recomendados
+        public List<Tecnico> ListarRecomendado(List<int> numeros)
+        {
+            List<Tecnico> tecnicos = new List<Tecnico>();
+            try
+            {
+                using (var db = new Model1())
+                {
+                    tecnicos = db.Tecnico.Where(t => numeros.Contains(t.Id_Tecnico)).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return tecnicos;
+        }
+
 
     }
 }

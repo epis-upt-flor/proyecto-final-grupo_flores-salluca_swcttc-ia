@@ -1,0 +1,21 @@
+Versión de Python 3.11.3
+
+Librerias de ENV
+--Install
+pip install fastapi
+pip install uvicorn
+--Librerias--
+pip install sqlalchemy pyodbc pandas nltk inflect
+
+--Agregara Variables de entorno--(Caso sea necesario, Verificar las rutas)
+C:\Users\hp\AppData\Local\Programs\Python\Python311
+C:\Users\hp\AppData\Local\Programs\Python\Python311\Scripts
+
+--Para crear entorno virtual--
+python -m venv recopi-env
+
+--Para levantar servidor--
+uvicorn recom:app --reload
+
+--API Docs--
+#http://127.0.0.1:8000/docs
