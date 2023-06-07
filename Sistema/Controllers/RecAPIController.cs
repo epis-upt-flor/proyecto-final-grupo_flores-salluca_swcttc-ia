@@ -39,9 +39,14 @@ namespace SistemaArtemis.Controllers
             }
         }
 
+
+
         private List<int> ParseResultToList(string result)
         {
             List<int> numeros = new List<int>();
+
+            // Remover los caracteres "[" y "]"
+            result = result.Replace("[", "").Replace("]", "");
 
             // Dividir la cadena result por comas
             string[] numerosStr = result.Split(',');
@@ -49,14 +54,20 @@ namespace SistemaArtemis.Controllers
             // Convertir cada elemento de la matriz en un número entero y agregarlo a la lista
             foreach (string numeroStr in numerosStr)
             {
-                int numero;
-                if (int.TryParse(numeroStr, out numero))
+                if (int.TryParse(numeroStr, out int numero))
                 {
                     numeros.Add(numero);
                 }
+                else
+                {
+                    Console.WriteLine($"No se pudo convertir el elemento '{numeroStr}' a un número entero. Se omitirá este elemento.");
+                }
             }
+
             return numeros;
         }
+
+
 
         public ActionResult Index()
         {

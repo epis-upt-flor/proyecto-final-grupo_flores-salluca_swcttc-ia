@@ -9,6 +9,7 @@ from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 from nltk.corpus import wordnet
 from fastapi import FastAPI
+from collections import Counter
 
 app = FastAPI()
 
@@ -69,5 +70,26 @@ def recomendar(texto: str):
         if len(palabras_claves.intersection(palabras_claves_trabajo)) >= 1:
             recomendaciones.append(trabajo[0])
 
-    return recomendaciones
+    # Realizar la validación de números repetidos y ordenar por repeticiones    
+    #repeticiones = Counter(recomendaciones)
+    #recomendaciones_ordenadas = sorted(repeticiones.items(), key=lambda x: x[1], reverse=True)
+    #recomendaciones_unicas = [num for num, _ in recomendaciones_ordenadas]
+
+
+
+    # Realizar la validación de números repetidos
+    repeticiones = Counter(recomendaciones)
+    recomendaciones_ordenadas = sorted(repeticiones, key=lambda x: repeticiones[x], reverse=True)
+
+    # Eliminar números repetidos en el array final
+    recomendaciones_unicas = []
+    for num in recomendaciones_ordenadas:
+        if num not in recomendaciones_unicas:
+            recomendaciones_unicas.append(num)
+    
+    return recomendaciones_unicas
+    #return recomendaciones
     #return {"recomendaciones": recomendaciones}
+
+       
+    

@@ -62,8 +62,15 @@
                                     }
 
                                     <td>
-                                        <a href="@Url.Action("IndexAsync", "RecAPI", new { texto = @t.Descripcion })" class="btn btn-success">Recomendar</a>
+                                        <form method="get" action="~/RecAPI/IndexAsync">
+                                            <input type="hidden" name="Descripcion" value="@t.Descripcion"/>
+                                            <button type="submit" class="btn btn-outline-secondary" style="width: 120px;">Recomendar</button>
+                                        </form>
                                     </td>
+
+                                    @*<td>
+                                        <a href="@Url.Action("IndexAsync", "RecAPI", new { texto = @t.Descripcion })" class="btn btn-success">Recomendar</a>
+                                    </td>*@
 
                                     <td>
                                         <a href="#" class="btn btn-success">Visualizar</a>
