@@ -61,7 +61,7 @@ namespace SistemaArtemis.Controllers
             else if (usuario.Id_Tipo_Usuario == 2)
             {
                 var tecnico = new Tecnico().Listar().Find(x => x.Id_Usuario == usuario.Id_Usuario);
-                Session["Id_Tecnico"] = tecnico.Id_Tecnico;
+                Session["Id_Tecnico"] = tecnico.Id_Tecnico;         
                 return RedirectToAction("Index", "Tecnico");
             }
             else if (usuario.Id_Tipo_Usuario == 3)
@@ -151,7 +151,7 @@ namespace SistemaArtemis.Controllers
         {
             FormsAuthentication.SignOut();
             Session.Abandon();
-            return RedirectToAction("Home", "Index");
+            return RedirectToAction("Index", "Home");
         }
 
 

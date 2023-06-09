@@ -8,7 +8,7 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-set VIRTUAL_ENV=D:\API\RecoAPI\recopi-env
+set VIRTUAL_ENV=D:\SistemaArtemis\proyecto-final-grupo_flores-salluca_swcttc-ia\API\RecoAPI\recopi-env
 
 if not defined PROMPT set PROMPT=$P$G
 

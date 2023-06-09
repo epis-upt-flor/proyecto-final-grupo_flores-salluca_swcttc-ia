@@ -37,11 +37,11 @@ namespace SistemaArtemis.Controllers
             if (ModelState.IsValid)
             {
                 model.Guardar();
-                return Redirect("~/Tecnico/Index");
+                return Redirect("~/RTecnico_TipoEspecialidad/List/" + model.Id_Tecnico);
             }  
             else
             {                
-                return Redirect("~/RTecnico_TipoEspecialidad/Create");
+                return Redirect("~/RTecnico_TipoEspecialidad/Create" + model.Id_Tecnico);
             }
         }
 
@@ -55,9 +55,10 @@ namespace SistemaArtemis.Controllers
 
         public ActionResult Eliminar(int id)
         {
+            
             objRTipoEspecialidad.Id = id;
             objRTipoEspecialidad.Eliminar();
-            return Redirect("~/Tecnico/Index");
+            return Redirect("~/Tecnico");
         }
 
 

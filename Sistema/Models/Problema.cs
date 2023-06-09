@@ -185,10 +185,11 @@ namespace SistemaArtemis.Models
             {
                 using (var db = new Model1())
                 {
-                    var icliente = db.Cliente
-                        .Where(u => u.Id_Usuario == id)
-                        .Select(u => u.Id_Cliente)
-                        .SingleOrDefault();
+                    var icliente = id;
+                    //var icliente = db.Cliente
+                    //    .Where(u => u.Id_Usuario == id)
+                    //    .Select(u => u.Id_Cliente)
+                    //    .SingleOrDefault();
                     if (icliente != 0)
                     {
                         misproblemas = db.Problema
@@ -205,25 +206,25 @@ namespace SistemaArtemis.Models
             return misproblemas;
         }
 
-        public int ObtenerIdCliente(int id)
-        {
-            int idCliente = 0;
-            try
-            {
-                using (var db = new Model1())
-                {
-                    var cliente = db.Cliente.SingleOrDefault(c => c.Id_Usuario == id);
-                    if (cliente != null)
-                    {
-                        idCliente = cliente.Id_Cliente;
-                    }
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            return idCliente;
-        }
+        //public int ObtenerIdCliente(int id)
+        //{
+        //    int idCliente = 0;
+        //    try
+        //    {
+        //        using (var db = new Model1())
+        //        {
+        //            var cliente = db.Cliente.SingleOrDefault(c => c.Id_Usuario == id);
+        //            if (cliente != null)
+        //            {
+        //                idCliente = cliente.Id_Cliente;
+        //            }
+        //        }
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw;
+        //    }
+        //    return idCliente;
+        //}
     }
 }

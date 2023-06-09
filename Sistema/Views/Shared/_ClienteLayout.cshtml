@@ -3,7 +3,7 @@
     ViewBag.Title = "_ClienteLayout";
     SistemaArtemis.Models.Usuario usuario = new SistemaArtemis.Models.Usuario();
     var usuarios = usuario.ObtenerDatos((string)Session["Correo"]);
-
+    var idcliente = Session["Id_Cliente"];
 }
 
 <!DOCTYPE html>
@@ -29,7 +29,7 @@
     <link rel="stylesheet" href="~/Source/vendor/datatables/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="~/Source/vendor/datatables/extensiones/css/responsive.dataTables.min.css">
     <link rel="stylesheet" href="~/Source/vendor/datatables/extensiones/css/buttons.dataTables.min.css">
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body id="page-top">
@@ -39,41 +39,38 @@
 
         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+            <li class="nav-item">
+                <!-- Sidebar - Brand -->
+                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
+                    <div class="sidebar-brand-icon">
+                        <i class="fas fa-desktop"></i>
+                    </div>
+                    <div class="sidebar-brand-text mx-3">Sistema SERF</div>
+                </a>
 
-            <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
-                <div class="sidebar-brand-icon">
-                    <i class="fas fa-desktop"></i>
-                </div>
-                <div class="sidebar-brand-text mx-3">Sistema SERF</div>
-            </a>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
+                <!-- Divider -->
+                <hr class="sidebar-divider my-0">
+            </li>
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
                 <a class="nav-link" href="~/Cliente/Index">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>PANEL CLIENTE</span>
+                    <span>PANEL CLIENTE @idcliente</span>
                 </a>
             </li>
 
-
-
-
-            <!-- BArra Lateral MENU  -->
-            <!-- Nav Item - Gestionar Servicio Collapse Menu -->
+            <!-- BArra Lateral MENU / Gestionar Servicio Collapse Menu -->
             <li class="nav-item">
+                <hr class="sidebar-divider">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseAdministracion">
                     <i class="fas fa-fw fa-cog"></i>
                     <span>Mis Servicio </span>
                 </a>
                 <div id="collapseAdministracion" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="~/Problema/ListarProblemaCliente/@usuarios.Id_Usuario">Listar Problema</a>
+                        <a class="collapse-item" href="~/Problema/ListarProblemaCliente/@idcliente">Listar Problema</a>
                         <a class="collapse-item" href="~/Problema/PublicarProblema">Publicar Servicio</a>
-                        @*<a class="collapse-item" href="~/Problema/Create/@usuarios.Id_Usuario">Publicar </a>*@
                     </div>
                 </div>
             </li>
@@ -92,41 +89,41 @@
                 </div>
             </li>
 
-            <!-- Nav Item - Venta Collapse Menu -->
-            <!--<li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseVenta">
-                    <i class="fas fa-fw fa-tags"></i>
-                    <span>Recomendación</span>
-                </a>
-                <div id="collapseVenta" class="collapse" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="~/Tecnico/Index">Trabajadores Disponibles</a>
-                        <a class="collapse-item" href="#">Trabajadores Aptos</a>
-                    </div>
-                </div>
-            </li>-->
-            <!-- Nav Item - Reportes Collapse Menu -->
-            @*<li class="nav-item">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseReportes">
-                        <i class="fas fa-fw fa-chart-area"></i>
-                        <span>Reportes</span>
+            @* <!-- Nav Item - Venta Collapse Menu -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseVenta">
+                        <i class="fas fa-fw fa-tags"></i>
+                        <span>Recomendación</span>
                     </a>
-                    <div id="collapseReportes" class="collapse" data-parent="#accordionSidebar">
+                    <div id="collapseVenta" class="collapse" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
-                            <a class="collapse-item" href="~/Servicios/ReporteServicios">Reporte de Servicios</a>
+                            <a class="collapse-item" href="~/Tecnico/Index">Trabajadores Disponibles</a>
+                            <a class="collapse-item" href="#">Trabajadores Aptos</a>
                         </div>
                     </div>
-                </li>*@
+                </li>
+                <!-- Nav Item - Reportes Collapse Menu -->
+                <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseReportes">
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>Reportes</span>
+                </a>
+                <div id="collapseReportes" class="collapse" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="~/Servicios/ReporteServicios">Reporte de Servicios</a>
+                    </div>
+                </div>
+            </li>*@
 
             <!-- Divider -->
-            <hr class="sidebar-divider">
-            <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
+            <hr class="sidebar-divider">            
+            <li class="nav-item d-flex justify-content-center">
+                <div class="text-center d-none d-md-inline">
+                    <button class="rounded-circle border-0" id="sidebarToggle"></button>
+                </div>
+            </li>
         </ul>
-        <!-- End of Sidebar -->
-        <!-- Content Wrapper -->
+        <!-- End of Sidebar / Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
 
             <!-- Main Content -->
@@ -143,7 +140,7 @@
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
 
-                        <div class="topbar-divider d-none d-sm-block"></div>
+                        @*<div class="topbar-divider d-none d-sm-block"></div>*@
 
                         <!-- Nav Item - Informacion de Usuario  -->
                         <li class="nav-item dropdown no-arrow">
@@ -197,7 +194,7 @@
 
                             <div class="modal-footer">
                                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                                <a class="btn btn-primary" href="~/Home/Index">Cerrar sesion</a>
+                                <a class="btn btn-primary" href="~/Login/LogOut">Cerrar sesion</a>
                             </div>
                         </div>
                     </div>
@@ -245,3 +242,13 @@
 </body>
 
 </html>
+<script>
+    $(document).ready(function () {
+        $('#Telefono').on('input', function () {
+            var telefono = $(this).val();
+            if (telefono.length > 9) {
+                $(this).val(telefono.slice(0, 9));
+            }
+        });
+    });
+</script>

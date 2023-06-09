@@ -38,7 +38,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="D:\API\RecoAPI\recopi-env"
+VIRTUAL_ENV="D:\SistemaArtemis\proyecto-final-grupo_flores-salluca_swcttc-ia\API\RecoAPI\recopi-env"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

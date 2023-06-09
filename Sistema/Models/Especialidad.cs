@@ -56,45 +56,7 @@ namespace SistemaArtemis.Models
 
         }
 
-        //public Especialidad Obtener(int id)
-        //{
-        //    var tipoespecialidad = new Especialidad();
-        //    try
-        //    {
-        //        using (var db = new Model1())
-        //        {
-        //            tipoespecialidad = db.Especialidad.Where(x => x.Id_Especialidad == id)
-        //                        .SingleOrDefault();
-        //        }
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw;
-        //    }
-
-        //    return tipoespecialidad;
-        //}
-        //public List<Especialidad> ListarEspecialidades()
-        //{
-        //    var especialidades = new List<Especialidad>();
-
-        //    try
-        //    {
-        //        using (var db = new Model1())
-        //        {
-        //            especialidades = db.Especialidad.ToList();
-        //        }
-        //    }
-        //    catch (DbException ex)
-        //    {
-        //        // Manejar la excepción de base de datos de manera adecuada
-        //        // Loggear el error, mostrar un mensaje al usuario, etc.
-        //        throw new Exception("Error al obtener las especialidades de la base de datos.", ex);
-        //    }
-
-        //    return especialidades;
-        //}
-
+     
 
 
 

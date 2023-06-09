@@ -28,15 +28,10 @@ namespace SistemaArtemis.Controllers
             }
         }
 
-  
-       /// <summary>
-       /// Esta función de C# devuelve una vista de un objeto de usuario con un ID especificado.
-       /// </summary>
-       /// <param name="id">El parámetro "id" es un valor entero que representa el identificador único
-       /// de un usuario. Este parámetro se utiliza para recuperar la información del usuario de la base de datos y pasarla a la vista para su visualización.</param>
-       /// <returns>
-       /// El método está devolviendo una vista con los datos obtenidos del método `Obtener` del objeto`objUsuario`, el cual toma un parámetro `id`.
-       /// </returns>
+
+        /// <summary>Esta función de C# devuelve una vista de un objeto de usuario con un ID especificado.</summary>
+        /// <returns>El método está devolviendo una vista con los datos obtenidos del método `Obtener` del objeto`objUsuario`, el cual toma un parámetro `id`.
+        
         public ActionResult Visualizar(int id)
         {
             return View(objUsuario.Obtener(id));
@@ -45,12 +40,9 @@ namespace SistemaArtemis.Controllers
         
         /// <summary>
         /// Esta es una función de C# que toma un parámetro de cadena "criterio" y devuelve un
-        /// ActionResult. Es probable que se utilice para buscar o filtrar datos.
+        /// ActionResult. que se utiliza para buscar o filtrar datos.
         /// </summary>
-        /// <param name="criterio">"criterio" es un parámetro de tipo string que se utiliza para pasar
-        /// un criterio de búsqueda a un método llamado "Buscar" en un controlador ASP.NET MVC. Se
-        /// espera que el método use este criterio para buscar algunos datos y devolver los resultados a
-        /// la vista.</param>
+        
         public ActionResult Buscar(string criterio)
         {
             return View(criterio == null || criterio == "" ? objUsuario.Listar() : objUsuario.Buscar(criterio));
@@ -58,11 +50,9 @@ namespace SistemaArtemis.Controllers
         }
 
 
-        /// <summary>
-        /// Esta función devuelve una vista para agregar un nuevo usuario o editar un usuario existente y completa una lista desplegable con datos de otro objeto.
+        /// <summary>Esta función devuelve una vista para agregar un nuevo usuario o editar un usuario existente y completa una lista desplegable con datos de otro objeto.
         /// </summary>
-        /// <returns>
-        /// El método "Agregar" devuelve una vista con un objeto ViewBag que contiene una lista de elementos para completar una lista desplegable y una nueva instancia de la clase "Usuario" o una instancia existente recuperada del objeto "objUsuario" según el valor del parámetro "id".
+        /// <returns>El método "Agregar" devuelve una vista con un objeto ViewBag que contiene una lista de elementos para completar una lista desplegable y una nueva instancia de la clase "Usuario" o una instancia existente recuperada del objeto "objUsuario" según el valor del parámetro "id".
         /// </returns>
         public ActionResult Agregar(int id = 0)
         {
@@ -70,12 +60,8 @@ namespace SistemaArtemis.Controllers
             return View(id == 0 ? new Usuario() : objUsuario.Obtener(id));
         }
 
-        /// <summary>
-        /// La función guarda un modelo de usuario y redirige a la página de índice si el estado del modelo es válido.
-        /// </summary>
-        /// <returns>
-        /// Si ModelState es válido, el método devuelve una redirección a la página de índice del controlador Usuario. Si ModelState no es válido, el método devuelve una vista para la acción agregar del controlador Usuario.
-        /// </returns>
+        /// <summary> La función guarda un modelo de usuario y redirige a la página de índice si el estado del modelo es válido. </summary>
+        /// <returns>Si ModelState es válido, el método devuelve una redirección a la página de índice del controlador Usuario. Si ModelState no es válido, el método devuelve una vista para la acción agregar del controlador Usuario</returns>
         public ActionResult Guardar(Usuario model)
         {
             if (ModelState.IsValid)
@@ -89,12 +75,8 @@ namespace SistemaArtemis.Controllers
             }
         }
 
-        /// <summary>
-        /// Esta función elimina un usuario con una identificación específica y redirige a la página del usuario.
-        /// </summary>
-        /// <returns>
-        /// El método devuelve una redirección a la página "Usuario".
-        /// </returns>
+        /// <summary> Esta función elimina un usuario con una identificación específica y redirige a la página del usuario. </summary>
+        /// <returns>El método devuelve una redirección a la página "Usuario". </returns>
         public ActionResult Eliminar(int id)
         {
             objUsuario.Id_Usuario = id;

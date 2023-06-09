@@ -7,6 +7,7 @@ namespace SistemaArtemis.Models
     using System.Data.Entity;
     using System.Data.Entity.Spatial;
     using System.Linq;
+    using System.Runtime.InteropServices.WindowsRuntime;
 
     [Table("Servicio")]
     public partial class Servicio
@@ -49,6 +50,7 @@ namespace SistemaArtemis.Models
         public virtual Tecnico Tecnico { get; set; }
 
 
+
         public List<Servicio> Listar()
         {
             var serv = new List<Servicio>();
@@ -70,15 +72,9 @@ namespace SistemaArtemis.Models
             return serv;
         }
 
-        /// <summary>
-        /// Esta función recupera una lista de problemas asociados con una identificación de cliente
-        /// específica.
-        /// </summary>
-        /// <param name="id">El parámetro id es un número entero que representa el id del usuario para
-        /// el que queremos listar los problemas.</param>
-        /// <returns>
-        /// El método devuelve una lista de objetos Problema.
-        /// </returns>
+        /// <summary> Esta función recupera una lista de problemas asociados con una identificación de cliente específica.
+        /// <param name="id">El parámetro id es un número entero que representa el id del usuario para el que queremos listar los problemas.</param>
+        /// <returns>El método devuelve una lista de objetos Problema.
         public List<Problema> ListarProblema(int id)
         {
             var misproblemas = new List<Problema>();
@@ -107,16 +103,9 @@ namespace SistemaArtemis.Models
         }
 
 
-        /// <summary>
-        /// La función recupera una lista de servicios asignados a un técnico con una identificación de
-        /// usuario específica y un estado de servicio específico.
-        /// </summary>
-        /// <param name="id">El parámetro id es un número entero que representa el id del usuario para el
-        /// que se debe recuperar la lista de servicios.</param>
-        /// <returns>
-        /// El método devuelve una lista de objetos de Servicio.
-        /// </returns>
-
+        /// <summary> La función recupera una lista de servicios asignados a un técnico con una identificación de usuario específica y un estado de servicio específico.
+        /// <param name="id">El parámetro id es un número entero que representa el id del usuario para el que se debe recuperar la lista de servicios.</param>
+        /// <returns>El método devuelve una lista de objetos de Servicio.
         public List<Servicio> MisServicios(int id)
         {
             var misservicios = new List<Servicio>();
@@ -147,11 +136,7 @@ namespace SistemaArtemis.Models
             return misservicios;
         }
 
-        /// <summary>
-        /// Esta función guarda los cambios realizados en un objeto de servicio en una base de datos utilizando
-        /// Entity Framework.
-        /// </summary>
-
+        /// <summary>Esta función guarda los cambios realizados en un objeto de servicio en una base de datos utilizando Entity Framework.
         public void Guardar()
         {
             try
@@ -196,6 +181,43 @@ namespace SistemaArtemis.Models
 
             return servicio;
         }
+
+        public List<Servicio> Detalles(int id)
+        {
+            var detalles = new List<Servicio>();
+            try
+            {
+                using (var db = new Model1())
+                {
+                    detalles = (from tec in db.Tecnico
+                                join serv in db.Servicio on tec.Id_Tecnico equals serv.Id_Tecnico
+                                join pro in db.Problema on serv.Id_Problema equals pro.Id_Problema
+                                where serv.Id_Problema == id
+                                select new
+                                {
+                                    Tecnico = tec,
+                                    Id_Estado_Servicio = serv.Id_Estado_Servicio,
+                                    Id_Problema = serv.Id_Problema,
+                                    Documento = serv.Documento
+                                }).AsEnumerable()
+                              .Select(x => new Servicio
+                              {
+                                  Tecnico = x.Tecnico,
+                                  Id_Estado_Servicio = x.Id_Estado_Servicio,
+                                  Documento = x.Documento,
+                                  Id_Problema= x.Id_Problema
+                              })
+                              .ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return detalles;
+        }
+     
+
 
     }
 }

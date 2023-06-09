@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -23,31 +24,15 @@ namespace SistemaArtemis.Controllers
         {
             return View();
         }
-        /// <summary>
-        /// La función Lista devuelve una vista con una lista de problemas.
-        /// </summary>
-        /// <returns>
-        /// El método `List()` está devolviendo una vista con una lista de problemas obtenidos del método
-        /// `ListProblem()` del objeto `objproblema`.
-        /// </returns>
+        /// <summary>La función Lista devuelve una vista con una lista de problemas.</summary>
         public ActionResult List()
         {
             return View(objproblema.ListProblem());
         }
-
-
-  
-        /// <summary>
-        /// Esta función guarda un modelo de servicio y actualiza el estado de un problema relacionado a
-        /// "En proceso".
-        /// </summary>
-        /// <param name="Servicio">una clase de modelo que contiene datos relacionados con un servicio
-        /// que se está realizando.</param>
-        /// <returns>
-        /// Si el estado del modelo es válido, el método devuelve una redirección a la acción "Index"
-        /// del controlador "Tecnico". Si el estado del modelo no es válido, el método devuelve la vista
-        /// "Guardar" con errores de validación.
-        /// </returns>
+         
+        /// <summary>Esta función guarda un modelo de servicio y actualiza el estado de un problema relacionado a "En proceso". </summary>
+        /// <param name="Servicio">una clase de modelo que contiene datos relacionados con un servicio ue se está realizando.</param>
+        /// <returns>Si el estado del modelo es válido, el método devuelve una redirección a la acción "Index"del controlador "Tecnico". Si el estado del modelo no es válido, el método devuelve la vista"Guardar" con errores de validación.
         public ActionResult Guardar(Servicio model)
         {
             if (ModelState.IsValid==false)
@@ -70,21 +55,30 @@ namespace SistemaArtemis.Controllers
             }
         }
 
+        public ActionResult Guardar2(int id)
+        {
+            // Eliminar los registros de Servicio según el id_Servicio
+            var serviciosAEliminar = db.Servicio.Where(s => s.Id_Servicio == id);
+            db.Servicio.RemoveRange(serviciosAEliminar);
+            db.SaveChanges();
 
-        /// <summary>
-        /// Esta función devuelve una vista para crear un nuevo servicio o editar uno existente, con una
-        /// lista de problemas pasada como ViewBag.
-        /// </summary>
-        /// <param name="id">El parámetro "id" es un número entero que tiene un valor predeterminado de 0.
-        /// Se utiliza para identificar un registro o entidad específica en la base de datos. En este caso,
-        /// se utiliza para recuperar un objeto "Servicio" específico de la base de datos o para crear uno
-        /// nuevo si el "id</param>
-        /// <returns>
-        /// El método devuelve una vista con un objeto modelo de tipo `Servicio`. Si el parámetro `id` es
-        /// igual a 0, se crea una nueva instancia de `Servicio` y se pasa como objeto modelo. De lo
-        /// contrario, se llama al método `Obtener` del objeto `objServicio` para recuperar un objeto
-        /// `Servicio` existente con el `id` especificado, que es
-        /// </returns>
+            /* Estas líneas de código están actualizando el estado de un problema relacionado con un
+            servicio que se está realizando. */
+            Problema problema = db.Problema.Find(id);
+            if (problema != null)
+            {
+                problema.Estado = "Pendiente";
+                db.SaveChanges();
+            }
+
+            return Redirect("~/Cliente/Index");
+        }
+
+
+
+        /// <summary> Esta función devuelve una vista para crear un nuevo servicio o editar uno existente, con una lista de problemas pasada como ViewBag.</summary>
+        /// <returns>El método devuelve una vista con un objeto modelo de tipo `Servicio`. Si el parámetro `id` es
+        /// igual a 0, se crea una nueva instancia de `Servicio` y se pasa como objeto modelo. De lo contrario, se llama al método `Obtener` del objeto `objServicio` para recuperar un objeto `Servicio` existente con el `id` especificado </returns>
         public ActionResult Create(int id=0)
         {
             var problemas = new Problema().Listar(id);
@@ -92,6 +86,24 @@ namespace SistemaArtemis.Controllers
 
             return View(id==0 ? new Servicio() : objServicio.Obtener(id));
         }
+
+
+        public ActionResult Details(int id)
+        {
+            ViewBag.detalles = objServicio.Detalles(id);
+            //if (id == null)
+            //{
+            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            //}
+            //else
+            //{
+            //    return HttpNotFound();
+            //}
+
+            return View();
+        }
+
+
 
 
     }

@@ -37,15 +37,15 @@ namespace SistemaArtemis.Models
             {
                 using (var db = new Model1())
                 {
-                    var idTecnico = db.Tecnico
-                        .Where(tec => tec.Id_Usuario == id) // Cambio aquí: Buscar por Id_Usuario en lugar de Id_Tecnico
-                        .Select(tec => tec.Id_Tecnico)
-                        .FirstOrDefault();
+                    //var idTecnico = db.Tecnico
+                    //    .Where(tec => tec.Id_Usuario == id) // Cambio aquí: Buscar por Id_Usuario en lugar de Id_Tecnico
+                    //    .Select(tec => tec.Id_Tecnico)
+                    //    .FirstOrDefault();
 
-                    if (idTecnico != 0)
+                    if (id != 0)
                     {
                         var idEspecialidad = db.Tecnico
-                            .Where(tec => tec.Id_Tecnico == idTecnico)
+                            .Where(tec => tec.Id_Tecnico == id)
                             .Select(tec => tec.Id_Especialidad)
                             .FirstOrDefault();
 
@@ -53,7 +53,7 @@ namespace SistemaArtemis.Models
                         {
                             tiposEspecialidad = (from tipoes in db.Tipo_Especialidad
                                                  where tipoes.Id_Especialidad == idEspecialidad && 
-                                                 !db.RTecnico_TipoEspecialidad.Any(r => r.Id_Tecnico == idTecnico && r.Id_Tipo_Especialidad == tipoes.Id_Tipo_Especialidad)
+                                                 !db.RTecnico_TipoEspecialidad.Any(r => r.Id_Tecnico == id && r.Id_Tipo_Especialidad == tipoes.Id_Tipo_Especialidad)
                                                  select tipoes).ToList();
                         }
                     }

@@ -3,6 +3,7 @@
     ViewBag.Title = "List";
     Layout = "~/Views/Shared/_TecnicoLayout.cshtml";
     List<SistemaArtemis.Models.Tipo_Especialidad> Nespecialidad = ViewBag.tipo;
+    var idtecnico = Session["Id_Tecnico"];
 }
 
 
@@ -14,8 +15,10 @@
 
         <div class="card-body">
             <div class="row">
-                <div class="col-sm-3">
+                <div class="col-sm-6">
+                    <a href="~/RTecnico_TipoEspecialidad/Create/@idtecnico" class="btn btn-warning">Nueva Especialidad</a>
                     <a href="~/Tecnico/Index" class="btn btn-dark">Regresar</a>
+
                     <h2 class="pagegeader"></h2>
                 </div>
             </div>

@@ -2241,6 +2241,7 @@
     <Content Include="Views\RTecnico_TipoEspecialidad\Create.cshtml" />
     <Content Include="Views\RTecnico_TipoEspecialidad\List.cshtml" />
     <Content Include="Views\RecAPI\IndexAsync.cshtml" />
+    <Content Include="Views\Servicio\Details.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

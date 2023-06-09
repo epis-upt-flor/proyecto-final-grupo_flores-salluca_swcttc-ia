@@ -12,6 +12,9 @@ from fastapi import FastAPI
 from collections import Counter
 
 app = FastAPI()
+nltk.download('punkt')
+nltk.download('stopwords')
+nltk.download('wordnet')
 
 #Funcion para conectar con BD
 def con():

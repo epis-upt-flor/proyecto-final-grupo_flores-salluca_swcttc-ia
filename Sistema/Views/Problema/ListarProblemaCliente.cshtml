@@ -5,8 +5,6 @@
 
 }
 
-@*<h2>ListarProblemaCliente</h2>*@
-
 <div class="container-fluid">
 
     <div class="card shadow mb-4">
@@ -29,11 +27,10 @@
                             <tr>
                                 <th>Id</th>
                                 <th>Descripción</th>
-                                @*<th>Cotización</th>*@
                                 <th>Inicio de la Publicación</th>
                                 <th>Fin de la Publicación</th>
                                 <th>Estado</th>
-
+                                <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -47,49 +44,37 @@
                                     @*<td>@t.Documento</td>*@
                                     <td>@t.Fecha_Inicio.ToString("dd/MM/yyyy")</td>
                                     <td>@t.Fecha_Fin.ToString("dd/MM/yyyy")</td>
-
                                     @if (t.Estado == "Pendiente")
                                     {
                                         <td> <span class="badge badge-success">Pendiente</span></td>
                                     }
+                                    @if (t.Estado == "En Revisión")
+                                    {
+                                        <td> <span class="badge badge-warning">En Revisión</span></td>
+                                    }
                                     @if (t.Estado == "En Proceso")
                                     {
-                                        <td> <span class="badge badge-warning">En Proceso</span></td>
+                                        <td> <span class="badge badge-primary">En Proceso</span></td>
                                     }
                                     @if (t.Estado == "Finalizado")
                                     {
                                         <td> <span class="badge badge-danger">Finalizado</span></td>
                                     }
-
                                     <td>
                                         <form method="get" action="~/RecAPI/IndexAsync">
-                                            <input type="hidden" name="Descripcion" value="@t.Descripcion"/>
-                                            <button type="submit" class="btn btn-outline-secondary" style="width: 120px;">Recomendar</button>
+                                            <input type="hidden" name="Descripcion" value="@t.Descripcion" />
+                                            <button type="submit" class="btn btn-outline-secondary" style="width: 116px">Recomendar</button>
                                         </form>
+                                        <a href="~/Servicio/Details/@t.Id_Problema" class="btn btn-outline-success" style="width: 116px">Visualizar</a>
+
                                     </td>
-
-                                    @*<td>
-                                        <a href="@Url.Action("IndexAsync", "RecAPI", new { texto = @t.Descripcion })" class="btn btn-success">Recomendar</a>
-                                    </td>*@
-
-                                    <td>
-                                        <a href="#" class="btn btn-success">Visualizar</a>
-                                    </td>
-
-
                                 </tr>
                             }
                         </tbody>
-
                     </table>
-
                 </div>
-
-
             </div>
-
         </div>
     </div>
 </div>
-
 

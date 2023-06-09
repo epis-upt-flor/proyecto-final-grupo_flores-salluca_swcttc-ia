@@ -27,17 +27,9 @@ namespace SistemaArtemis.Controllers
             return View();
         }
 
-        /// <summary>
-        /// Esta es una función de C# que crea un nuevo objeto "Problema" y lo agrega a una base de datos, luego
-        /// lo redirige a la página "Índice" del controlador "Cliente".
-        /// </summary>
-        /// <param name="Problema">Esta es la clase modelo para la entidad "Problema", que representa un
-        /// problema en el sistema.</param>
-        /// <returns>
-        /// Si el ModelState no es válido, el objeto "problema" se agrega a la base de datos y la acción se
-        /// redirige a la acción "Índice" del controlador "Cliente". Si ModelState es válido, el objeto
-        /// "problema" se devuelve a la vista.
-        /// </returns>
+        /// <summary>Esta es una función de C# que crea un nuevo objeto "Problema" y lo agrega a una base de datos, luego lo redirige a la página "Índice" del controlador "Cliente".     
+        /// <returns>Si el ModelState no es válido, el objeto "problema" se agrega a la base de datos Si ModelState es válido, el objeto
+        /// "problema" se devuelve a la vista.</returns>
 
         [HttpPost]
         //public ActionResult Create(Problema problema)
@@ -53,15 +45,8 @@ namespace SistemaArtemis.Controllers
         }
 
 
-        /// <summary>
-        /// Esta función devuelve una vista con una lista de problemas para un ID de cliente específico.
-        /// </summary>
-        /// <param name="id">El parámetro "id" es un valor entero que representa el ID de un cliente. Este
-        /// método se utiliza para enumerar todos los problemas asociados con un cliente en particular
-        /// identificado por la ID dada.</param>
-        /// <returns>
-        /// El método `ListarProblemaCliente` está devolviendo una `Vista` con el resultado de llamar al
-        /// método `ListarProblema` del objeto `objProblema`, pasando el parámetro `id` como argumento.
+        /// <summary>Esta función devuelve una vista con una lista de problemas para un ID de cliente específico.</summary>
+        /// <returns>El método `ListarProblemaCliente` está devolviendo una `Vista` con el resultado de llamar al método `ListarProblema` del objeto `objProblema`, pasando el parámetro `id` como argumento.
         /// </returns>
         public ActionResult ListarProblemaCliente(int id)
         {
@@ -74,17 +59,9 @@ namespace SistemaArtemis.Controllers
             return View();
         }
 
-        /// <summary>
-        /// Esta función guarda un modelo "Problema" y redirige al índice "Cliente" si el estado del modelo es
-        /// válido, de lo contrario devuelve la vista del modelo.
-        /// </summary>
-        /// <param name="Problema">Problema es una clase modelo que contiene propiedades y métodos relacionados
-        /// con un problema específico en la aplicación. El método Guardar es un método de acción que se encarga
-        /// de guardar los datos ingresados por el usuario en el modelo. Si ModelState no es válido, guarda los
-        /// datos y redirige al usuario a</param>
-        /// <returns>
-        /// Si ModelState no es válido, el modelo se guarda y el usuario es redirigido a la página de índice del
-        /// controlador de Cliente. Si ModelState es válido, se devuelve la vista con el modelo.
+        /// <summary>Esta función guarda un modelo "Problema" y redirige al índice "Cliente" si el estado del modelo es válido, de lo contrario devuelve la vista del modelo.
+        /// </summary>      
+        /// <returns>Si ModelState no es válido, el modelo se guarda y el usuario es redirigido a la página de índice del controlador de Cliente. Si ModelState es válido, se devuelve la vista con el modelo.
         /// </returns>
         public ActionResult Guardar(Problema model)
         {
@@ -99,9 +76,7 @@ namespace SistemaArtemis.Controllers
             }
 
         }      
-
-     
-
+           
         public ActionResult Eliminar(int id)
         {
             objProblema.Id_Problema = id;

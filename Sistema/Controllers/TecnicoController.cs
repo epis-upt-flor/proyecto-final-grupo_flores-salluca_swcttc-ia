@@ -121,14 +121,6 @@ namespace SistemaArtemis.Controllers
 
         }
 
-    
-
-
-
-
-
-
-
 
         //Tecnico
         // GET: Tecnico/Details
