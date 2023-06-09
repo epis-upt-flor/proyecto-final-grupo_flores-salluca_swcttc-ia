@@ -3,7 +3,7 @@
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_ClienteLayout.cshtml";
     List<SistemaArtemis.Models.Servicio> detalle = ViewBag.detalles;
-
+    var idcliente = Session["Id_Cliente"];
 }
 
 <div class="content-wrapper">
@@ -12,6 +12,13 @@
             <h6 class="m-0 font-weight-bold text-white"><i class="fas fa-user"></i>Visualizar Detalles</h6>
         </div>
         <div class="card-body">
+            <div class="row">
+                <div class="col-sm-3">                   
+                    <a href="~/Problema/ListarProblemaCliente/@idcliente" class="btn btn-dark">Regresar</a> 
+                    <h2 class="pagegeader"></h2>
+                </div>
+            </div>
+
             @foreach (var t in detalle)
             {
                 <div class="form-row">
@@ -52,9 +59,9 @@
 
                 </div>
 
-                <div class="row">                    
+                <div class="row">
                     <div class="col-sm-4">
-                        <a href="" class="btn btn-success  btn-sm btn-block">Aceptar</a>
+                        <a href="~/Servicio/Modificar/@t.Id_Problema" class="btn btn-success  btn-sm btn-block">Aceptar</a>
                     </div>
                     <div class="col-sm-4">
                         <a href="~/Servicio/Guardar2/@t.Id_Problema" class="btn btn-danger  btn-sm btn-block">Rechazar</a>

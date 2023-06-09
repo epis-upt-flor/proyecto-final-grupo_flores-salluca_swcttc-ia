@@ -38,11 +38,10 @@ namespace SistemaArtemis.Controllers
             if (ModelState.IsValid==false)
             {
                 model.Guardar();
-
                /* Estas líneas de código están actualizando el estado de un problema relacionado con un
                servicio que se está realizando. */
                 Problema problema = db.Problema.Find(model.Id_Problema);
-                problema.Estado ="En Proceso";
+                problema.Estado = "En Revisión";
                 db.SaveChanges();
 
 
@@ -51,30 +50,9 @@ namespace SistemaArtemis.Controllers
             else
             {
                 // Si el modelo no es válido, regresa la vista con los errores de validación
-                return View(model);
+                return Redirect("~/Servicio/List");
             }
-        }
-
-        public ActionResult Guardar2(int id)
-        {
-            // Eliminar los registros de Servicio según el id_Servicio
-            var serviciosAEliminar = db.Servicio.Where(s => s.Id_Servicio == id);
-            db.Servicio.RemoveRange(serviciosAEliminar);
-            db.SaveChanges();
-
-            /* Estas líneas de código están actualizando el estado de un problema relacionado con un
-            servicio que se está realizando. */
-            Problema problema = db.Problema.Find(id);
-            if (problema != null)
-            {
-                problema.Estado = "Pendiente";
-                db.SaveChanges();
-            }
-
-            return Redirect("~/Cliente/Index");
-        }
-
-
+        }     
 
         /// <summary> Esta función devuelve una vista para crear un nuevo servicio o editar uno existente, con una lista de problemas pasada como ViewBag.</summary>
         /// <returns>El método devuelve una vista con un objeto modelo de tipo `Servicio`. Si el parámetro `id` es
@@ -91,18 +69,47 @@ namespace SistemaArtemis.Controllers
         public ActionResult Details(int id)
         {
             ViewBag.detalles = objServicio.Detalles(id);
-            //if (id == null)
-            //{
-            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            //}
-            //else
-            //{
-            //    return HttpNotFound();
-            //}
-
+          
             return View();
         }
 
+
+        public ActionResult Guardar2(int id)
+        {
+            // Eliminar los registros de Servicio según el id_Servicio
+            var serviciosAEliminar = db.Servicio.Where(s => s.Id_Problema == id);
+            db.Servicio.RemoveRange(serviciosAEliminar);
+            db.SaveChanges();
+
+            /* Estas líneas de código están actualizando el estado de un problema relacionado con un
+            servicio que se está realizando. */
+            Problema problema = db.Problema.Find(id);
+            if (problema != null)
+            {
+                problema.Estado = "Pendiente";
+                db.SaveChanges();
+            }
+
+            return Redirect("~/Cliente/Index");
+        }
+
+        public ActionResult modificar(int id)
+        {
+            /* Estas líneas de código están actualizando el estado de un problema relacionado con un
+            servicio que se está realizando. */
+            Problema problema = db.Problema.Find(id);
+            Servicio servicio = db.Servicio.Find(id);
+
+            if (problema != null && servicio != null)
+            {
+                problema.Estado = "En Proceso";
+                servicio.Id_Estado_Servicio = 3;
+
+                db.SaveChanges();
+            }
+
+            return Redirect("~/Cliente/Index");
+        }
 
 
 
