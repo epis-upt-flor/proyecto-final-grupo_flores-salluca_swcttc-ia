@@ -10,6 +10,11 @@ from nltk.corpus import stopwords
 from nltk.corpus import wordnet
 from fastapi import FastAPI
 from collections import Counter
+from nltk.stem import WordNetLemmatizer
+
+
+import re
+import joblib
 
 app = FastAPI()
 nltk.download('punkt')
@@ -94,5 +99,169 @@ def recomendar(texto: str):
     #return recomendaciones
     #return {"recomendaciones": recomendaciones}
 
-       
+##Metodo coincidencias de palabras
+@app.get("/recomendar_mejorado")
+def recomendar_mejorado(texto: str):
+    con_obj = con()
+    query_datos = SenSql()
+    datos = SenSqlArray(query_datos, con_obj)
+
+    palabras_filtradas = filtrar_palabras(texto)
+    palabras_claves = set(palabras_filtradas)
+
+    inflector = inflect.engine()
+    recomendaciones = []
+
+    for trabajo in datos:
+        descripcion = trabajo[10]
+        palabras_filtradas_trabajo = filtrar_palabras(descripcion)
+        palabras_claves_trabajo = set(palabras_filtradas_trabajo)
+
+        lematizador = WordNetLemmatizer()
+        palabras_claves_trabajo_lem = set(lematizador.lemmatize(palabra) for palabra in palabras_claves_trabajo)
+
+        if palabras_claves.intersection(palabras_claves_trabajo_lem):
+            recomendaciones.append((trabajo[0], len(palabras_claves.intersection(palabras_claves_trabajo_lem))))
+
+    repeticiones = Counter(rec[0] for rec in recomendaciones)
+    recomendaciones_unicas = sorted(set(recomendaciones), key=lambda x: repeticiones[x[0]], reverse=True)
+
+    return [rec[0] for rec in recomendaciones_unicas]
+
+
+def filtrar_palabras(texto):
+    palabras = word_tokenize(texto.lower())
+    stop_words = set(stopwords.words('spanish'))
+    palabras_filtradas = [palabra for palabra in palabras if palabra not in stop_words]
+    return palabras_filtradas
+
+
+##Metodo coincidencias de palabras
+@app.get("/obtener_predicciones")
+def obtener_predicciones(texto: str):
+    delimitadores = delimitador()
+
+    # Cargar el modelo entrenado desde el archivo
+    loaded_model = joblib.load('modelo_entrenado.pkl')
+    # Crear una expresión regular que busca cualquiera de los delimitadores
+    patron_delimitador = "|".join(map(re.escape, delimitadores))
+
+    # Dividir el texto del usuario en partes separadas utilizando los delimitadores detectados
+    partes_texto = re.split(patron_delimitador, texto)
+
+    # Inicializar el array de predicciones
+    predicciones = []
+
+    # Realizar la predicción para cada parte del texto
+    for parte in partes_texto:
+        parte = parte.strip()
+        if parte:
+            prediccion = loaded_model.predict([parte])
+            predicciones.append(prediccion[0])
+
+    # Devolver el array de predicciones
+    return predicciones
     
+#Delimitadores
+def delimitador():
+    delimitadores = [
+    r" y ",
+    r", ",
+    r" además de ",
+    r" adicionalmente ",
+    r" junto con ",
+    r" dicho de otra forma, ",
+    r" es decir, ",
+    r" o sea, ",
+    r" esto es, ",
+    r" en otras palabras, ",
+    r" a modo de ejemplo, ",
+    r" a modo de ilustración, ",
+    r" a título de ejemplo, ",
+    r" como ejemplo, ",
+    r" como muestra, ",
+    r" como ilustración, ",
+    r" como caso ilustrativo, ",
+    r" para ejemplificar, ",
+    r" a manera de ejemplo, ",
+    r" para poner un ejemplo, ",
+    r" por ejemplo, ",
+    r" verbigracia, ",
+    r" v.gr., ",
+    r" p. ej., ",
+    r" ej., ",
+    r" entre ellos, ",
+    r" incluyendo, ",
+    r" tal como, ",
+    r" así como, ",
+    r" también, ",
+    r" igualmente, ",
+    r" asimismo, ",
+    r" del mismo modo, ",
+    r" de la misma manera, ",
+    r" por otro lado, ",
+    r" por otra parte, ",
+    r" de igual manera, ",
+    r" de manera similar, ",
+    r" de forma similar, ",
+    r" de igual modo, ",
+    r" de forma análoga, ",
+    r" al igual que, ",
+    r" de manera análoga, ",
+    r" en la misma línea, ",
+    r" a semejanza de, ",
+    r" a la par de, ",
+    r" de la misma forma, ",
+    r" al mismo tiempo, ",
+    r" simultáneamente, ",
+    r" a la vez, ",
+    r" paralelamente, ",
+    r" conjuntamente, ",
+    r" correlativamente, ",
+    r" de manera conjunta, ",
+    r" de manera correlativa, ",
+    r" a su vez, ",
+    r" a continuación, ",
+    r" seguidamente, ",
+    r" posteriormente, ",
+    r" luego, ",
+    r" después, ",
+    r" más tarde, ",
+    r" en otro orden de cosas, ",
+    r" en segundo lugar, ",
+    r" en tercer lugar, ",
+    r" en última instancia, ",
+    r" por último, ",
+    r" finalmente, ",
+    r" en conclusión, ",
+    r" en resumen, ",
+    r" en síntesis, ",
+    r" en suma, ",
+    r" en definitiva, ",
+    r" como resultado, ",
+    r" por consiguiente, ",
+    r" por lo tanto, ",
+    r" así que, ",
+    r" en consecuencia, ",
+    r" como consecuencia, ",
+    r" en virtud de eso, ",
+    r" por eso, ",
+    r" por ese motivo, ",
+    r" por esa razón, ",
+    r" de ahí que, ",
+    r" de esta manera, ",
+    r" de esta forma, ",
+    r" en tal sentido, ",
+    r" en ese caso, ",
+    r" por ese motivo, ",
+    r" en virtud de ello, ",
+    r" por esa causa, ",
+    r" así pues, ",
+    r" entonces, ",
+    r" así, ",
+    r" por consiguiente, ",
+    r" en ese sentido, ",
+    r".",
+    ]
+    return delimitadores
+

@@ -6,6 +6,8 @@ pip install fastapi
 pip install uvicorn
 --Librerias--
 pip install sqlalchemy pyodbc pandas nltk inflect
+pip install joblib
+pip install scikit-learn
 
 --Agregara Variables de entorno--(Caso sea necesario, Verificar las rutas)
 C:\Users\hp\AppData\Local\Programs\Python\Python311

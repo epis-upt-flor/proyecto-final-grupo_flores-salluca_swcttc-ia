@@ -19,7 +19,8 @@ namespace SistemaArtemis.Controllers
             using (HttpClient client = new HttpClient())
             {
                 string texto = Uri.EscapeDataString(Descripcion ?? string.Empty);
-                string url = "http://127.0.0.1:8000/recomendar?texto=" + texto;
+                //string url = "http://127.0.0.1:8000/recomendar?texto=" + texto;
+                string url = "http://127.0.0.1:8000/recomendar_mejorado?texto=" + texto;
                 HttpResponseMessage response = await client.GetAsync(url);
 
                 //// Mostrar ventana emergente con el valor de Descripcion
