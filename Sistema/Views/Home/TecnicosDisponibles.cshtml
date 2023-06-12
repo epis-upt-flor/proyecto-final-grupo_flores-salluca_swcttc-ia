@@ -1,7 +1,5 @@
 ﻿@model List<SistemaArtemis.Models.Tecnico>
-
 @{
-    //ViewBag.Title = "TecnicosDisponibles";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -18,7 +16,6 @@
                             <th width="80">ID</th>
                             <th>NOMBRE Y APELLIDOS</th>
                             <th>ESPECIALIDAD</th>
-
                         </tr>
                     </thead>
                     <tbody>
@@ -29,7 +26,7 @@
                             <tr>
                                 <td>@i</td>
                                 <td>@(t.Nombre + " " + t.Apellido)</td>
-                                <td>@(t.Especialidad)</td>
+                                <td>@(t.Id_Especialidad)</td>
                             </tr>
                         }
                     </tbody>

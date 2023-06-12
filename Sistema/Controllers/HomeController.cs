@@ -9,8 +9,7 @@ namespace SistemaArtemis.Controllers
 {
     public class HomeController : Controller
     {
-
-        private Servicio objServicio = new Servicio();
+        private Problema objproblema = new Problema();
         private Tecnico objTecnico = new Tecnico();
         
         public ActionResult Index()
@@ -18,16 +17,11 @@ namespace SistemaArtemis.Controllers
             return View();
         }
 
-       /// <summary>
-       /// Esta función devuelve una vista con una lista de puestos de trabajo disponibles.
-       /// </summary>
-       /// <returns>
-       /// El método `EmpleosDisponibles` está devolviendo una `Vista` con el resultado de llamar al
-       /// método `Listar` del objeto `objServicio`.
-       /// </returns>
+       /// <summary> Esta función devuelve una vista con una lista de puestos de trabajo disponibles.</summary>
+       /// <returns>El método `EmpleosDisponibles` está devolviendo una `Vista` con el resultado de llamar al método `Listar` del objeto `objServicio`</returns>
         public ActionResult EmpleosDisponibles()
         {
-            return View(objServicio.Listar());
+            return View(objproblema.ListProblem());
         }
 
         public ActionResult TecnicosDisponibles()

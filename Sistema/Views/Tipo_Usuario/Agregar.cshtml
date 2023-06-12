@@ -19,9 +19,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-12">
-                    
-
+                <div class="col-sm-12">                 
                     @using (Html.BeginForm("Guardar", "Tipo_Usuario", FormMethod.Post, new { id = "frm-categoria" }))
                     {
                         @Html.HiddenFor(x => x.Id_Tipo_Usuario)
@@ -34,21 +32,15 @@
                                     @Html.TextBoxFor(x => x.Nombre, new { @class = "form-control" })
                                     @Html.ValidationMessageFor(x => x.Nombre, null, new { @class = "label label-danger" })
                                 </div>
-
                             </div>
                             <div>
                                 <button type="submit" class="btn btn-primary">Guardar</button>
                                 <a href="~/Tipo_Usuario" class="btn btn-danger">Cancelar</a>
                             </div>
                         </div>
-
                     }
-
                 </div>
-
-
             </div>
-
         </div>
     </div>
 </div>

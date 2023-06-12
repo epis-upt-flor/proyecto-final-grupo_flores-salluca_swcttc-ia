@@ -1,20 +1,13 @@
 ﻿@model SistemaArtemis.Models.Problema
 @{
-
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_ClienteLayout.cshtml";
     List<SistemaArtemis.Models.Cliente> clientes = ViewBag.Cliente;
-
 }
-
-<h2>Create</h2>
-
 
 @using (Html.BeginForm())
 {
-    
-    @Html.HiddenFor(model => model.Id_Problema)
-    
+    @Html.HiddenFor(model => model.Id_Problema)    
     <div class="card">
         <div class="card-header">Informacion del Problema</div>
         <div class="card-body">
@@ -45,15 +38,11 @@
                 @Html.TextBoxFor(model => model.Id_Cliente, new { @class = "form-control", @readonly = "readonly", @Value = @Session["Id_Cliente"] })
                 @Html.ValidationMessageFor(model => model.Id_Cliente, "", new { @class = "text-danger" })
             </div>
-
-
             <div class="text-right">
                 <input type="submit" value="Guardar" class="btn btn-default" />
                 <a href="~/Problema" class="btn btn-danger">Cancelar</a>
             </div>
             <br /><br /><br />
-
-
         </div>
     </div>
 }

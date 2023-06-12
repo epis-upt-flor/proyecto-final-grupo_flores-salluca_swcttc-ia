@@ -47,46 +47,18 @@ namespace SistemaArtemis.Controllers
 
         public ActionResult List(int id)
         {
-            var Nespecialidad = objTipoespecialidad.ListarTipoEspecialidad();// lógica para obtener los tipos de especialidad desde tu base de datos o cualquier otra fuente de datos
-            ViewBag.tipo = Nespecialidad;
-
+            var Nespecialidad = objTipoespecialidad.ListarTipoEspecialidad();// lógica para obtener los tipos de especialidad desde la base de datos o cualquier otra fuente de datos
+            ViewBag.tipo = Nespecialidad;//enviando valores a la vista
             return View(objRTipoEspecialidad.ListarR(id));
         }
 
         public ActionResult Eliminar(int id)
-        {
-            
+        {            
             objRTipoEspecialidad.Id = id;
             objRTipoEspecialidad.Eliminar();
             return Redirect("~/Tecnico");
         }
 
-
-
-
     }
 }
-
-
-
-
-
-//public ActionResult Create(int id)
-//{
-//    ViewBag.Tipo = objTipoespecialidad.Listar(id);
-//    return View();
-//}
-
-
-//[HttpPost]
-//public ActionResult Create([Bind(Include ="Id,Id_Tecnico,Id_Tipo_Especialidad")] RTecnico_TipoEspecialidad rtecnicotipoespecialidad)
-//{
-//    if (ModelState.IsValid == false)
-//    {
-//        db.RTecnico_TipoEspecialidad.Add(rtecnicotipoespecialidad);
-//        db.SaveChanges();
-//        return RedirectToAction("~/Tecnico/Index");
-//    }
-//    return View(rtecnicotipoespecialidad);
-//}
 

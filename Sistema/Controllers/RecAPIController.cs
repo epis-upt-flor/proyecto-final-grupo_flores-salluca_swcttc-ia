@@ -12,8 +12,9 @@ namespace SistemaArtemis.Controllers
     public class RecAPIController : Controller
     {
         private Tecnico objtecnico = new Tecnico();
-        // GET: RecAPI
+        private Especialidad objespecialidad = new Especialidad();
 
+        // GET: RecAPI
         public async Task<ActionResult> IndexAsync(string Descripcion)
         {
             using (HttpClient client = new HttpClient())
@@ -26,9 +27,9 @@ namespace SistemaArtemis.Controllers
                 //// Mostrar ventana emergente con el valor de Descripcion
                 //string script = $"alert('{texto}');";
                 //ViewBag.Script = script;
-
                 if (response.IsSuccessStatusCode)
                 {
+                    ViewBag.tipo = objespecialidad.Listar();
                     string result = await response.Content.ReadAsStringAsync();
                     List<int> numeros = ParseResultToList(result);
                     return View(objtecnico.ListarRecomendado(numeros));
@@ -40,18 +41,13 @@ namespace SistemaArtemis.Controllers
             }
         }
 
-
-
         private List<int> ParseResultToList(string result)
-        {
+        {          
             List<int> numeros = new List<int>();
-
             // Remover los caracteres "[" y "]"
             result = result.Replace("[", "").Replace("]", "");
-
             // Dividir la cadena result por comas
             string[] numerosStr = result.Split(',');
-
             // Convertir cada elemento de la matriz en un número entero y agregarlo a la lista
             foreach (string numeroStr in numerosStr)
             {
@@ -66,13 +62,6 @@ namespace SistemaArtemis.Controllers
             }
 
             return numeros;
-        }
-
-
-
-        public ActionResult Index()
-        {
-            return View();
         }
     }
 }

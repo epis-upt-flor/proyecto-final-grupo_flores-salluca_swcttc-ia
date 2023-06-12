@@ -2,19 +2,17 @@
 @{
     ViewBag.Title = "IndexAsync";
     Layout = "~/Views/Shared/_ClienteLayout.cshtml";
+    List<SistemaArtemis.Models.Especialidad> Nespecialidad = ViewBag.tipo;
 }
 
 <div class="container-fluid">
-
     <div class="card shadow mb-4">
         <div class="card-header py-3 bg-second-primary">
             <h6 class="m-0 font-weight-bold text-white">Mis Calificaciones</h6>
         </div>
-
         <div class="card-body">
             <div class="row">
                 <div class="col-sm-3">
-                    @*<p href="~/Tecnico/TrabajosDisponibles" class="btn btn-warning">Aceptar Nuevo Trabajo</p>*@
                     <a href="~/Cliente/Index" class="btn btn-dark">Regresar</a>
                     <h2 class="pagegeader"></h2>
                 </div>
@@ -27,10 +25,9 @@
                                 <th>Id</th>
                                 <th>Nombre</th>
                                 <th>Apellido</th>
-                                <th>Telefono</th>                             
+                                <th>Telefono</th>
+                                <th>Especialidad</th>
                                 <th>Estado</th>
-
-                            
                             </tr>
                         </thead>
                         <tbody>
@@ -41,27 +38,34 @@
                                     <td>@(m.Nombre)</td>
                                     <td>@(m.Apellido)</td>
                                     <td>@(m.Telefono)</td>
-                                    @*<td>@ (m.Id_Especialidad)</td>*@
-
-                                    @if (m.Id_Estado_Tecnico == 1)
-                                    {
-                                        <td> <span class="badge badge-info">Activo</span></td>
+                                    @{
+                                        string especialidad = "";
+                                        foreach (var t in Nespecialidad)
+                                        {
+                                            if (m.Id_Especialidad.Equals(t.Id_Especialidad))
+                                            {
+                                                especialidad = t.Nombre;
+                                                break;
+                                            }
+                                        }
                                     }
-                                    else
-                                    {
-                                        <td><span class="badge badge-danger">No Activo</span></td>
-                                    }
+                                    <td>@especialidad</td>
+                                    <td>
+                                        @if (m.Id_Estado_Tecnico == 1)
+                                        {
+                                            <span class="badge badge-info">Activo</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge badge-danger">No Activo</span>
+                                        }
+                                    </td>
                                 </tr>
                             }
                         </tbody>
-
                     </table>
-
                 </div>
-
-
             </div>
-
         </div>
     </div>
 </div>

@@ -1942,7 +1942,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdministradorController.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
-    <Compile Include="Controllers\Estado_TecnicoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ProblemaController.cs" />
@@ -2039,15 +2038,12 @@
     <Content Include="Views\Shared\_ClienteLayout.cshtml" />
     <Content Include="Views\Shared\_TecnicoLayout.cshtml" />
     <Content Include="Views\Administrador\Index.cshtml" />
-    <Content Include="Views\Cliente\BuscarTecnicos.cshtml" />
     <Content Include="Views\Cliente\Index.cshtml" />
-    <Content Include="Views\Cliente\ListarCliente.cshtml" />
     <Content Include="Views\Cliente\ListarTecnicos.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Login\Registrarse.cshtml" />
     <Content Include="Views\Tecnico\Index.cshtml" />
     <Content Include="Views\Tecnico\TrabajosDisponibles.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\EmpleosDisponibles.cshtml" />
     <Content Include="Views\Home\TecnicosDisponibles.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
@@ -2223,7 +2219,6 @@
     <Content Include="Source\vendor\fontawesome-free\webfonts\fa-solid-900.woff2" />
     <Content Include="Source\vendor\jquery\jquery.min.map" />
     <Content Include="Source\vendor\jquery\jquery.slim.min.map" />
-    <Content Include="Views\Servicio\Index.cshtml" />
     <Content Include="Views\Tecnico\ListarMisServicios.cshtml" />
     <Content Include="Views\Tecnico\VisualizarCalificacion1.cshtml" />
     <Content Include="Views\Cliente\PublicarServicio.cshtml" />
@@ -2242,6 +2237,7 @@
     <Content Include="Views\RTecnico_TipoEspecialidad\List.cshtml" />
     <Content Include="Views\RecAPI\IndexAsync.cshtml" />
     <Content Include="Views\Servicio\Details.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -2251,7 +2247,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Estado_Tecnico\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

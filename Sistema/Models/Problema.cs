@@ -41,15 +41,8 @@ namespace SistemaArtemis.Models
 
 
 
-        /// <summary>
-        /// Esta función de C# recupera una lista de problemas en función de un ID determinado.
-        /// </summary>
-        /// <param name="id">El parámetro "id" es un valor entero que se utiliza para filtrar la lista de
-        /// objetos "Problema" según su propiedad "Id_Problema". El método devuelve una lista de objetos
-        /// "Problema" que tienen el mismo valor "Id_Problema" que el</param>
-        /// <returns>
-        /// Una lista de objetos Problema que tienen un Id_Problema igual al parámetro de entrada "id".
-        /// </returns>
+        /// <summary>Esta función de C# recupera una lista de problemas en función de un ID determinado.</summary>
+        /// <returns>Una lista de objetos Problema que tienen un Id_Problema igual al parámetro de entrada "id"</returns>
         public List<Problema> Listar(int id)
         {
             var problemas = new List<Problema>();
@@ -71,15 +64,9 @@ namespace SistemaArtemis.Models
         }
 
 
-        /// <summary>
-        /// Esta función recupera una lista de problemas pendientes de una base de datos, incluida la
-        /// información relacionada con el cliente.
-        /// </summary>
-        /// <returns>
-        /// Una lista de objetos "Problema" que tienen la propiedad "Estado" establecida en "Pendiente" y
-        /// se recuperan de la base de datos junto con sus objetos "Cliente".
-        /// </returns>
-        public List<Problema> ListProblem()
+        /// <summary> Esta función recupera una lista de problemas pendientes, incluida la información relacionada con el cliente.</summary>
+        /// <returns>Una lista de objetos "Problema" que tienen la propiedad "Estado" establecida en "Pendiente" y  se recuperan de la base de datos junto con sus objetos "Cliente". </returns>
+        public List<Problema> ListProblem()   //ok
         {
             var problemas = new List<Problema>();
             try

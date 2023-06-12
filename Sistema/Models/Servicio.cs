@@ -50,8 +50,7 @@ namespace SistemaArtemis.Models
         public virtual Tecnico Tecnico { get; set; }
 
 
-
-        public List<Servicio> Listar()
+        public List<Servicio> Listar()  //ok
         {
             var serv = new List<Servicio>();
             try
@@ -71,6 +70,7 @@ namespace SistemaArtemis.Models
             }
             return serv;
         }
+
 
         /// <summary> Esta función recupera una lista de problemas asociados con una identificación de cliente específica.
         /// <param name="id">El parámetro id es un número entero que representa el id del usuario para el que queremos listar los problemas.</param>
