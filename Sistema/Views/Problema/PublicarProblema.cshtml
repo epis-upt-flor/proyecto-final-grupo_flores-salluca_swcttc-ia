@@ -2,9 +2,9 @@
 @{
     ViewBag.Title = "PublicarProblema";
     Layout = "~/Views/Shared/_ClienteLayout.cshtml";
+    var idcliente = Session["Id_Cliente"];
 }
-
-@using (Html.BeginForm("Guardar", "Problema", FormMethod.Post))
+@using (Html.BeginForm("Guardar", "Problema", FormMethod.Post, new { id = "problemaForm" }))
 {
     @Html.HiddenFor(x => x.Id_Problema)
     <div class="container-fluid">
@@ -12,44 +12,47 @@
         <div class="card shadow mb-4">
             <div class="card">
                 <div class="card-header py-3 bg-second-primary">
-                    <h6 class="m-0 font-weight-bold text-white">Informacion del Problema </h6>
+                    <h6 class="m-0 font-weight-bold text-white">Informacion del Problema</h6>
                 </div>
                 <div class="card-body">
-                    <div class="form-row">
-                        <div class="form-group col-sm-6">
-                            <label for="datetime">Fecha Inicio</label>
-                            @Html.EditorFor(x => x.Fecha_Inicio, new { htmlAttributes = new { @class = "form-control", type = "date", min = DateTime.Today.ToString("yyyy-MM-dd") } })
-                            @Html.ValidationMessageFor(x => x.Fecha_Inicio, "", new { @class = "text-danger" })
+                    <!-- Contenido del formulario -->
+                    <div class="card-body">
+                        <div class="form-row">
+                            <div class="form-group col-sm-6">
+                                <label for="datetime">Fecha Inicio</label>
+                                @Html.EditorFor(x => x.Fecha_Inicio, new { htmlAttributes = new { @class = "form-control", type = "date", min = DateTime.Today.ToString("yyyy-MM-dd") } })
+                                @Html.ValidationMessageFor(x => x.Fecha_Inicio, "", new { @class = "text-danger" })
 
+                            </div>
+                            <div class="form-group col-sm-6">
+                                <label for="datetime">Fecha Fin</label>
+                                @Html.EditorFor(x => x.Fecha_Fin, new { htmlAttributes = new { @class = "form-control", type = "date", min = DateTime.Today.ToString("yyyy-MM-dd") } })
+                                @Html.ValidationMessageFor(x => x.Fecha_Fin, "", new { @class = "text-danger" })
+                            </div>
                         </div>
-                        <div class="form-group col-sm-6">
-                            <label for="datetime">Fecha Fin</label>
-                            @Html.EditorFor(x => x.Fecha_Fin, new { htmlAttributes = new { @class = "form-control", type = "date", min = DateTime.Today.ToString("yyyy-MM-dd") } })
-                            @Html.ValidationMessageFor(x => x.Fecha_Fin, "", new { @class = "text-danger" })
+                        <div class="form-row">
+                            <div class="form-group col-sm-12">
+                                <label for="txtDescripcion">Descripcion</label>
+                                @Html.TextAreaFor(x => x.Descripcion, new { @class = "form-control", rows = "5" })
+                                @Html.ValidationMessageFor(x => x.Descripcion, "", new { @class = "text-danger" })
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-sm-12">
-                            <label for="txtDescripcion">Descripcion</label>
-                            @Html.TextAreaFor(x => x.Descripcion, new { @class = "form-control", rows = "5" })
-                            @Html.ValidationMessageFor(x => x.Descripcion, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
 
-                    <div class="form-row">
-                        <div class="form-group col-sm-12">
-                            @Html.TextBoxFor(x => x.Id_Cliente, new { @class = "form-control", @hidden = "hidden", @Value = @Session["Id_Cliente"] })
+                        <div class="form-row">
+                            <div class="form-group col-sm-12">
+                                @Html.TextBoxFor(x => x.Id_Cliente, new { @class = "form-control", @hidden = "hidden", @Value = @Session["Id_Cliente"] })
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-sm-12">
-                            @Html.HiddenFor(x => x.Estado, new { @Value = "Pendiente" })
+                        <div class="form-row">
+                            <div class="form-group col-sm-12">
+                                @Html.HiddenFor(x => x.Estado, new { @Value = "Pendiente" })
+                            </div>
                         </div>
-                    </div>
-                  
-                    <div class="text-right">
-                        <input type="submit" value="Guardar" class="btn btn-primary btn-sm" />
-                        <a href="~/Cliente/" class="btn btn-danger btn-sm">Cancelar</a>
+
+                        <div class="text-right">
+                            <input type="submit" value="Guardar" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal" />
+                            <a href="~/Cliente/" class="btn btn-danger btn-sm">Cancelar</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -57,3 +60,61 @@
     </div>
 }
 
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Recomendación</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Aquí se mostrarán los datos de la recomendación -->
+                Especialidad: <span id="especialidad"></span><br>
+                Nombre: <span id="nombre"></span>
+            </div>
+            <div class="modal-footer">
+                @*<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>*@
+                <button id="redireccionarBtn" type="button" class="btn btn-primary">Cerrar y redireccionar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        var formularioEnviado = false;
+
+        $('#problemaForm').submit(function (e) {
+            if (formularioEnviado) {
+                return;
+            }
+
+            e.preventDefault(); // Evita que el formulario se envíe de forma predeterminada
+
+            formularioEnviado = true; // Marca el formulario como enviado
+
+            // Realiza la solicitud POST al controlador
+            $.post($(this).attr('action'), $(this).serialize(), function () {
+                // Aquí puedes mostrar el modal con la información deseada
+                var especialidad = "@idcliente";
+                var nombre = "NOnbre especialidad";
+
+                // Actualiza el contenido del modal con los datos de recomendación
+                $('#especialidad').text(especialidad);
+                $('#nombre').text(nombre);
+
+                // Abre el modal
+                $('#myModal').modal('show');
+            });
+        });
+
+        $('#redireccionarBtn').click(function () {
+            // Redirecciona a la vista deseada
+            var url = '@Url.Action("Index", "Cliente")';
+            window.location.href = url;
+        });
+    });
+</script>

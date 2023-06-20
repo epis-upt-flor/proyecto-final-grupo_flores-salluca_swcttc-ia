@@ -21,7 +21,12 @@ namespace SistemaArtemis.Controllers
         {
             return View(objproblema.ListProblem());
         }
-         
+
+        public ActionResult ListService()
+        {
+            return View(objServicio.Listar());
+        }
+
         /// <summary>Esta función guarda un modelo de servicio y actualiza el estado de un problema relacionado a "En proceso". </summary>
         public ActionResult Guardar(Servicio model)
         {
@@ -90,6 +95,12 @@ namespace SistemaArtemis.Controllers
             return Redirect("~/Cliente/Index");
         }
 
+
+        public ActionResult Details(int id)
+        {
+            ViewBag.detalles = objServicio.Detalles(id);
+            return View();
+        }
 
 
     }

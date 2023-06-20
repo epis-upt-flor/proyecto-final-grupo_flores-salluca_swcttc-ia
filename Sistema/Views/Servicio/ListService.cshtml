@@ -1,0 +1,59 @@
+﻿@model List<SistemaArtemis.Models.Servicio>
+@{
+    ViewBag.Title = "ListService";
+    Layout = "~/Views/Shared/_ClienteLayout.cshtml";
+}
+
+@*<h2>ListService</h2>*@
+
+<div class="container-fluid">
+
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 bg-second-primary">
+            <h6 class="m-0 font-weight-bold text-white">Trabajos en proceso de atención</h6>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-3">
+                    <a href="~/Cliente/Index" class="btn btn-dark">Regresar</a>
+                    <h2 class="page-linl"></h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <table class="table table-bordered" id="tbdata" cellspacing="0" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Datos del Tecnico</th>
+                                <th>Descripción</th>                               
+                                <th>Estado</th>
+                                @*<th>Acciones</th>*@
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{ var i = 0;}
+                            @foreach (var t in Model)
+                            {
+                                i++;
+                                <tr>
+                                    <td>@i</td>
+                                    <td>@t.Tecnico.Nombre @t.Tecnico.Apellido</td>
+                                    <td>@t.Descripcion</td>
+                                    @if (t.Id_Estado_Servicio == 3)
+                                    {
+                                       <td> <span class="badge badge-primary">En Proceso</span></td>
+                                    }
+
+                                    @*<td>
+                                        <a href="~/Servicio/Create/@t.Id_Problema" class="btn btn-success"><i class=""></i> Postular</a>
+                                    </td>*@
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

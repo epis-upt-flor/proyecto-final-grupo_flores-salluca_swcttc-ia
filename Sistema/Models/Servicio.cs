@@ -60,7 +60,7 @@ namespace SistemaArtemis.Models
                     serv = db.Servicio
                            .Include("Tecnico")
                            .Include("Problema")
-                           .Where(s => s.Id_Estado_Servicio == 1)
+                           .Where(s => s.Id_Estado_Servicio == 3) // cambie validar
                      .ToList();
                 }
             }
@@ -216,7 +216,26 @@ namespace SistemaArtemis.Models
             }
             return detalles;
         }
-     
+
+        public List<Servicio> ListService()  //ok
+        {
+            var servi = new List<Servicio>();
+            try
+            {
+                using (var db = new Model1())
+                {
+                    servi = db.Servicio
+                           .Include("Tecnico")                        
+                           .Where(s => s.Id_Estado_Servicio == 3)
+                     .ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return servi;
+        }
 
 
     }

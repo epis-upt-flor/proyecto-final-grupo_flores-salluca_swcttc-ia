@@ -2238,6 +2238,7 @@
     <Content Include="Views\RecAPI\IndexAsync.cshtml" />
     <Content Include="Views\Servicio\Details.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Servicio\ListService.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

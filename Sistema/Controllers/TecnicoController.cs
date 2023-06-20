@@ -49,10 +49,10 @@ namespace SistemaArtemis.Controllers
 
        /// <summary> Esta función devuelve una vista con una lista de trabajos disponibles.</summary>
        /// <returns>El método `TrabajosDisponibles` está devolviendo una `Vista` con el resultado de llamar al método `Listar` del objeto `objservicio`</returns>
-        public ActionResult TrabajosDisponibles()
-        {
-            return View(objservicio.Listar());
-        }
+        //public ActionResult TrabajosDisponibles()
+        //{
+        //    return View(objservicio.Listar());
+        //}
 
         /// <summary> Esta función devuelve una vista de los servicios pertenecientes a un usuario específico.
         /// <returns> El método `ListarMisServicios` está devolviendo una vista con los datos obtenidos del método`MisServicios` del objeto `objservicio`, que toma un parámetro `id`.
