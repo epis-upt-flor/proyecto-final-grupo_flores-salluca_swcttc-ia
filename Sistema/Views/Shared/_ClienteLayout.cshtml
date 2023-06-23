@@ -85,38 +85,50 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="~/Cliente/ListarTecnicos">Trabajadores disponibles</a>
                         <a class="collapse-item" href="~/Servicio/ListService">Atenciones en Curso</a>
-                    </div>                
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseVenta">
+                    <i class="fas fa-fw fa-satellite"></i>
+                    <span>Calificación</span>
+                </a>
+                <div id="collapseVenta" class="collapse" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="~/Calificacion/Index/@idcliente">Calificar Servicio</a>
+
+                    </div>
                 </div>
             </li>
 
             @* <!-- Nav Item - Venta Collapse Menu -->
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseVenta">
-                        <i class="fas fa-fw fa-tags"></i>
-                        <span>Recomendación</span>
-                    </a>
-                    <div id="collapseVenta" class="collapse" data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <a class="collapse-item" href="~/Tecnico/Index">Trabajadores Disponibles</a>
-                            <a class="collapse-item" href="#">Trabajadores Aptos</a>
-                        </div>
-                    </div>
-                </li>
-                <!-- Nav Item - Reportes Collapse Menu -->
-                <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseReportes">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Reportes</span>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseVenta">
+                    <i class="fas fa-fw fa-tags"></i>
+                    <span>Recomendación</span>
                 </a>
-                <div id="collapseReportes" class="collapse" data-parent="#accordionSidebar">
+                <div id="collapseVenta" class="collapse" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="~/Servicios/ReporteServicios">Reporte de Servicios</a>
+                        <a class="collapse-item" href="~/Tecnico/Index">Trabajadores Disponibles</a>
+                        <a class="collapse-item" href="#">Trabajadores Aptos</a>
                     </div>
                 </div>
-            </li>*@
+            </li>
+            <!-- Nav Item - Reportes Collapse Menu -->
+            <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseReportes">
+                <i class="fas fa-fw fa-chart-area"></i>
+                <span>Reportes</span>
+            </a>
+            <div id="collapseReportes" class="collapse" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="~/Servicios/ReporteServicios">Reporte de Servicios</a>
+                </div>
+            </div>
+        </li>*@
 
             <!-- Divider -->
-            <hr class="sidebar-divider">            
+            <hr class="sidebar-divider">
             <li class="nav-item d-flex justify-content-center">
                 <div class="text-center d-none d-md-inline">
                     <button class="rounded-circle border-0" id="sidebarToggle"></button>

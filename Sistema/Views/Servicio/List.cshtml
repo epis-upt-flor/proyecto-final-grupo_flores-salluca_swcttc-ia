@@ -44,7 +44,8 @@
                                     <td>@t.Fecha_Fin.ToString("dd/MM/yyyy")</td>
                                     <td>@t.Estado</td>
                                     <td>
-                                        <a href="~/Servicio/Create/@t.Id_Problema" class="btn btn-success"><i class=""></i> Postular</a>
+                                        <a href="~/Archivo/Subir/@t.Id_Problema" class="btn btn-success" title="Postular"><i class=""></i>Postular</a>
+                                        <a href="~/Archivo/Index/@t.Id_Problema" class="btn btn-warning"><i class=""></i>Ver</a>
                                     </td>
                                 </tr>
                             }

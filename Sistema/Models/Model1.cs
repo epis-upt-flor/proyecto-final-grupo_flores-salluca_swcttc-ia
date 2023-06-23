@@ -11,7 +11,7 @@ namespace SistemaArtemis.Models
             : base("name=Model1")
         {
         }
-
+        public virtual DbSet<Archivos> ARCHIVOS { get; set; }
         public virtual DbSet<Calificacion> Calificacion { get; set; }
         public virtual DbSet<Cliente> Cliente { get; set; }
         public virtual DbSet<Especialidad> Especialidad { get; set; }
@@ -28,6 +28,14 @@ namespace SistemaArtemis.Models
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Archivos>()
+                .Property(e => e.Nombre)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Archivos>()
+                .Property(e => e.Extension)
+                .IsUnicode(false);
+
             modelBuilder.Entity<Calificacion>()
                 .Property(e => e.Comentario)
                 .IsUnicode(false);

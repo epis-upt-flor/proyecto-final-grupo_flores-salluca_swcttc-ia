@@ -1,0 +1,42 @@
+﻿@model SistemaArtemis.Models.Archivos
+@{
+    //ViewBag.Title = "Subir";
+    Layout = "~/Views/Shared/_TecnicoLayout.cshtml";
+    var problemas = ViewBag.Prob as List<SistemaArtemis.Models.Problema>;
+    var idtecnico = Session["Id_Tecnico"];
+}
+
+<h2>Subir</h2>
+
+<div class="card">
+    <div class="card-header py-3 bg-second-primary">
+        <h6 class="m-0 font-weight-bold text-white">Postular al servicio</h6>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="documento">Envía tu Cotización:</label>
+                </div>
+                <div class="panel-body">
+                    <form action="@Url.Action("SubirArchivo","Archivo")" method="post" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label>Nombre del archivo:</label>
+                            <input class="form-control" name="Nombre" type="text" autocomplete="off" />
+                        </div>
+                        <div class="form-group">
+                            <label>Archivo:</label>
+                            <input name="Archivo" type="file" id="Documento" accept=".pdf,.doc,.docx" />
+                        </div>
+                        @foreach (var problema in problemas)
+                        {
+                            <input type="hidden" name="Id_Problema" value="@problema.Id_Problema" />
+                        }
+                        <button class="btn btn-success">Subir Archivo</button>
+                        <a class="btn btn-warning" href="@Url.Action("ListarMisServicios/"+ @idtecnico,"Tecnico")">Volver</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

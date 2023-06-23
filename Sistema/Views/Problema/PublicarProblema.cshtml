@@ -3,7 +3,35 @@
     ViewBag.Title = "PublicarProblema";
     Layout = "~/Views/Shared/_ClienteLayout.cshtml";
     var idcliente = Session["Id_Cliente"];
+    var especi = ViewBag.LEspecialidad;
+
 }
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Recomendación</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Aquí se mostrarán los datos de la recomendación -->
+                Especialidad: <span id="Especialidadades"></span><br>
+                Nombre: <span id=@especi></span>
+            </div>
+            <div class="modal-footer">
+                @*<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>*@
+                <button id="redireccionarBtn" type="button" class="btn btn-primary">Cerrar y redireccionar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 @using (Html.BeginForm("Guardar", "Problema", FormMethod.Post, new { id = "problemaForm" }))
 {
     @Html.HiddenFor(x => x.Id_Problema)
@@ -50,7 +78,7 @@
                         </div>
 
                         <div class="text-right">
-                            <input type="submit" value="Guardar" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal" />
+                            <input type="submit" value="Guardar" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal" onclick="enviarFormulario()" />
                             <a href="~/Cliente/" class="btn btn-danger btn-sm">Cancelar</a>
                         </div>
                     </div>
@@ -59,30 +87,6 @@
         </div>
     </div>
 }
-
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel">Recomendación</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <!-- Aquí se mostrarán los datos de la recomendación -->
-                Especialidad: <span id="especialidad"></span><br>
-                Nombre: <span id="nombre"></span>
-            </div>
-            <div class="modal-footer">
-                @*<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>*@
-                <button id="redireccionarBtn" type="button" class="btn btn-primary">Cerrar y redireccionar</button>
-            </div>
-        </div>
-    </div>
-</div>
-
 <script>
     $(document).ready(function () {
         var formularioEnviado = false;
@@ -91,22 +95,21 @@
             if (formularioEnviado) {
                 return;
             }
-
-            e.preventDefault(); // Evita que el formulario se envíe de forma predeterminada
-
+            e.preventDefault(); // Evita que el formulario se envíe de forma predeterminadaA
             formularioEnviado = true; // Marca el formulario como enviado
 
             // Realiza la solicitud POST al controlador
-            $.post($(this).attr('action'), $(this).serialize(), function () {
-                // Aquí puedes mostrar el modal con la información deseada
-                var especialidad = "@idcliente";
-                var nombre = "NOnbre especialidad";
-
-                // Actualiza el contenido del modal con los datos de recomendación
-                $('#especialidad').text(especialidad);
-                $('#nombre').text(nombre);
-
+            $.post($(this).attr('action'), $(this).serialize(), function (listaEspecialidades) {
+                var contenidoEspecialidades = '';
+                for (var i = 0; i < listaEspecialidades.length; i++) {
+                    contenidoEspecialidades += '<li>' + listaEspecialidades[i] + '</li>';
+                }
+                $('#especialidades').html(contenidoEspecialidades);
                 // Abre el modal
+                $('#myModal').modal('show');
+            }).fail(function () {
+                // En caso de error, muestra un mensaje de error en el modal
+                $('#especialidades').html('<li>Error al obtener las especialidades</li>');
                 $('#myModal').modal('show');
             });
         });
@@ -118,3 +121,58 @@
         });
     });
 </script>
+
+<script>
+    function enviarFormulario() {
+        var descripcion = document.getElementById("txtDescripcion").value;
+        var formulario = document.createElement("form");
+
+        // Establecer la acción y el método del formulario
+        formulario.setAttribute("action", "/RecAPI/RecomendarEspecialidad");
+        formulario.setAttribute("method", "POST");
+
+        // Agregar la descripción como un campo oculto al formulario
+        var inputDescripcion = document.createElement("input");
+        inputDescripcion.setAttribute("type", "hidden");
+        inputDescripcion.setAttribute("name", "Descripcion");
+        inputDescripcion.setAttribute("value", descripcion);
+        formulario.appendChild(inputDescripcion);
+        document.body.appendChild(formulario);     
+        formulario.submit();
+    }
+</script>
+
+
+
+@*<script>
+        $(document).ready(function () {
+            var formularioEnviado = false;
+
+            $('#problemaForm').submit(function (e) {
+                if (formularioEnviado) {
+                    return;
+                }
+                e.preventDefault(); // Evita que el formulario se envíe de forma predeterminada
+                formularioEnviado = true; // Marca el formulario como enviado
+                // Realiza la solicitud POST al controlador
+                $.post($(this).attr('action'), $(this).serialize(), function () {
+                    // Aquí puedes mostrar el modal con la información deseada
+                    var especialidad = "@idcliente";
+                    var nombre = "NOnbre especialidad";
+
+                    // Actualiza el contenido del modal con los datos de recomendación
+                    $('#especialidad').text(especialidad);
+                    $('#nombre').text(nombre);
+
+                    // Abre el modal
+                    $('#myModal').modal('show');
+                });
+            });
+
+            $('#redireccionarBtn').click(function () {
+                // Redirecciona a la vista deseada
+                var url = '@Url.Action("Index", "Cliente")';
+                window.location.href = url;
+            });
+        });
+    </script>*@

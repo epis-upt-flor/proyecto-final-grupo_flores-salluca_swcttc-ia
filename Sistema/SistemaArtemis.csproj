@@ -232,6 +232,12 @@
     <Content Include="Global.asax" />
     <Content Include="Source\css\sb-admin-2.css" />
     <Content Include="Source\css\sb-admin-2.min.css" />
+    <Content Include="Source\img\Imagenes\docx.png" />
+    <Content Include="Source\img\Imagenes\jpg.png" />
+    <Content Include="Source\img\Imagenes\pdf.png" />
+    <Content Include="Source\img\Imagenes\png.png" />
+    <Content Include="Source\img\Imagenes\pptx.png" />
+    <Content Include="Source\img\Imagenes\xlsx.png" />
     <Content Include="Source\img\undraw_posting_photo.svg" />
     <Content Include="Source\img\undraw_profile.svg" />
     <Content Include="Source\img\undraw_profile_1.svg" />
@@ -1941,6 +1947,8 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdministradorController.cs" />
+    <Compile Include="Controllers\ArchivoController.cs" />
+    <Compile Include="Controllers\CalificacionController.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -1954,6 +1962,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Archivos.cs" />
     <Compile Include="Models\Calificacion.cs" />
     <Compile Include="Models\Cliente.cs" />
     <Compile Include="Models\Conexion.cs" />
@@ -2239,6 +2248,9 @@
     <Content Include="Views\Servicio\Details.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Servicio\ListService.cshtml" />
+    <Content Include="Views\Archivo\Index.cshtml" />
+    <Content Include="Views\Archivo\Subir.cshtml" />
+    <Content Include="Views\Calificacion\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

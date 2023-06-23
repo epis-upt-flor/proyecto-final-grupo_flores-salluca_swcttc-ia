@@ -1,0 +1,32 @@
+﻿@model SistemaArtemis.Models.Calificacion
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_ClienteLayout.cshtml";
+}
+
+<h2>Index</h2>
+
+<form action="/Calificacion/Guardar" method="post">
+    <div>
+        <label for="calificacion">Calificación:</label>
+        <select name="calificacion" id="calificacion">
+            <option value="1">1 estrella</option>
+            <option value="2">2 estrellas</option>
+            <option value="3">3 estrellas</option>
+            <option value="3">4 estrellas</option>
+            <option value="3">5 estrellas</option>
+            <option value="3">6 estrellas</option>
+            <option value="3">7 estrellas</option>
+            <option value="3">8 estrellas</option>
+            <option value="3">9 estrellas</option>
+            <option value="10">10 estrellas</option>
+        </select>
+    </div>
+    <div>
+        <label for="comentario">Comentario:</label>
+        <textarea name="comentario" id="comentario" rows="5"></textarea>
+    </div>
+    <div>
+        <input type="submit" value="Enviar Calificación">
+    </div>
+</form>

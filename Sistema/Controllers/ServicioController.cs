@@ -51,8 +51,11 @@ namespace SistemaArtemis.Controllers
         /// igual a 0, se crea una nueva instancia de `Servicio` y se pasa como objeto modelo. De lo contrario, se llama al método `Obtener` del objeto `objServicio` para recuperar un objeto `Servicio` existente con el `id` especificado </returns>
         public ActionResult Create(int id=0)  //ok
         {
+            var archivo = new Archivos().Listar(id);
             var problemas = new Problema().Listar(id);
+            ViewBag.Archiv = archivo;
             ViewBag.Prob = problemas;
+
 
             return View(id==0 ? new Servicio() : objServicio.Obtener(id));
         }
@@ -98,6 +101,8 @@ namespace SistemaArtemis.Controllers
 
         public ActionResult Details(int id)
         {
+            var archivo = new Archivos().Listar(id);
+            ViewBag.Archiv = archivo;
             ViewBag.detalles = objServicio.Detalles(id);
             return View();
         }

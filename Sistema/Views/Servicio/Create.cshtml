@@ -3,56 +3,69 @@
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_TecnicoLayout.cshtml";
     var problemas = ViewBag.Prob as List<SistemaArtemis.Models.Problema>;
-    
+    var archivos = ViewBag.Archiv as List<SistemaArtemis.Models.Archivos>;
+    var idtecnico = Session["Id_Tecnico"];
 }
+<div class="card shadow mb-4">
+    <div class="card-header py-3 bg-second-primary">
+        <h6 class="m-0 font-weight-bold text-white">Detalles de la postulación</h6>
+    </div>
+
+    <div class="card-body">
+        @foreach (var x in problemas)
+        {
+            <label>Fecha Inicio :  @x.Fecha_Inicio </label><br />
+            <label>Fecha Fin : @x.Fecha_Fin </label><br />
+            <label>Descripción : @x.Descripcion</label><br />
+        }
+        @foreach (var z in archivos)
+        {
+            <label>Nombre de la cotización : @z.Nombre @z.Extension</label><br />
+        }
+    </div>
+</div>
+
+
 
 @using (Html.BeginForm("Guardar", "Servicio", FormMethod.Post))
 {
     @Html.HiddenFor(x => x.Id_Servicio)
-
-    <div class="card">
-        <div class="card-header py-3 bg-second-primary">
-            <h6 class="m-0 font-weight-bold text-white">Postular al servicio</h6>
-        </div>
-        <div class="card-body">
-            <div id="file-name"></div>
-            @foreach (var problema in problemas)
-            {
-                <div class="form-group">
-                    @Html.HiddenFor(x => x.Descripcion, new { @Value = problema.Descripcion })
-                </div>
-                <div class="form-group">
-                    @Html.HiddenFor(x => x.Fecha_Inicio, new {@Value = problema.Fecha_Inicio })
-                </div>
-                <div class="form-group">
-                    @Html.HiddenFor(x => x.Fecha_Fin, new {@Value = problema.Fecha_Fin })
-                </div>
-                <div class="form-group">
-                    @Html.HiddenFor(x => x.Id_Tecnico, new { @Value =Convert.ToInt32(@Session["Id_Tecnico"] )})
-                </div>
-                <div class="form-group">
-                    @Html.HiddenFor(x => x.Id_Problema, new { @Value = problema.Id_Problema })
-                </div>
-                <div class="form-group">
-                    @Html.HiddenFor(x => x.Id_Estado_Servicio, new { @Value = 2 })
-                </div>
-            }
+    <div class="card-body">
+        <div id="file-name"></div>
+        @foreach (var problema in problemas)
+        {
+            <div class="form-group"></div>
             <div class="form-group">
-                <div class="form-group">
-                    <label for="documento">Envía tu Cotización:</label>
-                </div>
-                <input type="file" name="Documento" id="Documento" accept=".pdf,.doc,.docx" onchange="updateFileName()" />
-                @Html.ValidationMessageFor(x => x.Documento, "", new { @class = "text-danger" })
+                @Html.HiddenFor(x => x.Fecha_Inicio, new { @Value = problema.Fecha_Inicio })
             </div>
-            <div class="text-right">
-                <input type="submit" value="Guardar" class="btn btn-default" />
-                <a href="~/Servicio/List" class="btn btn-danger">Cancelar</a>
+            <div class="form-group">
+                @Html.HiddenFor(x => x.Fecha_Fin, new { @Value = problema.Fecha_Fin })
             </div>
-            <br /><br /><br />
+            <div class="form-group">
+                @Html.HiddenFor(x => x.Id_Tecnico, new { @Value = Convert.ToInt32(@Session["Id_Tecnico"]) })
+            </div>
+            <div class="form-group">
+                @Html.HiddenFor(x => x.Id_Problema, new { @Value = problema.Id_Problema })
+            </div>
+            <div class="form-group">
+                @Html.HiddenFor(x => x.Id_Estado_Servicio, new { @Value = 2 })
+            </div>
+            <div class="form-group">
+                @Html.HiddenFor(x => x.Descripcion, new { @Value = problema.Descripcion })
+            </div>
+        }
+        @foreach (var t in archivos)
+        {
+            <div class="form-group">
+                @Html.HiddenFor(x => x.Documento, new { @Value = t.Nombre })
+            </div>
+        }
+        <div class="text-right">
+            <input type="submit" value="Confirmar" class="btn btn-success" />
+            <a href="~/Servicio/List" class="btn btn-danger">Cancelar</a>
         </div>
     </div>
 }
-
 
 
 
