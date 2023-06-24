@@ -18,6 +18,7 @@ namespace SistemaArtemis.Controllers
         
         public ActionResult Index(int id = 0) //ok
         {
+            //Validar ID A Vista
             ViewBag.ObtenerTotalServiciosPorTecnico = objservicio.ObtenerTotalServiciosPorTecnico(id);
             ViewBag.ObtenerTotalServiciosFaltaAprobarEstado = objservicio.ObtenerTotalServiciosFaltaAprobarEstado(id);
             ViewBag.ObtenerTotalServiciosEnProceso = objservicio.ObtenerTotalServiciosEnProceso(id);
