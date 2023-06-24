@@ -57,13 +57,13 @@ namespace SistemaArtemis.Controllers
             {
                 var tecnico = new Tecnico().Listar().Find(x => x.Id_Usuario == usuario.Id_Usuario);
                 Session["Id_Tecnico"] = tecnico.Id_Tecnico;         
-                return RedirectToAction("Index", "Tecnico");
+                return RedirectToAction("Index/"+ tecnico.Id_Tecnico, "Tecnico");
             }
             else if (usuario.Id_Tipo_Usuario == 3)
             {
                 var cliente = new Cliente().Listar().Find(x => x.Id_Usuario == usuario.Id_Usuario);
                 Session["Id_Cliente"] = cliente.Id_Cliente;
-                return RedirectToAction("Index", "Cliente");
+                return RedirectToAction("Index/" + cliente.Id_Cliente, "Cliente");
             }
             else
             {
