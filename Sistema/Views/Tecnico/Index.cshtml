@@ -2,6 +2,10 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_TecnicoLayout.cshtml";
+    var ObtenerTotalServiciosPorTecnico = ViewBag.ObtenerTotalServiciosPorTecnico;
+    var ObtenerTotalServiciosFaltaAprobarEstado = ViewBag.ObtenerTotalServiciosFaltaAprobarEstado;
+    var ObtenerTotalServiciosEnProceso = ViewBag.ObtenerTotalServiciosEnProceso;
+    var ObtenerTotalTipoEspecialidadPorTecnico = ViewBag.ObtenerTotalTipoEspecialidadPorTecnico;
 }
 @*<h2>Bienvenido Id. @Session["Id_Tecnico"]</h2>*@
 
@@ -30,7 +34,7 @@
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                 Total de Servicios
                             </div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="totalVenta">10</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="totalVenta">@ObtenerTotalServiciosPorTecnico</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-briefcase  fa-2x text-gray-300"></i>
@@ -49,7 +53,7 @@
                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                 TOTAL DE TRABAJOS
                             </div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="totaltecnico">4</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="totaltecnico">@ObtenerTotalServiciosFaltaAprobarEstado</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-tools fa-2x text-gray-300"></i>
@@ -68,7 +72,7 @@
                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                 SERVICIOS EN PROCESO
                             </div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="totalProductos">2</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="totalProductos">@ObtenerTotalServiciosEnProceso</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-paper-plane fa-2x text-gray-300"></i>
@@ -89,7 +93,7 @@
                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                 TOTAL DE ESPECIALIDADES
                             </div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="tecnicosdisponibles">5</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="tecnicosdisponibles">@ObtenerTotalTipoEspecialidadPorTecnico</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-cogs  fa-2x text-gray-300"></i>

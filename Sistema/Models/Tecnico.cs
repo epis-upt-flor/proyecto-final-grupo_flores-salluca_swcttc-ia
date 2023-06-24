@@ -193,5 +193,66 @@ namespace SistemaArtemis.Models
         }
 
 
+        public int ObtenerTotalTecnicosDisponibleNoDisponibles()
+        {
+            int contador = 0;
+            try
+            {
+                using (var db = new Model1())
+                {
+                    contador = db.Tecnico
+                        .Count(tec => tec.Id_Estado_Tecnico == 1 || tec.Id_Estado_Tecnico == 2);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return contador;
+        }
+
+        public int ObtenerTotalTecnicoDisponibles()
+        {
+            int contador = 0;
+            try
+            {
+                using (var db = new Model1())
+                {
+                    contador = db.Tecnico
+                        .Count(tec => tec.Id_Estado_Tecnico == 1);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return contador;
+        }
+
+        public int ObtenerTotalTipoEspecialidadPorTecnico(int id)
+        {
+            int contador = 0;
+            try
+            {
+                using (var db = new Model1())
+                {
+                    contador = db.Tecnico
+                        .Join(db.RTecnico_TipoEspecialidad, tec => tec.Id_Tecnico, rt => rt.Id_Tecnico, (tec, rt) => new { Tec = tec, RTec = rt })
+                        .Join(db.Tipo_Especialidad, rt => rt.RTec.Id_Tipo_Especialidad, tip => tip.Id_Tipo_Especialidad, (rt, tip) => new { RTec = rt.RTec, Tip = tip })
+                        .Count(st => st.RTec.Id_Tecnico == id);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return contador;
+        }
+
+
+
+
+
+
     }
 }

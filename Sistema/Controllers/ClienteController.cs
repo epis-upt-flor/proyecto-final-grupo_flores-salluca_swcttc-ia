@@ -15,8 +15,14 @@ namespace SistemaArtemis.Controllers
         Cliente objCliente = new Cliente();
         private Model1 db = new Model1();
         // GET: Cliente
-        public ActionResult Index()  //ok
+        public ActionResult Index(int id = 0)  //ok
         {
+            //int id = 0;
+            ViewBag.ObtenerTotalServiciosCliente = objCliente.ObtenerTotalServiciosCliente(id);
+            ViewBag.ObtenerTotalServiciosClienteEstadoEnProceso = objCliente.ObtenerTotalServiciosClienteEstadoEnProceso(id);
+            ViewBag.ObtenerTotalTecnicosDisponibleNoDisponibles = objTecnico.ObtenerTotalTecnicosDisponibleNoDisponibles();
+            ViewBag.ObtenerTotalTecnicoDisponibles = objTecnico.ObtenerTotalTecnicoDisponibles();
+
             return View();
         }       
         public ActionResult ListarTecnicos() //ok

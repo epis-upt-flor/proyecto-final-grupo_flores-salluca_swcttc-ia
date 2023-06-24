@@ -16,8 +16,12 @@ namespace SistemaArtemis.Controllers
         private Servicio objservicio = new Servicio();
         private Especialidad objTipo= new Especialidad();
         
-        public ActionResult Index() //ok
+        public ActionResult Index(int id = 0) //ok
         {
+            ViewBag.ObtenerTotalServiciosPorTecnico = objservicio.ObtenerTotalServiciosPorTecnico(id);
+            ViewBag.ObtenerTotalServiciosFaltaAprobarEstado = objservicio.ObtenerTotalServiciosFaltaAprobarEstado(id);
+            ViewBag.ObtenerTotalServiciosEnProceso = objservicio.ObtenerTotalServiciosEnProceso(id);
+            ViewBag.ObtenerTotalTipoEspecialidadPorTecnico = objtecnico.ObtenerTotalTipoEspecialidadPorTecnico(id);
             return View();
         }
 

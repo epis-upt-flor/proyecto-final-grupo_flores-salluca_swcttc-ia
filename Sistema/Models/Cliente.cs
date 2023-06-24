@@ -163,5 +163,52 @@ namespace SistemaArtemis.Models
             return sc;
         }
 
+
+        public int ObtenerTotalServiciosCliente(int id)
+        {
+            int contador = 0;
+            try
+            {
+                using (var db = new Model1())
+                {
+                    contador = db.Servicio
+                        .Join(db.Problema, Ser => Ser.Id_Problema, Pro => Pro.Id_Problema, (Ser, Pro) => new { Ser, Pro })
+                        .Join(db.Cliente, Temp => Temp.Pro.Id_Cliente, Cli => Cli.Id_Cliente, (Temp, Cli) => new { Temp.Ser, Temp.Pro, Cli })
+                        .Where(Temp => Temp.Cli.Id_Cliente == id)
+                        .Count();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return contador;
+        }
+
+
+        public int ObtenerTotalServiciosClienteEstadoEnProceso(int id)
+        {
+            int total = 0;
+            try
+            {
+                using (var db = new Model1())
+                {
+                    total = db.Servicio
+                        .Join(db.Problema, ser => ser.Id_Problema, pro => pro.Id_Problema, (ser, pro) => new { Ser = ser, Pro = pro })
+                        .Join(db.Cliente, sp => sp.Pro.Id_Cliente, cli => cli.Id_Cliente, (sp, cli) => new { Sp = sp, Cli = cli })
+                        .Where(spcli => spcli.Cli.Id_Cliente == id && spcli.Sp.Ser.Id_Estado_Servicio == 3)
+                        .Count();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return total;
+        }
+
+
+
+
     }
 }

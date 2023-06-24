@@ -237,6 +237,68 @@ namespace SistemaArtemis.Models
             return servi;
         }
 
+        public int ObtenerTotalServiciosPorTecnico(int id)
+        {
+            int contador = 0;
+            try
+            {
+                using (var db = new Model1())
+                {
+                    contador = db.Servicio
+                        .Join(db.Tecnico, ser => ser.Id_Tecnico, tec => tec.Id_Tecnico, (ser, tec) => new { Ser = ser, Tec = tec })
+                        .Count(st => st.Tec.Id_Tecnico == id);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return contador;
+        }
+
+        public int ObtenerTotalServiciosFaltaAprobarEstado(int id)
+        {
+            int contador = 0;
+            try
+            {
+                using (var db = new Model1())
+                {
+                    contador = db.Servicio
+                        .Join(db.Tecnico, ser => ser.Id_Tecnico, tec => tec.Id_Tecnico, (ser, tec) => new { Ser = ser, Tec = tec })
+                        .Count(st => st.Tec.Id_Tecnico == id && st.Ser.Id_Estado_Servicio == 2);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return contador;
+        }
+
+        public int ObtenerTotalServiciosEnProceso(int id)
+        {
+            int contador = 0;
+            try
+            {
+                using (var db = new Model1())
+                {
+                    contador = db.Servicio
+                        .Join(db.Tecnico, ser => ser.Id_Tecnico, tec => tec.Id_Tecnico, (ser, tec) => new { Ser = ser, Tec = tec })
+                        .Count(st => st.Tec.Id_Tecnico == id && st.Ser.Id_Estado_Servicio == 3);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return contador;
+        }
+
+
+
+
+
+
 
     }
 }
