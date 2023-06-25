@@ -1969,6 +1969,7 @@
     <Compile Include="Models\Especialidad.cs" />
     <Compile Include="Models\Estado_Servicio.cs" />
     <Compile Include="Models\Estado_Tecnico.cs" />
+    <Compile Include="Models\Imagen_Problema.cs" />
     <Compile Include="Models\Login\HashHelper.cs" />
     <Compile Include="Models\Login\ResponseModel.cs" />
     <Compile Include="Models\Login\SessionHelper.cs" />

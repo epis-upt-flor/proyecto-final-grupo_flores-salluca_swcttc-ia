@@ -16,6 +16,7 @@ namespace SistemaArtemis.Models
         public virtual DbSet<Cliente> Cliente { get; set; }
         public virtual DbSet<Especialidad> Especialidad { get; set; }
         public virtual DbSet<Estado_Servicio> Estado_Servicio { get; set; }
+        public virtual DbSet<Imagen_Problema> Imagen_Problema { get; set; }
         public virtual DbSet<Estado_Tecnico> Estado_Tecnico { get; set; }
         public virtual DbSet<Modelo_Ia> Modelo_Ia { get; set; }
         public virtual DbSet<Problema> Problema { get; set; }
@@ -86,6 +87,14 @@ namespace SistemaArtemis.Models
 
             modelBuilder.Entity<Modelo_Ia>()
                 .Property(e => e.TipoEspecialidad)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Imagen_Problema>()
+                .Property(e => e.Nombre)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Imagen_Problema>()
+                .Property(e => e.Extension)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Modelo_Ia>()
