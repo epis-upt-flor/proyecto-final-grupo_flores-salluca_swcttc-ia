@@ -2255,6 +2255,7 @@
     <Content Include="Views\Calificacion\Index.cshtml" />
     <Content Include="Views\Imagen_Problema\SubirImagenProblema.cshtml" />
     <Content Include="Views\Imagen_Problema\VisualizarImagenes.cshtml" />
+    <Content Include="Views\Imagen_Problema\VisualizarImagenesTecnico.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

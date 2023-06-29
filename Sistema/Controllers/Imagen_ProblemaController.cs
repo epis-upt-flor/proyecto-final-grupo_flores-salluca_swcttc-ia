@@ -37,5 +37,11 @@ namespace SistemaArtemis.Controllers
             return View(imagenes);
         }
 
+        public ActionResult VisualizarImagenesTecnico(int id_Problema)
+        {
+            var imagenes = objImagenProblema.VisualizarImagenes(id_Problema);
+            return View(imagenes);
+        }
+
     }
 }
