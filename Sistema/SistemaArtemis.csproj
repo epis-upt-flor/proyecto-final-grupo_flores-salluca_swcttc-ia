@@ -1951,6 +1951,7 @@
     <Compile Include="Controllers\CalificacionController.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\Imagen_ProblemaController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ProblemaController.cs" />
     <Compile Include="Controllers\RecAPIController.cs" />
@@ -2252,6 +2253,8 @@
     <Content Include="Views\Archivo\Index.cshtml" />
     <Content Include="Views\Archivo\Subir.cshtml" />
     <Content Include="Views\Calificacion\Index.cshtml" />
+    <Content Include="Views\Imagen_Problema\SubirImagenProblema.cshtml" />
+    <Content Include="Views\Imagen_Problema\VisualizarImagenes.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

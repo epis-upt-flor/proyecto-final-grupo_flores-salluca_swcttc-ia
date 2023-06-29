@@ -1,0 +1,84 @@
+﻿
+@model List<SistemaArtemis.Models.Imagen_Problema>
+
+@{
+    ViewBag.Title = "VisualizarImagenes";
+    Layout = "~/Views/Shared/_ClienteLayout.cshtml";
+}
+
+<style>
+    .card-img-top {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+</style>
+
+<h2>Visualizar Imágenes</h2>
+<br />
+<a href="@Url.Action("Index", "Cliente")" class="btn btn-secondary">Regresar</a>
+<hr />
+
+@if (Model.Count > 0)
+{
+    <div class="row">
+        @foreach (var imagen in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="data:image;base64,@Convert.ToBase64String(imagen.Archivo)" class="card-img-top" alt="Imagen">
+                    <div class="card-body">
+                        <h5 class="card-title">@imagen.Nombre</h5>
+                        <p class="card-text">Extensión: @imagen.Extension</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <p>No hay imágenes disponibles.</p>
+}
+
+
+
+
+
+
+
+@*@model List<SistemaArtemis.Models.Imagen_Problema>
+
+    @{
+        ViewBag.Title = "VisualizarImagenes";
+        Layout = "~/Views/Shared/_ClienteLayout.cshtml";
+    }
+
+    <h2>Visualizar Imágenes</h2>
+
+    @if (Model.Count > 0)
+    {
+        <div class="row">
+            @foreach (var imagen in Model)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="data:image;base64,@Convert.ToBase64String(imagen.Archivo)" class="card-img-top" alt="Imagen">
+                        <div class="card-body">
+                            <h5 class="card-title">@imagen.Nombre</h5>
+                            <p class="card-text">Extensión: @imagen.Extension</p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <p>No hay imágenes disponibles.</p>
+    }*@
+
+
+
+
+

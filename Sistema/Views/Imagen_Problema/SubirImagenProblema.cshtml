@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "SubirImagenProblema";
+    Layout = "~/Views/Shared/_ClienteLayout.cshtml";
+}
+
+<h2>SubirImagenProblema</h2>
+
+@using (Html.BeginForm("GuardarImagen", "Imagen_Problema", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <input type="hidden" name="Id_Problema" value="@ViewBag.Id_Problema" />
+
+    <div class="form-group">
+        <label for="fileInput">Seleccione las imágenes:</label>
+        <input type="file" name="fileInput" id="fileInput" multiple accept="image/*" required />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Guardar</button>
+}
+
+<div class="mt-4">
+    <a href="@Url.Action("VisualizarImagenes", "Imagen_Problema", new { id_Problema = ViewBag.Id_Problema })" class="btn btn-info">Visualizar Imágenes</a>
+    <a href="@Url.Action("Index", "Cliente")" class="btn btn-secondary">Regresar</a>
+</div>
+
+
