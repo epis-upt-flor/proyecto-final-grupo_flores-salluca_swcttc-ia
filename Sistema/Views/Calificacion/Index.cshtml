@@ -1,32 +1,75 @@
-﻿@model SistemaArtemis.Models.Calificacion
+﻿
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_ClienteLayout.cshtml";
+    var lista = ViewBag.service as List<SistemaArtemis.Models.Servicio>;
+    var idcliente = Session["Id_Cliente"];
+
 }
 
-<h2>Index</h2>
+<div class="container-fluid">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 bg-second-primary">
+            <h6 class="m-0 font-weight-bold text-white">Calificar Trabajo </h6>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-3">
 
-<form action="/Calificacion/Guardar" method="post">
-    <div>
-        <label for="calificacion">Calificación:</label>
-        <select name="calificacion" id="calificacion">
-            <option value="1">1 estrella</option>
-            <option value="2">2 estrellas</option>
-            <option value="3">3 estrellas</option>
-            <option value="3">4 estrellas</option>
-            <option value="3">5 estrellas</option>
-            <option value="3">6 estrellas</option>
-            <option value="3">7 estrellas</option>
-            <option value="3">8 estrellas</option>
-            <option value="3">9 estrellas</option>
-            <option value="10">10 estrellas</option>
-        </select>
+                    <a href="~/Calificacion/VerCalificacion/@idcliente" class="btn btn-warning"><i class="fas fa-eject"></i> Ver Calificaciones</a>
+                    <a href="~/Cliente/Index/" class="btn btn-dark"><i class="fas fa-chevron-left"></i> Regresar</a>
+                    <h2 class="pagegeader"></h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <table class="table table-bordered" id="tbdata" cellspacing="0" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Tecnico Responsable</th>
+                                <th>Descripción del Servicio</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{ var i = 0;}
+                            @foreach (var t in lista)
+                            {
+                                i++;
+                                <tr>
+                                    <td>@i</td>
+
+                                    <td>@t.Tecnico.Nombre @t.Tecnico.Apellido</td>
+                                    <td>@t.Descripcion</td>
+
+                                    @if (t.Id_Estado_Servicio == 1)
+                                    {
+                                        <td> <span class="badge badge-success">Pendiente</span></td>
+                                    }
+                                    @if (t.Id_Estado_Servicio == 2)
+                                    {
+                                        <td> <span class="badge badge-warning">En Revisión</span></td>
+                                    }
+                                    @if (t.Id_Estado_Servicio == 3)
+                                    {
+                                        <td> <span class="badge badge-primary">En Proceso</span></td>
+                                    }
+                                    @if (t.Id_Estado_Servicio == 4)
+                                    {
+                                        <td> <span class="badge badge-danger">Finalizado</span></td>
+                                    }
+                                    <td>
+                                        <a href="~/Calificacion/Calificar/@t.Id_Servicio" class="btn btn-success"><i class="fas fa-check"></i> Calificar</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
-    <div>
-        <label for="comentario">Comentario:</label>
-        <textarea name="comentario" id="comentario" rows="5"></textarea>
-    </div>
-    <div>
-        <input type="submit" value="Enviar Calificación">
-    </div>
-</form>
+</div>
+

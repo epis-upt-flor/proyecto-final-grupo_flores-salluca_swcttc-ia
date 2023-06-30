@@ -28,6 +28,7 @@
                                 <th>Fin de la Publicación</th>
                                 <th>Estado</th>
                                 <th>Acciones</th>
+                                <th>Cargar Imagenes</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -57,15 +58,17 @@
                                     {
                                         <td> <span class="badge badge-danger">Finalizado</span></td>
                                     }
-                                <td>
-                                    <form method="get" action="~/RecAPI/IndexAsync">
-                                        <input type="hidden" name="Descripcion" value="@t.Descripcion" />
-                                        <button type="submit" class="btn btn-outline-secondary" style="width: 116px">Recomendar</button>
-                                    </form>
-                                    <a href="~/Servicio/Details/@t.Id_Problema" class="btn btn-outline-success" style="width: 116px">Visualizar</a>
-                                    <a href="~/Imagen_Problema/SubirImagenProblema/@t.Id_Problema" class="btn btn-primary" style="width: 116px">Subir Imagen</a>
-
-                                </td>
+                                    }
+                                    <td>
+                                        <form method="get" action="~/RecAPI/IndexAsync">
+                                            <input type="hidden" name="Descripcion" value="@t.Descripcion" />
+                                            <button type="submit" class="btn btn-outline-secondary" style="width: 120px">Recomendar</button>
+                                        </form>
+                                        <a href="~/Servicio/Details/@t.Id_Problema" class="btn btn-outline-success" style="width: 118px">Visualizar</a>
+                                    </td>
+                                    <td>
+                                        <a href="~/Imagen_Problema/SubirImagenProblema/@t.Id_Problema" class="btn btn-primary" style="width: 116px">Subir Imagen</a>
+                                    </td>
                                 </tr>
                             }
                         </tbody>
