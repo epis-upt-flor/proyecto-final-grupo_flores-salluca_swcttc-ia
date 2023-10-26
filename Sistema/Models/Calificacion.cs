@@ -91,6 +91,76 @@ namespace SistemaArtemis.Models
             return tipousuario;
         }
 
+        public List<Calificacion> VerCalificacion(int id)
+        {
+            List<Calificacion> calificaciones = new List<Calificacion>();
+            try
+            {
+                using (var db = new Model1())
+                {
+                    calificaciones = db.Calificacion
+                       .Where(x => x.Id_Cliente == id)
+                       .ToList();
+                }
+            }
+            catch (Exception)
+            {
+                // Manejar la excepción aquí si es necesario.
+                throw;
+            }
 
+            return calificaciones; // Devuelve una lista de Calificacion.
+        }
+
+
+
+
+
+        //public List<Calificacion> VerCalificacionLista(List<int> id)
+        //{
+        //    List<Calificacion> calificaciones = new List<Calificacion>();
+        //    try
+        //    {
+        //        using (var db = new Model1())
+        //        {
+        //            calificaciones = db.Calificacion
+        //                .Where(x => id.Contains(x.Id_Servicio))
+        //                .ToList();
+        //        }
+        //    }
+        //    catch (Exception)
+        //    {
+        //        // Manejar la excepción aquí si es necesario.
+        //        throw;
+        //    }
+
+        //    return calificaciones; // Devuelve una lista de Calificacion.
+        //}
+
+        public List<Calificacion> VerCalificacionLista(List<int> id)
+        {
+            List<Calificacion> calificaciones = new List<Calificacion>();
+            try
+            {
+                using (var db = new Model1())
+                {
+                    calificaciones = db.Calificacion
+                        .Where(x => id.Contains(x.Id_Servicio ?? 0))  // Usamos ?? 0 para manejar nulos
+                        .ToList();
+                }
+            }
+            catch (Exception)
+            {
+                // Manejar la excepción aquí si es necesario.
+                throw;
+            }
+
+            return calificaciones; // Devuelve una lista de Calificacion.
+        }
+
+
+
+
+        
     }
 }

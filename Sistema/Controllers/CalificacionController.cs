@@ -16,13 +16,23 @@ namespace SistemaArtemis.Controllers
         Model1 db = new Model1();
 
         private Calificacion objcalifica = new Calificacion();
+        private Problema objproblema = new Problema();
+        private Servicio objservicio = new Servicio();
 
-        public ActionResult Index()
+        public ActionResult Index(int id)
         {
+            //var listServicio = objproblema.ListaProblemaCliente(id);
             var listServicio = db.Servicio.Include("Tecnico").Where(s => s.Id_Estado_Servicio.Equals(3)).ToList();
             ViewBag.Service = listServicio;
             return View();
         }
+        //public ActionResult Index(int id)
+        //{
+
+        //    var listServicio = objproblema.ListaProblemaCliente(id);
+        //    //ViewBag.Service = listServicio != null ? listServicio : new List<int>();
+        //    return View(listServicio);
+        //}
 
 
         public ActionResult Calificar(int id = 0)
@@ -84,9 +94,7 @@ namespace SistemaArtemis.Controllers
 
         public ActionResult VerCalificacion(int id)
         {
-            var vercali = db.Calificacion.Where(s => s.Id_Servicio == id).ToList();
-            ViewBag.calificacion = vercali;
-            return View();
+            return View(objcalifica.VerCalificacion(id));
         }
 
     }

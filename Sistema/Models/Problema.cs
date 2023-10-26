@@ -193,6 +193,28 @@ namespace SistemaArtemis.Models
             return misproblemas;
         }
 
+        public List<Problema> ListaProblemaCliente(int idcliente)
+        {
+            List<Problema> serviciosRealizados = new List<Problema>();
+
+            try
+            {
+                using (var db = new Model1())
+                {
+                    serviciosRealizados = db.Problema
+                        .Where(x => x.Id_Cliente == idcliente && x.Estado == "En Proceso")
+                        .ToList();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return serviciosRealizados;
+        }
+
+
         //public int ObtenerIdCliente(int id)
         //{
         //    int idCliente = 0;

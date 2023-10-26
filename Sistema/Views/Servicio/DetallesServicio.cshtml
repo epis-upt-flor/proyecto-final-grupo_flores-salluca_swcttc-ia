@@ -1,0 +1,28 @@
+﻿@model SistemaArtemis.Models.Servicio
+
+@{
+    ViewBag.Title = "Detalles del Servicio";
+    Layout = "~/Views/Shared/_ClienteLayout.cshtml";
+}
+
+<div class="container">
+    <h2>Detalles del Servicio</h2>
+    <hr />
+
+    <dl class="dl-horizontal">
+        <dt>Descripción:</dt>
+        <dd>@Model.Descripcion</dd>
+        <dt>Fecha de Inicio:</dt>
+        <dd>@Model.Fecha_Inicio.ToShortDateString()</dd>
+        <dt>Fecha de Fin:</dt>
+        <dd>@Model.Fecha_Fin.ToShortDateString()</dd>
+        <dt>Documento:</dt>
+        <dd>@Model.Documento</dd>
+        <dt>Técnico:</dt>
+        <dd>@Model.Tecnico.Nombre</dd> 
+        <dt>Problema:</dt>
+        <dd>@Model.Problema.Descripcion</dd> 
+    </dl>
+
+    <a href="@Url.Action("Index", "Cliente")" class="btn btn-default">Volver</a>
+</div>

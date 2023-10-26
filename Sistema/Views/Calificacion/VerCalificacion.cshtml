@@ -1,25 +1,20 @@
-﻿@model SistemaArtemis.Models.Calificacion
+﻿@model List<SistemaArtemis.Models.Calificacion>
 @{
-    ViewBag.Title = "VerCalificacion";
+    ViewBag.Title = "Visualizar Calificaciones";
     Layout = "~/Views/Shared/_ClienteLayout.cshtml";
-    var listacalificacion = ViewBag.calificacion as List<SistemaArtemis.Models.Calificacion>;
-    //var listacalificacion = ViewBag.calificacion;
 }
 
-
-
 <div class="container-fluid">
+
     <div class="card shadow mb-4">
         <div class="card-header py-3 bg-second-primary">
-            <h6 class="m-0 font-weight-bold text-white">Detalle de las Calificaciones </h6>
+            <h6 class="m-0 font-weight-bold text-white">Trabajos Disponibles</h6>
         </div>
         <div class="card-body">
             <div class="row">
                 <div class="col-sm-3">
-
-                    <a href="~/Calificacion/VerCalificacion/" class="btn btn-warning"><i class="fas fa-eject"></i> Ver Calificaciones</a>
-                    <a href="~/Cliente/Index/" class="btn btn-dark"><i class="fas fa-chevron-left"></i> Regresar</a>
-                    <h2 class="pagegeader"></h2>
+                    <a href="~/Cliente/Index" class="btn btn-dark">Regresar</a>
+                    <h2 class="page-linl"></h2>
                 </div>
             </div>
             <div class="row">
@@ -30,36 +25,27 @@
                                 <th>Id</th>
                                 <th>Comentario</th>
                                 <th>Calificación</th>
-                                <th>Descripción del Servicio</th>
-                                @*<th>Acciones</th>*@
+                                <th>Cliente</th>
+                                <th>Servicio</th>
+                                <th>Ver Detalles</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @{ var i = 0;}
-                            @foreach (var t in listacalificacion)
+                            @{ var i = 0; }
+                            @foreach (var calificacion in Model)
                             {
                                 i++;
                                 <tr>
-                                    @*<td>@t.Calificacion1</td>*@
-                                <td>@i</td>
-
-                                <td>@t.Comentario</td>
-                                <td>
-                                    @if (t.Calificacion1 >= 1 && t.Calificacion1 <= 10)
-                                    {
-                                        for (int j = 0; j < t.Calificacion1; j++)
-                                        {
-                                            <span class="badge badge-success">★</span>
-
-                                        }
-                                    }
-                                </td>
-                                <td>@t.Servicio.Descripcion</td>
-                                @*<td>
-                                        <a href="~/Calificacion/Calificar/@t.Id_Servicio" class="btn btn-success"><i class="fas fa-check"></i> Calificar</a>
-                                    </td>*@
-                            </tr>
-                        }
+                                    <td>@i</td>
+                                    <td>@calificacion.Comentario</td>
+                                    <td>@calificacion.Calificacion1</td>
+                                    <td>@calificacion.Id_Cliente</td>
+                                    <td>@calificacion.Id_Servicio</td>
+                                    <td>
+                                        <a href="@Url.Action("DetallesServicio", "Servicio", new { id = calificacion.Id_Servicio })" class="btn btn-info">Detalles</a>
+                                    </td>
+                                </tr>
+                            }
                         </tbody>
                     </table>
                 </div>

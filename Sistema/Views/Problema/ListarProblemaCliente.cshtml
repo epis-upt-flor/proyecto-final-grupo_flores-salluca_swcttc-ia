@@ -2,17 +2,16 @@
 @{
     ViewBag.Title = "ListarProblemaCliente";
     Layout = "~/Views/Shared/_ClienteLayout.cshtml";
- }
+}
 
 <div class="container-fluid">
     <div class="card shadow mb-4">
         <div class="card-header py-3 bg-second-primary">
-            <h6 class="m-0 font-weight-bold text-white">Mis Servicios - Descripción del Trabajo </h6>
+            <h6 class="m-0 font-weight-bold text-white">Mis Servicios - Descripción del Trabajo</h6>
         </div>
         <div class="card-body">
             <div class="row">
                 <div class="col-sm-3">
-                    @*<p href="~/Tecnico/TrabajosDisponibles" class="btn btn-warning">Aceptar Nuevo Trabajo</p>*@
                     <a href="~/Cliente/Index" class="btn btn-dark">Regresar</a>
                     <h2 class="pagegeader"></h2>
                 </div>
@@ -35,41 +34,43 @@
                             @{ var i = 0;}
                             @foreach (var t in Model)
                             {
-                                i++;
-                                <tr>
-                                    <td>@i</td>
-                                    <td>@t.Descripcion</td>
-                                    @*<td>@t.Documento</td>*@
-                                    <td>@t.Fecha_Inicio.ToString("dd/MM/yyyy")</td>
-                                    <td>@t.Fecha_Fin.ToString("dd/MM/yyyy")</td>
-                                    @if (t.Estado == "Pendiente")
-                                    {
-                                        <td> <span class="badge badge-success">Pendiente</span></td>
-                                    }
-                                    @if (t.Estado == "En Revisión")
-                                    {
-                                        <td> <span class="badge badge-warning">En Revisión</span></td>
-                                    }
-                                    @if (t.Estado == "En Proceso")
-                                    {
-                                        <td> <span class="badge badge-primary">En Proceso</span></td>
-                                    }
-                                    @if (t.Estado == "Finalizado")
-                                    {
-                                        <td> <span class="badge badge-danger">Finalizado</span></td>
-                                    }
-                                    }
-                                    <td>
-                                        <form method="get" action="~/RecAPI/IndexAsync">
-                                            <input type="hidden" name="Descripcion" value="@t.Descripcion" />
-                                            <button type="submit" class="btn btn-outline-secondary" style="width: 120px">Recomendar</button>
-                                        </form>
-                                        <a href="~/Servicio/Details/@t.Id_Problema" class="btn btn-outline-success" style="width: 118px">Visualizar</a>
-                                    </td>
-                                    <td>
-                                        <a href="~/Imagen_Problema/SubirImagenProblema/@t.Id_Problema" class="btn btn-primary" style="width: 116px">Subir Imagen</a>
-                                    </td>
-                                </tr>
+                                // Filtrar registros con estado "Finalizado"
+                                if (t.Estado != "Finalizado")
+                                {
+                                    i++;
+                                    <tr>
+                                        <td>@i</td>
+                                        <td>@t.Descripcion</td>
+                                        <td>@t.Fecha_Inicio.ToString("dd/MM/yyyy")</td>
+                                        <td>@t.Fecha_Fin.ToString("dd/MM/yyyy")</td>
+                                        @if (t.Estado == "Pendiente")
+                                        {
+                                            <td> <span class="badge badge-success">Pendiente</span></td>
+                                        }
+                                        @if (t.Estado == "En Revisión")
+                                        {
+                                            <td> <span class="badge badge-warning">En Revisión</span></td>
+                                        }
+                                        @if (t.Estado == "En Proceso")
+                                        {
+                                            <td> <span class="badge badge-primary">En Proceso</span></td>
+                                        }
+                                        @if (t.Estado == "Finalizado")
+                                        {
+                                            <td> <span class="badge badge-danger">Finalizado</span></td>
+                                        }
+                                        <td>
+                                            <form method="get" action="~/RecAPI/IndexAsync">
+                                                <input type="hidden" name="Descripcion" value="@t.Descripcion" />
+                                                <button type="submit" class="btn btn-outline-secondary" style="width: 120px">Recomendar</button>
+                                            </form>
+                                            <a href="~/Servicio/Details/@t.Id_Problema" class="btn btn-outline-success" style="width: 118px">Visualizar</a>
+                                        </td>
+                                        <td>
+                                            <a href="~/Imagen_Problema/SubirImagenProblema/@t.Id_Problema" class="btn btn-primary" style="width: 116px">Subir Imagen</a>
+                                        </td>
+                                    </tr>
+                                }
                             }
                         </tbody>
                     </table>
@@ -78,4 +79,3 @@
         </div>
     </div>
 </div>
-

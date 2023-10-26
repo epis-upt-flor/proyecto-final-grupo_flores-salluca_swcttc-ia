@@ -2258,6 +2258,8 @@
     <Content Include="Views\Imagen_Problema\VisualizarImagenesTecnico.cshtml" />
     <Content Include="Views\Calificacion\Calificar.cshtml" />
     <Content Include="Views\Calificacion\VerCalificacion.cshtml" />
+    <Content Include="Views\Servicio\DetallesServicio.cshtml" />
+    <Content Include="Views\Servicio\DetallesServicioTecnico.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

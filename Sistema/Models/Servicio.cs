@@ -8,6 +8,7 @@ namespace SistemaArtemis.Models
     using System.Data.Entity.Spatial;
     using System.Linq;
     using System.Runtime.InteropServices.WindowsRuntime;
+    using System.Web.Mvc;
 
     [Table("Servicio")]
     public partial class Servicio
@@ -295,9 +296,73 @@ namespace SistemaArtemis.Models
         }
 
 
+        public Servicio DetallesServicio(int id)
+        {
+            Servicio servicio = null;
+
+            try
+            {
+                using (var db = new Model1())
+                {
+                    servicio = db.Servicio
+                        .Include("Tecnico")
+                        .Include("Problema")
+                        .Where(x => x.Id_Servicio == id)
+                        .SingleOrDefault();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return servicio;
+        }
+
+        public int BuscarIdTecnico(int id)
+        {
+            int idTecnico = 0;
+
+            try
+            {
+                using (var db = new Model1())
+                {
+                    idTecnico = db.Servicio
+                        .Where(x => x.Id_Servicio == id)
+                        .Select(x => x.Id_Tecnico)
+                        .SingleOrDefault();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return idTecnico;
+        }
 
 
+        public List<int> ListaServicioTecnico(int idTecnico)
+        {
+            List<int> serviciosRealizados = new List<int>();
 
+            try
+            {
+                using (var db = new Model1())
+                {
+                    serviciosRealizados = db.Servicio
+                        .Where(x => x.Id_Tecnico == idTecnico && x.Id_Estado_Servicio == 4)
+                        .Select(x => x.Id_Servicio)
+                        .ToList();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return serviciosRealizados;
+        }      
 
 
     }

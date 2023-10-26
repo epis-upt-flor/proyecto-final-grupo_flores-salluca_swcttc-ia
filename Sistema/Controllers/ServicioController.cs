@@ -22,6 +22,7 @@ namespace SistemaArtemis.Controllers
             return View(objproblema.ListProblem());
         }
 
+
         public ActionResult ListService()
         {
             return View(objServicio.Listar());
@@ -106,6 +107,19 @@ namespace SistemaArtemis.Controllers
             ViewBag.detalles = objServicio.Detalles(id);
             return View();
         }
+
+        //Vista Cliente
+        public ActionResult DetallesServicio(int id)
+        {
+            return View(objServicio.DetallesServicio(id));
+        }
+
+        //Vista Tecnico
+        public ActionResult DetallesServicioTecnico(int id)
+        {
+            return View(objServicio.DetallesServicio(id));
+        }
+
 
 
     }

@@ -1,22 +1,18 @@
-﻿
+﻿@model List<SistemaArtemis.Models.Calificacion>
 @{
-    ViewBag.Title = "VisualizarCalificacion1";
+    ViewBag.Title = "Visualizar Calificaciones";
     Layout = "~/Views/Shared/_TecnicoLayout.cshtml";
 }
-
-
 
 <div class="container-fluid">
 
     <div class="card shadow mb-4">
         <div class="card-header py-3 bg-second-primary">
-            <h6 class="m-0 font-weight-bold text-white">Mis Calificaciones</h6>
+            <h6 class="m-0 font-weight-bold text-white">Trabajos Disponibles</h6>
         </div>
-
         <div class="card-body">
             <div class="row">
                 <div class="col-sm-3">
-                    <a href="~/Servicio/List" class="btn btn-warning">Aceptar Nuevo Trabajo</a>
                     <a href="~/Tecnico/Index" class="btn btn-dark">Regresar</a>
                     <h2 class="page-linl"></h2>
                 </div>
@@ -29,29 +25,31 @@
                                 <th>Id</th>
                                 <th>Comentario</th>
                                 <th>Calificación</th>
-                                <th>Nro.Servicio</th>
+                                <th>Cliente</th>
+                                <th>Servicio</th>
+                                <th>Ver Detalles</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Se realizo el trabajo conforme, muy buena calidad, un buen servicio</td>
-                                <td>8</td>
-                                <td>1</td>
-                            </tr>
-
-                            
+                            @{ var i = 0; }
+                            @foreach (var calificacion in Model)
+                            {
+                                i++;
+                                <tr>
+                                    <td>@i</td>
+                                    <td>@calificacion.Comentario</td>
+                                    <td>@calificacion.Calificacion1</td>
+                                    <td>@calificacion.Id_Cliente</td>
+                                    <td>@calificacion.Id_Servicio</td>
+                                    <td>                                        
+                                        <a href="@Url.Action("DetallesServicioTecnico", "Servicio", new { id = calificacion.Id_Servicio })" class="btn btn-info">Detalles</a>
+                                    </td>
+                                </tr>
+                            }
                         </tbody>
-                        
                     </table>
-                   
                 </div>
-                
-               
             </div>
-            
         </div>
     </div>
 </div>
-
-

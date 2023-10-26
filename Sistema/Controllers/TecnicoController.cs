@@ -15,7 +15,10 @@ namespace SistemaArtemis.Controllers
         private Tecnico objtecnico = new Tecnico();
         private Servicio objservicio = new Servicio();
         private Especialidad objTipo= new Especialidad();
-        
+        private Problema objproblema = new Problema();
+        private Servicio objServicio = new Servicio();
+        private Calificacion objCalificacion = new Calificacion();
+
         public ActionResult Index(int id = 0) //ok
         {
             //Validar ID A Vista
@@ -68,9 +71,12 @@ namespace SistemaArtemis.Controllers
 
         /// <summary> Esta función devuelve una vista para visualizar un determinado tipo de calificación.</summary>
         /// <returns> El método está devolviendo un resultado Ver. </returns>
-        public ActionResult VisualizarCalificacion1()
+        public ActionResult VisualizarCalificacion1(int id)
         {
-            return View();
+            //lista de sercivo con IdTecnico
+            var listtecnico = objServicio.ListaServicioTecnico(id);
+
+            return View(objCalificacion.VerCalificacionLista(listtecnico));
         }
 
     }
