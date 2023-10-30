@@ -19,13 +19,32 @@ namespace SistemaArtemis.Controllers
         private Problema objproblema = new Problema();
         private Servicio objservicio = new Servicio();
 
-        public ActionResult Index(int id)
+        //public ActionResult Index(int? id)
+        //{
+        //    //var listServicio = objproblema.ListaProblemaCliente(id);
+        //    var listServicio = db.Servicio.Include("Tecnico").Where(s => s.Id_Estado_Servicio.Equals(3)).ToList();
+        //    ViewBag.Service = listServicio;
+        //    return View();
+        //}
+
+        public ActionResult Index(int? id)
         {
-            //var listServicio = objproblema.ListaProblemaCliente(id);
-            var listServicio = db.Servicio.Include("Tecnico").Where(s => s.Id_Estado_Servicio.Equals(3)).ToList();
-            ViewBag.Service = listServicio;
+            if (id.HasValue)
+            {
+                // El parámetro 'id' tiene un valor, muestra otras calificaciones
+                var listServicio = db.Servicio.Include("Tecnico").Where(s => s.Id_Estado_Servicio.Equals(3)).ToList();
+                ViewBag.Service = listServicio;
+            }
+            else
+            {
+                // El parámetro 'id' es nulo,dirigir a otra página index cliente
+                return RedirectToAction("Index", "Cliente");
+            }
+
             return View();
         }
+
+
         //public ActionResult Index(int id)
         //{
 
