@@ -90,11 +90,38 @@ namespace SistemaArtemis.Controllers
         [HttpPost]
         public FileResult DescargarArchivo(int IdArchivo)
         {
-            Archivos oArchivo = olista.Where(a => a.IdArchivo == IdArchivo || a.Id_Problema==IdArchivo).FirstOrDefault();
+            CargarArchivosDesdeBD();
+            Archivos oArchivo = olista.Where(a => a.Id_Problema == IdArchivo).FirstOrDefault();
+            //Archivos oArchivo = olista.Where(a => a.IdArchivo == IdArchivo || a.Id_Problema==IdArchivo).FirstOrDefault();
             string NombreCompleto = oArchivo.Nombre + oArchivo.Extension;
             return File(oArchivo.Archivo, "application/" + oArchivo.Extension.Replace(".", ""), NombreCompleto);
         }
+        private void CargarArchivosDesdeBD()
+        {
 
+            using (SqlConnection oconexion = new SqlConnection(cadena))
+            {
+                SqlCommand cmd = new SqlCommand("SELECT * FROM ARCHIVOS", oconexion);
+
+                cmd.CommandType = CommandType.Text;
+                oconexion.Open();
+
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        Archivos archivo_encontrado = new Archivos();
+                        archivo_encontrado.IdArchivo = Convert.ToInt32(dr["IdArchivo"]);
+                        archivo_encontrado.Nombre = dr["Nombre"].ToString();
+                        archivo_encontrado.Archivo = dr["Archivo"] as byte[];
+                        archivo_encontrado.Extension = dr["Extension"].ToString();
+                        archivo_encontrado.Id_Problema = Convert.ToInt32(dr["Id_Problema"]);
+
+                        olista.Add(archivo_encontrado);
+                    }
+                }
+            }
+        }
 
     }
 }
