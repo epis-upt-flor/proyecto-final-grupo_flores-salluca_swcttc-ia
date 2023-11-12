@@ -1,4 +1,16 @@
-﻿@model List<SistemaArtemis.Models.Tecnico>
+﻿<!--
+Este archivo ListarTecnicos.cshtml fue creado para mostrar una lista de técnicos disponibles.
+
+    Para el caso de uso: Gestionar Búsqueda
+
+Fecha de Creación: [07/08/2023]
+Creado por: [DJFN]
+
+Última Modificación: [11/11/2023]
+Modificado por: [JFSV]
+-->
+
+@model List<SistemaArtemis.Models.Tecnico>
 @{
     ViewBag.Title = "ListarTecnicos";
     Layout = "~/Views/Shared/_ClienteLayout.cshtml";
@@ -32,7 +44,7 @@
                                 <th>Telefono</th>
                                 @*<th>Especialidad</th>*@
                                 <th>Estado</th>
-                                <th>Acciones</th>
+                                @*<th>Acciones</th>*@
                             </tr>
                         </thead>
                         <tbody>
@@ -54,11 +66,11 @@
                                         <td><span class="badge badge-danger">No Activo</span></td>
                                     }
 
-                                    <td>
+                                    @*<td>
 
-                                        <a href="#" class="btn btn-success">Contactar</a>
+                                            <a href="#" class="btn btn-success">Contactar</a>
 
-                                    </td>
+                                        </td>*@
                                 </tr>
                             }
                         </tbody>
