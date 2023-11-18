@@ -45,7 +45,7 @@ namespace TestProject
         {
             // Arrange
             var problema = new Problema();
-            var idClienteNoExistente = -1; // Modifica según tu caso
+            var idClienteNoExistente = -1; // Modifica 
 
             // Act
             var problemasCliente = problema.ListaProblemaCliente(idClienteNoExistente);

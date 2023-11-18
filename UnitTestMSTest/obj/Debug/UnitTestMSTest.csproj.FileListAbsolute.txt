@@ -1,0 +1,2 @@
+C:\Users\Lotus\Desktop\Py\proyecto-final-grupo_flores-salluca_swcttc-ia\UnitTestMSTest\obj\Debug\UnitTestMSTest.csproj.AssemblyReference.cache
+C:\Users\Lotus\Desktop\Py\proyecto-final-grupo_flores-salluca_swcttc-ia\UnitTestMSTest\obj\Debug\UnitTestMSTest.csproj.CoreCompileInputs.cache
