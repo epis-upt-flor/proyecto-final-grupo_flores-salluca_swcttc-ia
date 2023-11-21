@@ -118,7 +118,7 @@ namespace TestProject
         {
             // Arrange
             var tecnico = new Tecnico();
-            var idTecnicoExistente = 1; // Modificar según tu caso
+            var idTecnicoExistente = 1; // Modificar
 
             // Act
             var totalTipoEspecialidad = tecnico.ObtenerTotalTipoEspecialidadPorTecnico(idTecnicoExistente);

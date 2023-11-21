@@ -12,7 +12,7 @@ namespace UnitTestMSTest
         {
             // Arrange
             var problema = new Problema();
-            var idClienteExistente = 1; // Modifica según tu caso
+            var idClienteExistente = 1; // Modifica
 
             // Act
             var misProblemas = problema.ListarProblema(idClienteExistente);
@@ -27,7 +27,7 @@ namespace UnitTestMSTest
         {
             // Arrange
             var problema = new Problema();
-            var idClienteExistente = 1; // Modifica según tu caso
+            var idClienteExistente = 1; // Modifica
 
             // Act
             var problemasCliente = problema.ListaProblemaCliente(idClienteExistente);
