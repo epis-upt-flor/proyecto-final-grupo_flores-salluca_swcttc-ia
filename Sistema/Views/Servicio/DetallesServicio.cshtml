@@ -1,4 +1,16 @@
-﻿@model SistemaArtemis.Models.Servicio
+﻿@*
+    Versión: 1.0
+    Descripción: DetallesServicio.cshtml Representada para gestionar calificación
+    Para el caso de uso: Gestionar Calificación
+
+    Fecha de creación: [07/08/2023]
+    Creado por: [DJFN]
+
+    Última modificación: [11/11/2023]
+    Modificado por: [JFSV]
+*@
+
+@model SistemaArtemis.Models.Servicio
 
 @{
     ViewBag.Title = "DetallesServicio";
@@ -19,9 +31,9 @@
         <dt>Documento:</dt>
         <dd>@Model.Documento</dd>
         <dt>Técnico:</dt>
-        <dd>@Model.Tecnico.Nombre</dd> 
+        <dd>@Model.Tecnico.Nombre</dd>
         <dt>Problema:</dt>
-        <dd>@Model.Problema.Descripcion</dd> 
+        <dd>@Model.Problema.Descripcion</dd>
     </dl>
 
     <a href="@Url.Action("Index", "Cliente")" class="btn btn-default">Volver</a>

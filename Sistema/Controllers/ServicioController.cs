@@ -1,4 +1,21 @@
-﻿using SistemaArtemis.Models;
+﻿/*
+Versión: 1.0
+Descripción: ServicioController.cs representada gestionar la asignaciòn de trabajo.
+Para el caso de uso: 
+    Gestionar Asignaciòn de Trabajo
+    Gestionar Calificaciòn
+    Gestionar Progreso
+
+Fecha de creación: [07/08/2023]
+Creado por: [DJFN]
+
+Última modificación: [11/11/2023]
+Modificado por: [JFSV]
+*/
+
+
+
+using SistemaArtemis.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

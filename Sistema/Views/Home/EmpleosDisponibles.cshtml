@@ -1,4 +1,17 @@
-﻿@model List<SistemaArtemis.Models.Problema>
+﻿@*
+    Versión: 1.0
+    Descripción: EmpleadosDisponibles.cshtml Representada para autenticar usuario
+    Para el caso de uso: Autenticar Usuario
+
+    Fecha de creación: [07/08/2023]
+    Creado por: [DJFN]
+
+    Última modificación: [11/11/2023]
+    Modificado por: [JFSV]
+*@
+
+
+@model List<SistemaArtemis.Models.Problema>
 @{
     ViewBag.Title = "EmpleosDisponibles";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -16,12 +29,12 @@
                     <h2>Empleos Recientes</h2>
                 </div>
                 <table id="myTable" class="" style=" width:100%">
-                      <thead>
+                    <thead>
                         <tr>
                             <th width="50">ID</th>
-                            <th >DESCRIPCIÓN</th>
-                            <th >INICIO DE LA PUBLICACIÓN</th>
-                            <th >FIN DE LA PUBLICACIÓN</th>
+                            <th>DESCRIPCIÓN</th>
+                            <th>INICIO DE LA PUBLICACIÓN</th>
+                            <th>FIN DE LA PUBLICACIÓN</th>
 
                         </tr>
                     </thead>

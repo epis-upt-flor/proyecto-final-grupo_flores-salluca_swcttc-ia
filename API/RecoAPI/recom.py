@@ -1,3 +1,16 @@
+###
+#Versión: 1.0
+#Descripción: recom.py Representada para gestionar recomendacion
+#Para el caso de uso: Gestionar Recomendacion
+
+#Fecha de creación: [07/08/2023]
+#Creado por: [DJFN]
+
+#Última modificación: [11/11/2023]
+#Modificado por: [JFSV]
+###
+
+
 import sqlalchemy
 from sqlalchemy import create_engine
 import pyodbc

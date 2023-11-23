@@ -1,4 +1,17 @@
-﻿using SistemaArtemis.Models;
+﻿/*
+Versión: 1.0
+Descripción: TecnicoController.cs Representada gestionar calificaciòn
+Para el caso de uso:   
+    Gestionar Calificaciòn
+    Gestionar Progreso
+
+Fecha de creación: [07/08/2023]
+Creado por: [DJFN]
+
+Última modificación: [11/11/2023]
+Modificado por: [JFSV]
+*/
+using SistemaArtemis.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

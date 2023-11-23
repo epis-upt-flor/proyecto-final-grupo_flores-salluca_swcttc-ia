@@ -1,4 +1,19 @@
-﻿using SistemaArtemis.Models;
+﻿/*
+Versión: 1.0
+Descripción: HomeController representada para la vista principal del sistema Artemis.
+Para el caso de uso: Autenticar Usuario
+
+Fecha de creación: [07/08/2023]
+Creado por: [DJFN]
+
+Última modificación: [11/11/2023]
+Modificado por: [JFSV]
+*/
+
+
+
+
+using SistemaArtemis.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

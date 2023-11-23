@@ -1,4 +1,16 @@
-﻿using System;
+﻿/*
+Versión: 1.0
+Descripción: RecAPIController.cs Representada para gestionar recomendacion
+Para el caso de uso: Gestionar Recomendacion
+
+Fecha de creación: [07/08/2023]
+Creado por: [DJFN]
+
+Última modificación: [11/11/2023]
+Modificado por: [JFSV]
+*/
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;

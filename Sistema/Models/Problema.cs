@@ -1,3 +1,21 @@
+/*
+Versión: 1.0
+Descripción: Problema.cs representada gestionar la solitud del servicio
+Para el caso de uso: 
+    Gestionar Solicitud de Servicio
+    Gestionar Asiganaciòn Trabajo
+    Gestionar Recomendaciòn
+    Gestionar Progreso
+
+Fecha de creación: [07/08/2023]
+Creado por: [DJFN]
+
+Última modificación: [11/11/2023]
+Modificado por: [JFSV]
+*/
+
+
+
 namespace SistemaArtemis.Models
 {
     using System;

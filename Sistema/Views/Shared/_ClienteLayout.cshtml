@@ -1,4 +1,15 @@
-﻿
+﻿@*
+    Versión: 1.0
+    Descripción: _CLienteLayout.cshtml Representada para autenticar usuario cliente
+    Para el caso de uso: Autenticar Usuario
+
+    Fecha de creación: [07/08/2023]
+    Creado por: [DJFN]
+
+    Última modificación: [11/11/2023]
+    Modificado por: [JFSV]
+*@
+
 @{
     ViewBag.Title = "_ClienteLayout";
     SistemaArtemis.Models.Usuario usuario = new SistemaArtemis.Models.Usuario();
@@ -102,30 +113,30 @@
             </li>
 
             @* <!-- Nav Item - Venta Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseVenta">
-                    <i class="fas fa-fw fa-tags"></i>
-                    <span>Recomendación</span>
-                </a>
-                <div id="collapseVenta" class="collapse" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="~/Tecnico/Index">Trabajadores Disponibles</a>
-                        <a class="collapse-item" href="#">Trabajadores Aptos</a>
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseVenta">
+                            <i class="fas fa-fw fa-tags"></i>
+                            <span>Recomendación</span>
+                        </a>
+                        <div id="collapseVenta" class="collapse" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <a class="collapse-item" href="~/Tecnico/Index">Trabajadores Disponibles</a>
+                                <a class="collapse-item" href="#">Trabajadores Aptos</a>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- Nav Item - Reportes Collapse Menu -->
+                    <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseReportes">
+                        <i class="fas fa-fw fa-chart-area"></i>
+                        <span>Reportes</span>
+                    </a>
+                    <div id="collapseReportes" class="collapse" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <a class="collapse-item" href="~/Servicios/ReporteServicios">Reporte de Servicios</a>
+                        </div>
                     </div>
-                </div>
-            </li>
-            <!-- Nav Item - Reportes Collapse Menu -->
-            <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseReportes">
-                <i class="fas fa-fw fa-chart-area"></i>
-                <span>Reportes</span>
-            </a>
-            <div id="collapseReportes" class="collapse" data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="~/Servicios/ReporteServicios">Reporte de Servicios</a>
-                </div>
-            </div>
-        </li>*@
+                </li>*@
 
             <!-- Divider -->
             <hr class="sidebar-divider">

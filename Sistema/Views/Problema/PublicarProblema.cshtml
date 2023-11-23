@@ -1,4 +1,18 @@
-﻿@model SistemaArtemis.Models.Problema
+﻿@*
+    Versión: 1.0
+    Descripción: PublicarProblema.cshtml Representada para gestionar solicitud de servicio
+    Para el caso de uso: 
+        Gestionar Solicitud de Servicio
+        Gestionar Progreso
+
+    Fecha de creación: [07/08/2023]
+    Creado por: [DJFN]
+
+    Última modificación: [11/11/2023]
+    Modificado por: [JFSV]
+*@
+
+@model SistemaArtemis.Models.Problema
 @{
     ViewBag.Title = "PublicarProblema";
     Layout = "~/Views/Shared/_ClienteLayout.cshtml";
@@ -18,12 +32,12 @@
                 </button>
             </div>
             <div class="modal-body">-->
-                <!-- Aquí se mostrarán los datos de la recomendación -->
-                <!--Especialidad: <span id="Especialidadades"></span><br>
+<!-- Aquí se mostrarán los datos de la recomendación -->
+<!--Especialidad: <span id="Especialidadades"></span><br>
                 Nombre: <span id= especi></span>
             </div>
             <div class="modal-footer">
-                
+
                 <button id="redireccionarBtn" type="button" class="btn btn-primary">Cerrar y redireccionar</button>
             </div>
         </div>
@@ -89,59 +103,59 @@
     </div>
 }
 @*<script>
-    $(document).ready(function () {
-        var formularioEnviado = false;
+        $(document).ready(function () {
+            var formularioEnviado = false;
 
-        $('#problemaForm').submit(function (e) {
-            if (formularioEnviado) {
-                return;
-            }
-            e.preventDefault(); // Evita que el formulario se envíe de forma predeterminadaA
-            formularioEnviado = true; // Marca el formulario como enviado
-
-            // Realiza la solicitud POST al controlador
-            $.post($(this).attr('action'), $(this).serialize(), function (listaEspecialidades) {
-                var contenidoEspecialidades = '';
-                for (var i = 0; i < listaEspecialidades.length; i++) {
-                    contenidoEspecialidades += '<li>' + listaEspecialidades[i] + '</li>';
+            $('#problemaForm').submit(function (e) {
+                if (formularioEnviado) {
+                    return;
                 }
-                $('#especialidades').html(contenidoEspecialidades);
-                // Abre el modal
-                $('#myModal').modal('show');
-            }).fail(function () {
-                // En caso de error, muestra un mensaje de error en el modal
-                $('#especialidades').html('<li>Error al obtener las especialidades</li>');
-                $('#myModal').modal('show');
+                e.preventDefault(); // Evita que el formulario se envíe de forma predeterminadaA
+                formularioEnviado = true; // Marca el formulario como enviado
+
+                // Realiza la solicitud POST al controlador
+                $.post($(this).attr('action'), $(this).serialize(), function (listaEspecialidades) {
+                    var contenidoEspecialidades = '';
+                    for (var i = 0; i < listaEspecialidades.length; i++) {
+                        contenidoEspecialidades += '<li>' + listaEspecialidades[i] + '</li>';
+                    }
+                    $('#especialidades').html(contenidoEspecialidades);
+                    // Abre el modal
+                    $('#myModal').modal('show');
+                }).fail(function () {
+                    // En caso de error, muestra un mensaje de error en el modal
+                    $('#especialidades').html('<li>Error al obtener las especialidades</li>');
+                    $('#myModal').modal('show');
+                });
+            });
+
+            $('#redireccionarBtn').click(function () {
+                // Redirecciona a la vista deseada
+                var url = '@Url.Action("Index", "Cliente")';
+                window.location.href = url;
             });
         });
-
-        $('#redireccionarBtn').click(function () {
-            // Redirecciona a la vista deseada
-            var url = '@Url.Action("Index", "Cliente")';
-            window.location.href = url;
-        });
-    });
-</script>*@
+    </script>*@
 
 @*<script>
-    function enviarFormulario() {
-        var descripcion = document.getElementById("txtDescripcion").value;
-        var formulario = document.createElement("form");
+        function enviarFormulario() {
+            var descripcion = document.getElementById("txtDescripcion").value;
+            var formulario = document.createElement("form");
 
-        // Establecer la acción y el método del formulario
-        formulario.setAttribute("action", "/RecAPI/RecomendarEspecialidad");
-        formulario.setAttribute("method", "POST");
+            // Establecer la acción y el método del formulario
+            formulario.setAttribute("action", "/RecAPI/RecomendarEspecialidad");
+            formulario.setAttribute("method", "POST");
 
-        // Agregar la descripción como un campo oculto al formulario
-        var inputDescripcion = document.createElement("input");
-        inputDescripcion.setAttribute("type", "hidden");
-        inputDescripcion.setAttribute("name", "Descripcion");
-        inputDescripcion.setAttribute("value", descripcion);
-        formulario.appendChild(inputDescripcion);
-        document.body.appendChild(formulario);     
-        formulario.submit();
-    }
-</script>*@
+            // Agregar la descripción como un campo oculto al formulario
+            var inputDescripcion = document.createElement("input");
+            inputDescripcion.setAttribute("type", "hidden");
+            inputDescripcion.setAttribute("name", "Descripcion");
+            inputDescripcion.setAttribute("value", descripcion);
+            formulario.appendChild(inputDescripcion);
+            document.body.appendChild(formulario);
+            formulario.submit();
+        }
+    </script>*@
 
 
 

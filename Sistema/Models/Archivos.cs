@@ -1,4 +1,19 @@
-﻿using System;
+﻿/*
+Versión: 1.0
+Descripción: Clase Archivos que representa la entidad para el manejo de archivos en el sistema Artemis.
+Para el caso de uso:
+    Gestionar Asignación Trabajo
+    Gestionar Progreso
+
+Fecha de creación: [07/08/2023]
+Creado por: [DJFN]
+
+Última modificación: [11/11/2023]
+Modificado por: [JFSV]
+*/
+
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
