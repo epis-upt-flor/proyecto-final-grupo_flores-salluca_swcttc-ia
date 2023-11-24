@@ -1,14 +1,14 @@
-/*
-Versión: 1.0
-Descripción: Calificacion.cs Representada gestionar calificaciòn
+ï»¿/*
+VersiÃ³n: 1.0
+DescripciÃ³n: Calificacion.cs Representada gestionar calificaciÃ²n
 Para el caso de uso: 
-    Gestionar Calificaciòn
+    Gestionar CalificaciÃ²n
     Gestionar Progreso
 
-Fecha de creación: [07/08/2023]
+Fecha de creaciÃ³n: [07/08/2023]
 Creado por: [DJFN]
 
-Última modificación: [11/11/2023]
+Ãšltima modificaciÃ³n: [11/11/2023]
 Modificado por: [JFSV]
 */
 
@@ -31,17 +31,17 @@ namespace SistemaArtemis.Models
         [StringLength(100)]
         public string Comentario { get; set; }
 
-        [Column("Calificacion")]
-        public int? Calificacion1 { get; set; }
+        public int? Id_Codigo { get; set; }
 
         public int? Id_Cliente { get; set; }
 
         public int? Id_Servicio { get; set; }
 
+        public virtual Codigo Codigo { get; set; }
+
         public virtual Servicio Servicio { get; set; }
 
         public virtual Cliente Cliente { get; set; }
-
 
 
         public void Guardar()
@@ -112,44 +112,20 @@ namespace SistemaArtemis.Models
             {
                 using (var db = new Model1())
                 {
-                    calificaciones = db.Calificacion
+                    calificaciones = db.Calificacion.Include(x => x.Codigo).Include(x => x.Cliente).Include(x => x.Servicio)
                        .Where(x => x.Id_Cliente == id)
                        .ToList();
                 }
             }
             catch (Exception)
             {
-                // Manejar la excepción aquí si es necesario.
+                // Manejar la excepciï¿½n aquï¿½ si es necesario.
                 throw;
             }
 
             return calificaciones; // Devuelve una lista de Calificacion.
         }
 
-
-
-
-
-        //public List<Calificacion> VerCalificacionLista(List<int> id)
-        //{
-        //    List<Calificacion> calificaciones = new List<Calificacion>();
-        //    try
-        //    {
-        //        using (var db = new Model1())
-        //        {
-        //            calificaciones = db.Calificacion
-        //                .Where(x => id.Contains(x.Id_Servicio))
-        //                .ToList();
-        //        }
-        //    }
-        //    catch (Exception)
-        //    {
-        //        // Manejar la excepción aquí si es necesario.
-        //        throw;
-        //    }
-
-        //    return calificaciones; // Devuelve una lista de Calificacion.
-        //}
 
         public List<Calificacion> VerCalificacionLista(List<int> id)
         {
@@ -158,14 +134,14 @@ namespace SistemaArtemis.Models
             {
                 using (var db = new Model1())
                 {
-                    calificaciones = db.Calificacion
+                    calificaciones = db.Calificacion.Include(x => x.Codigo).Include(x => x.Cliente).Include(x => x.Servicio)
                         .Where(x => id.Contains(x.Id_Servicio ?? 0))  // Usamos ?? 0 para manejar nulos
                         .ToList();
                 }
             }
             catch (Exception)
             {
-                // Manejar la excepción aquí si es necesario.
+                // Manejar la excepciï¿½n aquï¿½ si es necesario.
                 throw;
             }
 
@@ -175,6 +151,5 @@ namespace SistemaArtemis.Models
 
 
 
-        
     }
 }

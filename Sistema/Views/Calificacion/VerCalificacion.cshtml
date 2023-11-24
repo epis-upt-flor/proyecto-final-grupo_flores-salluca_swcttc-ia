@@ -26,7 +26,7 @@
                                 <th>Comentario</th>
                                 <th>Calificación</th>
                                 <th>Cliente</th>
-                                <th>Servicio</th>
+                                @*<th>Servicio</th>*@
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -38,9 +38,26 @@
                                 <tr>
                                     <td>@i</td>
                                     <td>@calificacion.Comentario</td>
-                                    <td>@calificacion.Calificacion1</td>
-                                    <td>@calificacion.Id_Cliente</td>
-                                    <td>@calificacion.Id_Servicio</td>
+                                    <td>
+                                        @if (calificacion.Id_Codigo == calificacion.Codigo.Codigo1)
+                                        {
+                                            @calificacion.Codigo.Descripcion;
+                                        }
+                                    </td>
+                                    @*<td>@calificacion.Id_Cliente</td>*@
+                                    <td>
+                                        @if (calificacion.Id_Cliente == calificacion.Cliente.Id_Cliente)
+                                        {
+                                            @calificacion.Cliente.Nombre @calificacion.Cliente.Apellido
+                                        }
+                                    </td>
+                                    @*<td>@calificacion.Id_Servicio</td>*@
+                                    @*<td>
+                                            @if (calificacion.Id_Servicio == calificacion.Servicio.Id_Servicio)
+                                            {
+                                                @calificacion.Servicio.Descripcion
+                                            }
+                                        </td>*@
                                     <td>
                                         <a href="@Url.Action("DetallesServicio", "Servicio", new { id = calificacion.Id_Servicio })" class="btn btn-info">Detalles</a>
                                     </td>

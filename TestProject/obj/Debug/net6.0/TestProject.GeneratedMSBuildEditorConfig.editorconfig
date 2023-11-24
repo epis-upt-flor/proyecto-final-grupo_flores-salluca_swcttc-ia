@@ -8,6 +8,4 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = TestProject
-build_property.ProjectDir = C:\Users\Lotus\Desktop\Py\proyecto-final-grupo_flores-salluca_swcttc-ia\TestProject\
-build_property.EnableComHosting = 
-build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.ProjectDir = C:\Users\dnava\OneDrive\Escritorio\VersionGithub\v2\proyecto-final-grupo_flores-salluca_swcttc-ia\TestProject\

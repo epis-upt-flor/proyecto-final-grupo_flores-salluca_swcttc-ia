@@ -11,14 +11,15 @@ namespace SistemaArtemis.Models
             : base("name=Model1")
         {
         }
-        public virtual DbSet<Archivos> ARCHIVOS { get; set; }
+
+        public virtual DbSet<Archivos> Archivos { get; set; }
         public virtual DbSet<Calificacion> Calificacion { get; set; }
         public virtual DbSet<Cliente> Cliente { get; set; }
+        public virtual DbSet<Codigo> Codigo { get; set; }
         public virtual DbSet<Especialidad> Especialidad { get; set; }
         public virtual DbSet<Estado_Servicio> Estado_Servicio { get; set; }
-        public virtual DbSet<Imagen_Problema> Imagen_Problema { get; set; }
         public virtual DbSet<Estado_Tecnico> Estado_Tecnico { get; set; }
-        public virtual DbSet<Modelo_Ia> Modelo_Ia { get; set; }
+        public virtual DbSet<Imagen_Problema> Imagen_Problema { get; set; }
         public virtual DbSet<Problema> Problema { get; set; }
         public virtual DbSet<RTecnico_TipoEspecialidad> RTecnico_TipoEspecialidad { get; set; }
         public virtual DbSet<Servicio> Servicio { get; set; }
@@ -58,6 +59,10 @@ namespace SistemaArtemis.Models
                 .WithRequired(e => e.Cliente)
                 .WillCascadeOnDelete(false);
 
+            modelBuilder.Entity<Codigo>()
+                .Property(e => e.Descripcion)
+                .IsUnicode(false);
+
             modelBuilder.Entity<Especialidad>()
                 .Property(e => e.Nombre)
                 .IsUnicode(false);
@@ -85,10 +90,6 @@ namespace SistemaArtemis.Models
                 .WithRequired(e => e.Estado_Tecnico)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<Modelo_Ia>()
-                .Property(e => e.TipoEspecialidad)
-                .IsUnicode(false);
-
             modelBuilder.Entity<Imagen_Problema>()
                 .Property(e => e.Nombre)
                 .IsUnicode(false);
@@ -97,9 +98,9 @@ namespace SistemaArtemis.Models
                 .Property(e => e.Extension)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<Modelo_Ia>()
-                .Property(e => e.Estado)
-                .IsUnicode(false);
+
+
+
 
             modelBuilder.Entity<Problema>()
                 .Property(e => e.Descripcion)

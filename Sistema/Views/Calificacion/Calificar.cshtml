@@ -1,7 +1,7 @@
 ﻿@*
     Versión: 1.0
     Descripción: Calificar.cshtml Representada para gestionar calificación
-    Para el caso de uso: 
+    Para el caso de uso:
         Gestionar Calificación
         Gestionar Progreso
 
@@ -18,6 +18,8 @@
     Layout = "~/Views/Shared/_ClienteLayout.cshtml";
     var idcliente = Session["Id_Cliente"];
     var idservicio = ViewBag.idservicio;
+
+    List<SistemaArtemis.Models.Codigo> codigos = ViewBag.Puntaje;
 }
 
 <div class="card">
@@ -33,20 +35,33 @@
                     <textarea id="Comentario" name="Comentario" class="form-control" rows="5"></textarea>
                 </div>
 
-                <div class="form-group">
+                @*<div class="form-group">
+                        <label for="Calificacion">Califica su Trabajo</label>
+                        <select name="Calificacion1" class="form-control">
+                            <option value="">-- Seleccione --</option>
+                            <option value="1">★</option>
+                            <option value="2">★★</option>
+                            <option value="3">★★★</option>
+                            <option value="4">★★★★</option>
+                            <option value="5">★★★★★</option>
+                            <option value="6">★★★★★★</option>
+                            <option value="7">★★★★★★★</option>
+                            <option value="8">★★★★★★★★</option>
+                            <option value="9">★★★★★★★★★</option>
+                            <option value="10">★★★★★★★★★★</option>
+                        </select>
+
+                    </div>*@
+
+
+                <div class="form-group col-sm-7">
                     <label for="Calificacion">Califica su Trabajo</label>
-                    <select name="Calificacion1" class="form-control">
-                        <option value="">-- Seleccione --</option>
-                        <option value="1">★</option>
-                        <option value="2">★★</option>
-                        <option value="3">★★★</option>
-                        <option value="4">★★★★</option>
-                        <option value="5">★★★★★</option>
-                        <option value="6">★★★★★★</option>
-                        <option value="7">★★★★★★★</option>
-                        <option value="8">★★★★★★★★</option>
-                        <option value="9">★★★★★★★★★</option>
-                        <option value="10">★★★★★★★★★★</option>
+                    <select name="Calificacion1" class="form-control" id="Id_Codigo">
+                        <option value="">--Seleccione--</option>
+                        @foreach (var t in codigos)
+                        {
+                            <option value="@t.Codigo1">@t.Descripcion</option>
+                        }
                     </select>
                 </div>
 

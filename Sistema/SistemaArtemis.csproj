@@ -1967,6 +1967,7 @@
     <Compile Include="Models\Archivos.cs" />
     <Compile Include="Models\Calificacion.cs" />
     <Compile Include="Models\Cliente.cs" />
+    <Compile Include="Models\Codigo.cs" />
     <Compile Include="Models\Conexion.cs" />
     <Compile Include="Models\Especialidad.cs" />
     <Compile Include="Models\Estado_Servicio.cs" />

@@ -29,18 +29,12 @@ namespace SistemaArtemis.Controllers
 
         Model1 db = new Model1();
 
+        private Codigo objcodi = new Codigo();
         private Calificacion objcalifica = new Calificacion();
         private Problema objproblema = new Problema();
         private Servicio objservicio = new Servicio();
 
-        //public ActionResult Index(int? id)
-        //{
-        //    //var listServicio = objproblema.ListaProblemaCliente(id);
-        //    var listServicio = db.Servicio.Include("Tecnico").Where(s => s.Id_Estado_Servicio.Equals(3)).ToList();
-        //    ViewBag.Service = listServicio;
-        //    return View();
-        //}
-
+  
         public ActionResult Index(int? id)
         {
             if (id.HasValue)
@@ -59,18 +53,12 @@ namespace SistemaArtemis.Controllers
         }
 
 
-        //public ActionResult Index(int id)
-        //{
-
-        //    var listServicio = objproblema.ListaProblemaCliente(id);
-        //    //ViewBag.Service = listServicio != null ? listServicio : new List<int>();
-        //    return View(listServicio);
-        //}
-
-
         public ActionResult Calificar(int id = 0)
         {
             ViewBag.idservicio = id;
+            //var idcod = objcodi.Listar();
+            // var califi = db.Codigo.ToList();
+            ViewBag.Puntaje = db.Codigo.ToList();
             return View();
         }
 
@@ -79,7 +67,7 @@ namespace SistemaArtemis.Controllers
         {
             using (SqlConnection oconexion = new SqlConnection(cadena))
             {
-                string query = "INSERT INTO Calificacion (Comentario, Calificacion, Id_cliente, Id_Servicio) VALUES (@comentario, @calificacion1, @id_cliente, @id_Servicio)";
+                string query = "INSERT INTO Calificacion (Comentario, Id_codigo, Id_cliente, Id_Servicio) VALUES (@comentario, @calificacion1, @id_cliente, @id_Servicio)";
 
                 SqlCommand cmd = new SqlCommand(query, oconexion);
                 cmd.Parameters.AddWithValue("@comentario", Comentario);

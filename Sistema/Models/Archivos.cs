@@ -13,24 +13,32 @@ Modificado por: [JFSV]
 */
 
 
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
-
 namespace SistemaArtemis.Models
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity.Spatial;
+    using System.Linq;
+
+
     [Table("Archivos")]
-    public class Archivos
+    public partial class Archivos
     {
         [Key]
         public int IdArchivo { get; set; }
+
+        [StringLength(100)]
         public string Nombre { get; set; }
+
         public byte[] Archivo { get; set; }
+
+        [StringLength(50)]
         public string Extension { get; set; }
-        public int Id_Problema { get; set; }
+
+        public int? Id_Problema { get; set; }
+
 
         public List<Archivos> Listar(int id)
         {
@@ -39,7 +47,7 @@ namespace SistemaArtemis.Models
             {
                 using (var db = new Model1())
                 {
-                    archivo = db.ARCHIVOS
+                    archivo = db.Archivos
                         .Where(p => p.Id_Problema == id).ToList();
                 }
             }
@@ -50,6 +58,4 @@ namespace SistemaArtemis.Models
             return archivo;
         }
     }
-
-
 }
