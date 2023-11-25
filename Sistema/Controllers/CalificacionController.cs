@@ -102,7 +102,7 @@ namespace SistemaArtemis.Controllers
                     var problema = db.Problema.Find(idProblema);
                     if (problema != null)
                     {
-                        problema.Estado = "Finalizado";
+                        problema.Estado = "Finalizado"; 
                         db.SaveChanges();
                     }
                 }
