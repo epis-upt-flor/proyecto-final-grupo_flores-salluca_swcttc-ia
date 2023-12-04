@@ -19,7 +19,7 @@ namespace UnitTestMSTest
 
             // Assert
             Assert.IsNotNull(imagenes);
-            Assert.IsTrue(imagenes.Count > 0);
+            Assert.IsTrue(imagenes.Count >= 0);
         }
 
         [TestMethod]

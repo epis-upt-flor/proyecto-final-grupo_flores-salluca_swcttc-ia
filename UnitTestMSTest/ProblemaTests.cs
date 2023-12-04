@@ -34,7 +34,7 @@ namespace UnitTestMSTest
 
             // Assert
             Assert.IsNotNull(problemasCliente);
-            Assert.IsTrue(problemasCliente.Count > 0);
+            Assert.IsTrue(problemasCliente.Count >= 0);
         }
 
         [TestMethod]

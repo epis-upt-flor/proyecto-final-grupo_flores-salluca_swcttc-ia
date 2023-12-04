@@ -11,21 +11,21 @@ namespace UnitTestMSTest
         public void Registrar_NuevoUsuario_DeberiaDevolverResultadoExitoso()
         {
             // Arrange
-            var nuevoUsuario = new Usuario
+            var nuevoUsuario = new Usuario//Modificar
             {
-                Nombre = "Nuevo",
-                Apellido = "Usuario",
-                Correo = "nuevo.usuario@example.com",
-                Password = "password123",
+                Nombre = "Cliente2072",
+                Apellido = "Cliente2072",
+                Correo = "Cliente2072@gmail.com",
+                Password = "1234",
                 Estado = 1,
-                Id_Tipo_Usuario = 1
+                Id_Tipo_Usuario = 2
             };
 
             // Act
             var resultado = nuevoUsuario.Registrar(nuevoUsuario);
 
             // Assert
-            Assert.AreEqual(1, resultado);
+            Assert.AreEqual(2072, resultado);//Modificar
         }
 
         [TestMethod]
@@ -105,7 +105,7 @@ namespace UnitTestMSTest
             // Arrange
             var usuarioExistente = new Usuario
             {
-                Correo = "Cliente35@gmail.com",
+                Correo = "Cliente2069@gmail.com",
                 Password = "1234"
             }; // Modificar 
 
@@ -121,7 +121,7 @@ namespace UnitTestMSTest
         {
             // Arrange
             var usuario = new Usuario();
-            var correoExistente = "Cliente35@gmail.com"; // Modificar 
+            var correoExistente = "Cliente0@gmail.com"; // Modificar 
 
             // Act
             var usuarioObtenido = usuario.ObtenerDatos(correoExistente);

@@ -166,20 +166,19 @@ namespace SistemaArtemis.Models
         /// Una lista de objetos de tipo "Tecnico" que coinciden con los criterios de búsqueda
         /// especificados por el parámetro "criterio".
         /// </returns>
+        /// 
+
+        //Codigo modificado  04/12/2023
         public List<Tecnico> Buscar(string criterio)
         {
-            var categorias = new List<Tecnico>();
+            List<Tecnico> tecnicosEncontrados = new List<Tecnico>();
             try
             {
                 using (var db = new Model1())
                 {
-                    categorias = db.Tecnico
-                        .Include("Tipo_Usuario")
-                        .Where(x => x.Nombre.Contains(criterio) ||
-                                x.Apellido.Contains(criterio))//|| 
-                                                              // x.Especialidad.Contains(criterio))
+                    tecnicosEncontrados = db.Tecnico
+                        .Where(x => x.Nombre.Contains(criterio) || x.Apellido.Contains(criterio))
                         .ToList();
-
                 }
             }
             catch (Exception)
@@ -187,9 +186,34 @@ namespace SistemaArtemis.Models
                 throw;
             }
 
-            return categorias;
-
+            return tecnicosEncontrados;
         }
+
+        //Codigo original  04/12/2023
+        //public List<Tecnico> Buscar(string criterio)
+        //{
+        //    var categorias = new List<Tecnico>();
+        //    try
+        //    {
+        //        using (var db = new Model1())
+        //        {
+        //            categorias = db.Tecnico
+        //                .Include("Tipo_Usuario")
+        //                .Where(x => x.Nombre.Contains(criterio) ||
+        //                        x.Apellido.Contains(criterio))//|| 
+        //                                                      // x.Especialidad.Contains(criterio))
+        //                .ToList();
+
+        //        }
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw;
+        //    }
+
+        //    return categorias;
+
+        //}
 
         //Listar tecnico especificos recomendados
         public List<Tecnico> ListarRecomendado(List<int> numeros)

@@ -14,10 +14,11 @@ namespace UnitTestMSTest
             // Arrange
             var nuevaCalificacion = new Calificacion
             {
-                Comentario = "Buen servicio",
-                Calificacion1 = 5,
+                Comentario = "excelente servicio",
+                Id_Calificacion = 4,
+                Id_Codigo = 5,
                 Id_Cliente = 1,
-                Id_Servicio = 1
+                Id_Servicio = 1025
             };
 
             // Act
@@ -33,7 +34,7 @@ namespace UnitTestMSTest
         public void Obtener_IdValido_DeberiaRetornarCalificacion()
         {
             // Arrange
-            var idServicioExistente = 1;
+            var idServicioExistente = 1025;
 
             // Act
             var calificacionObtenida = new Calificacion().Obtener(idServicioExistente);

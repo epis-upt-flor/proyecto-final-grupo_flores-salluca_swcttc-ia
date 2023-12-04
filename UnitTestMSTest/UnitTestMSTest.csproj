@@ -69,7 +69,6 @@
     <Compile Include="ServicioTests.cs" />
     <Compile Include="TecnicoTests.cs" />
     <Compile Include="Tipo_EspecialidadTests.cs" />
-    <Compile Include="Tipo_EspecialidadTest.cs" />
     <Compile Include="UsuarioTests.cs" />
   </ItemGroup>
   <ItemGroup>

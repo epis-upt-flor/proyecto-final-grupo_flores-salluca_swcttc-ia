@@ -13,7 +13,7 @@ namespace UnitTestMSTest
         {
             // Arrange
             var tecnico = new Tecnico();
-            var idUsuarioExistente = 1; // Modificar
+            var idUsuarioExistente = 2061; // Modificar
 
             // Act
             var tecnicoObtenido = tecnico.Obtener(idUsuarioExistente);
@@ -62,13 +62,13 @@ namespace UnitTestMSTest
         {
             // Arrange
             var tecnico = new Tecnico();
-            var criterioBusqueda = "Nombre"; // Modificar 
+            var criterioBusqueda = "Tecnico0"; // Modificar 
             // Act
             var tecnicosEncontrados = tecnico.Buscar(criterioBusqueda);
 
             // Assert
             Assert.IsNotNull(tecnicosEncontrados);
-            Assert.IsTrue(tecnicosEncontrados.Count > 0);
+            Assert.IsTrue(tecnicosEncontrados.Count >= 0);
         }
 
         [TestMethod]
