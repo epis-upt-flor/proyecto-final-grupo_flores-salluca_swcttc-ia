@@ -33,6 +33,7 @@ namespace SistemaArtemis.Controllers
 
         public ActionResult VisualizarImagenes(int id_Problema)
         {
+            ViewBag.Id_Problema = id_Problema;
             var imagenes = objImagenProblema.VisualizarImagenes(id_Problema);
             return View(imagenes);
         }

@@ -1,0 +1,66 @@
+﻿@model List<SistemaArtemis.Models.Servicio>
+@{
+
+    ViewBag.Title = "TrabajosDisponibles";
+    Layout = "~/Views/Shared/_TecnicoLayout.cshtml";
+}
+
+<div class="container-fluid">
+
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 bg-second-primary">
+            <h6 class="m-0 font-weight-bold text-white">Trabajos Disponibles</h6>
+        </div>
+
+        <div class="card-body">
+            <div class="row">
+           <div class="col-sm-3">
+               <a href="~/Tecnico/Index" class="btn btn-dark">Regresar</a>
+            <h2 class="page-linl"></h2>
+           </div>
+        </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <table class="table table-bordered" id="tbdata" cellspacing="0" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Fecha Publicación</th>
+                                <th>Descripción</th>
+                                @*<th>Cliente</th>*@
+                                @*<th>Especialidad</th>*@
+                                <th>Estado</th>
+                                <th>Fecha Finalizacion</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{ var i = 0;}
+                            @foreach (var t in Model)
+                            {
+                                i++;
+                                <tr>
+                                    <td>@i</td>
+                                    <td>@t.Fecha_Inicio.ToString("dd/MM/yyyy")</td>
+                                    <td>@t.Descripcion</td>
+                                    @*<td>@t.Cliente.Nombre</td>*@
+                                    @*<td>@t.Id_Tipo_Especialidad</td>*@
+                                    <td>@t.Id_Estado_Servicio</td>
+                                    <td>@t.Fecha_Fin.ToString("dd/MM/yyyy")</td>
+                                    <td>
+                                        <p class="text-center" style="margin-inline: 5px;">
+                                            <a href="~/Tecnico/Index/@t.Id_Tecnico" class="btn btn-primary"><i class=""></i> Registrarse</a>
+                                            &nbsp; &nbsp;
+                                            <a href="~/Problema/Index/@t.Id_Problema" class="btn btn-info">Más Detalle</a>
+                                        </p>
+                                    </td>
+                                </tr>
+
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

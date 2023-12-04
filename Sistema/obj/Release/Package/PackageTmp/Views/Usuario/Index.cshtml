@@ -1,0 +1,73 @@
+﻿@model List<SistemaArtemis.Models.Usuario>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdministradorLayout.cshtml";
+    List<SistemaArtemis.Models.Tipo_Usuario> tipousuario=ViewBag.tipo;
+}
+
+
+<div class="container-fluid">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 bg-second-primary">
+            <h6 class="m-0 font-weight-bold text-white">Usuarios</h6>
+        </div>
+
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-6">
+                    <a href="~/Usuario/Agregar" class="btn btn-info"><i class="fas fa-user-plus"></i> Nuevo Registro</a>
+                    <h2 class="page-linl"></h2>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+
+                    @using (Html.BeginForm("Index", "Usuario", FormMethod.Post))
+                    {
+
+                    }
+                    <table class="table table-bordered" id="tbdata" cellspacing="0" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Nombre</th>
+                                <th>Acciones</th>
+                                <th>Correo</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var m in Model)
+
+                            {
+                                <tr>
+                                    <td>@(m.Id_Usuario)</td>
+                                    <td>@(m.Tipo_Usuario != null ? m.Tipo_Usuario.Nombre : "")</td>
+                                    <td>@(m.Apellido), @(m.Nombre)</td>
+                                    <td>@(m.Correo)</td>
+                                    @*<td>@(m.Estado)</td>*@
+                                    @if (m.Estado == 1)
+                                    {
+                                        <td> <span class="badge badge-info">Activo</span></td>
+                                    }
+                                    else
+                                    {
+                                        <td><span class="badge badge-danger">No Activo</span></td>
+                                    }
+
+                                    <td>
+                                        <a href="~/Usuario/Agregar/@m.Id_Usuario" class="btn btn-primary">Editar</a>
+                                        <a onclick="return confirm('Esta Seguro que desea eliminar el registro?')" href="~/Usuario/Eliminar/@m.Id_Usuario" class="btn btn-danger">Eliminar</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

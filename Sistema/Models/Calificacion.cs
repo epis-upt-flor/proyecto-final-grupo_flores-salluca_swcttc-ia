@@ -21,6 +21,7 @@ namespace SistemaArtemis.Models
     using System.Data.Entity;
     using System.Data.Entity.Spatial;
     using System.Linq;
+    using System.Security.Cryptography.X509Certificates;
 
     [Table("Calificacion")]
     public partial class Calificacion

@@ -2044,6 +2044,7 @@
     <Content Include="Content\icons\simple-line-icons\fonts\Simple-Line-Icons7317.ttf" />
     <Content Include="Content\icons\simple-line-icons\fonts\Simple-Line-Icons7317.woff" />
     <Content Include="Content\images\ico\site.webmanifest" />
+    <Content Include=".editorconfig" />
     <None Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -2262,6 +2263,7 @@
     <Content Include="Views\Calificacion\VerCalificacion.cshtml" />
     <Content Include="Views\Servicio\DetallesServicio.cshtml" />
     <Content Include="Views\Servicio\DetallesServicioTecnico.cshtml" />
+    <Content Include="Views\Servicio\VerPostulantes.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

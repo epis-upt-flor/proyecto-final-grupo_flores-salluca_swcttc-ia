@@ -25,7 +25,10 @@ namespace SistemaArtemis.Controllers
 {
     public class ArchivoController : Controller
     {
+
         static string cadena = "Data Source=.;Initial Catalog=ArtemisBD;Integrated security=true";
+        //static string cadena = "Data Source=artemis.database.windows.net;Initial Catalog=ArtemisBD;user id=administrador;password=upt.2023";
+
         //NO CREAR ESTO HASTA LA VISTA DE INDEX
         //using ProyectoCarga.Models;
         static List<Archivos> olista = new List<Archivos>();
@@ -34,6 +37,7 @@ namespace SistemaArtemis.Controllers
         public ActionResult Subir(int id = 0)
         {
             var problemas = new Problema().Listar(id);
+            
             ViewBag.Prob = problemas;
             return View();
         }
@@ -45,7 +49,7 @@ namespace SistemaArtemis.Controllers
 
             using (SqlConnection oconexion = new SqlConnection(cadena))
             {
-                SqlCommand cmd = new SqlCommand("SELECT * FROM ARCHIVOS WHERE Id_Problema = @id_problema", oconexion);
+                SqlCommand cmd = new SqlCommand("SELECT * FROM ARCHIVOS WHERE Id_Tecnico = @id_problema OR Id_Problema = @id_problema", oconexion);
                 cmd.Parameters.AddWithValue("@id_problema", id);
                 cmd.CommandType = CommandType.Text;
                 oconexion.Open();
@@ -65,14 +69,16 @@ namespace SistemaArtemis.Controllers
                 }
 
             }
-            ViewBag.IdProblema = id;
+                
+            
+            ViewBag.Idusuario = new Tecnico().Listar().Find(x => x.Id_Tecnico == id);
             return View(olista);
         }
 
 
-        //public EmptyResult SubirArchivo(string Nombre, HttpPostedFileBase Archivo, int Id_Problema)
+        
         [HttpPost]
-        public ActionResult SubirArchivo(string Nombre, HttpPostedFileBase Archivo, int Id_Problema)
+        public ActionResult SubirArchivo(string Nombre, HttpPostedFileBase Archivo, int Id_Problema, int Id_Tecnico, int Precio)
         {
             //var sv = new ServicioController();
             //sv.Guardar(sdfsdf.servicio)
@@ -84,11 +90,13 @@ namespace SistemaArtemis.Controllers
 
             using (SqlConnection oconexion = new SqlConnection(cadena))
             {
-                SqlCommand cmd = new SqlCommand("INSERT INTO ARCHIVOS(Nombre, Archivo, Extension, Id_Problema) VALUES(@nombre, @archivo, @extension, @idProblema)", oconexion);
-                cmd.Parameters.AddWithValue("@nombre", Nombre);
+                SqlCommand cmd = new SqlCommand("INSERT INTO ARCHIVOS(Nombre, Archivo, Extension, Id_Problema, Id_Tecnico, Precio) VALUES(@nombre, @archivo, @extension, @idProblema, @id_tecnico,@precio)", oconexion);
+                cmd.Parameters.AddWithValue("@nombre", Nombre);             
                 cmd.Parameters.AddWithValue("@archivo", data);
                 cmd.Parameters.AddWithValue("@extension", Extension);
                 cmd.Parameters.AddWithValue("@idProblema", Id_Problema);
+                cmd.Parameters.AddWithValue("@id_tecnico", Id_Tecnico);
+                cmd.Parameters.AddWithValue("@precio", Precio);
                 cmd.CommandType = CommandType.Text;
                 oconexion.Open();
                 cmd.ExecuteNonQuery();
@@ -104,7 +112,7 @@ namespace SistemaArtemis.Controllers
         public FileResult DescargarArchivo(int IdArchivo)
         {
             CargarArchivosDesdeBD();
-            Archivos oArchivo = olista.Where(a => a.Id_Problema == IdArchivo).FirstOrDefault();
+            Archivos oArchivo = olista.Where(a => a.Id_Problema == IdArchivo || a.IdArchivo == IdArchivo).FirstOrDefault();
             //Archivos oArchivo = olista.Where(a => a.IdArchivo == IdArchivo || a.Id_Problema==IdArchivo).FirstOrDefault();
             string NombreCompleto = oArchivo.Nombre + oArchivo.Extension;
             return File(oArchivo.Archivo, "application/" + oArchivo.Extension.Replace(".", ""), NombreCompleto);

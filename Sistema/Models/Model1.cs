@@ -38,6 +38,11 @@ namespace SistemaArtemis.Models
                 .Property(e => e.Extension)
                 .IsUnicode(false);
 
+            
+            modelBuilder.Entity<Archivos>()
+                .Property(e => e.Precio)
+                .HasPrecision(10, 2);    
+
             modelBuilder.Entity<Calificacion>()
                 .Property(e => e.Comentario)
                 .IsUnicode(false);

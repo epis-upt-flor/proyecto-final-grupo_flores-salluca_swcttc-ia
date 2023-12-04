@@ -1,0 +1,65 @@
+﻿@*
+    Versión: 1.0
+    Descripción: EmpleadosDisponibles.cshtml Representada para autenticar usuario
+    Para el caso de uso: Autenticar Usuario
+
+    Fecha de creación: [07/08/2023]
+    Creado por: [DJFN]
+
+    Última modificación: [11/11/2023]
+    Modificado por: [JFSV]
+*@
+
+@{
+    ViewBag.Title = "Contact";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="section sm">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+                <div class="section-title">
+                    <h2>Contactanos para ayudarte</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-10 col-md-8 col-md-offset-2 mb-30">
+            <form class="contact-form-wrapper" data-toggle="validator" action="/~Home/Index" method="POST" autocomplete="off">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="inputName">Nombres y apellidos <span class="font10 text-danger">(requerido)</span></label>
+                            <input id="inputName" name="fullname" type="text" class="form-control" data-error="Tu nombre es obligatorio" required>
+                            <div class="help-block with-errors"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="inputEmail">Tu Correo Electrónico <span class="font10 text-danger">(requerido)</span></label>
+                            <input id="inputEmail" name="email" type="email" class="form-control" data-error="Tu correo es obligatorio y verificado por Correo Electrónico" required>
+                            <div class="help-block with-errors"></div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label for="inputMessage">Mensaje <span class="font10 text-danger">(requerido)</span></label>
+                            <textarea id="inputMessage" name="message" class="form-control" rows="8" data-minlength="50" data-error="Your message is required and must not less than 50 characters" required></textarea>
+                            <div class="help-block with-errors"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12 text-right">
+                        <button type="submit" class="btn btn-primary mt-5">Enviar Mensaje</button>
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>

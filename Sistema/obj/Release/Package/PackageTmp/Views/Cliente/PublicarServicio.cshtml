@@ -1,0 +1,81 @@
+﻿@model SistemaArtemis.Models.Cliente
+@{
+    ViewBag.Title = "PublicarServicio";
+    Layout = "~/Views/Shared/_ClienteLayout.cshtml";
+}
+
+<div class="card-body">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 bg-second-primary">
+            <h6 class="m-0 font-weight-bold text-white">Agregar Nueva Publicación</h6>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">
+                <button class="btn btn-success" data-toggle="modal" data-target="#modalData"><i class="fas fa-plus-circle"></i> Nuevo Servicio</button>
+                <h2 class="pagegeader"></h2>
+            </div>
+        </div>
+
+
+
+        <div class="modal fade" id="modalData" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h6>Detalle Producto</h6>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        @using (Html.BeginForm())
+                        {
+                            @*<form action="~/Cliente/Index" method="post">*@
+                            <input type="hidden" value="0" id="txtId"><div class="row">
+                                <div class="col-sm-8">
+                                    <div class="form-row">
+                                        <div class="form-group col-sm-6">
+                                            <label for="datetime">Fecha Inicio</label>
+                                            <input type="date" class="form-control form-control-sm input-validar" id="txtCodigoBarra" name="Codigo Barra">
+                                        </div>
+                                        <div class="form-group col-sm-6">
+                                            <label for="datetime">Fecha Fin</label>
+                                            <input type="date" class="form-control form-control-sm input-validar" id="txtMarca" name="Marca">
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-sm-12">
+                                            <label for="txtDescripcion">Descripcion</label>
+                                            <input type="text" class="form-control form-control-sm input-validar" id="txtDescripcion" name="Descripcion">
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-sm-6">
+                                            <label for="cboCategoria">Categoria</label>
+                                            <select class="form-control form-control-sm" id="cboCategoria">
+                                                <option value="0">seleccionar</option>
+                                                <option value="0">En Proceso</option>
+                                            </select>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+                            </div><div class="modal-footer">
+                                @*<button class="btn btn-primary btn-sm" type="button" id="btnGuardar">Guardar</button>*@
+                                <a href="~/Cliente/Index" class="btn btn-success">Guardar</a>
+                                <button class="btn btn-danger btn-sm" type="button" data-dismiss="modal">Cancel</button>
+                            </div>
+
+                        }
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+

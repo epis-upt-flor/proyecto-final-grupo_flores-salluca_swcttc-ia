@@ -1,0 +1,132 @@
+﻿@model List<SistemaArtemis.Models.Servicio>
+@{
+    ViewBag.Title = "VerPostulantes";
+    Layout = "~/Views/Shared/_ClienteLayout.cshtml";
+    List<SistemaArtemis.Models.Archivos> archivos = ViewBag.listar;
+    List<SistemaArtemis.Models.Tecnico> ltecnico = ViewBag.listecnico;
+    List<SistemaArtemis.Models.Problema> lproblema = ViewBag.listproblema;
+}
+@*<h2>VerPostulantes</h2>*@
+
+
+<div class="container-fluid">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 bg-second-primary">
+            <h6 class="m-0 font-weight-bold text-white">Ver Postulantes y ofertas</h6>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-3">
+                    <a href="~/Cliente/Index" class="btn btn-dark btn-sm"><i class="fas fa-arrow-left"></i> Regresar</a>
+                    <h2 class="pagegeader"></h2>
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-sm-12">
+                    <table class="table table-bordered" id="tbdata" cellspacing="0" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Descripción</th>
+                                <th>Inicio de la Publicación</th>
+                                <th>Fin de la Publicación</th>
+                                <th>Cotización</th>
+                                <th>Monto a cobrar</th>
+                                <th>Tecnico</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{ var i = 0;}
+                            @foreach (var s in Model)
+                            {
+                                // Filtrar registros con estado "Finalizado"
+                                if (s.Id_Estado_Servicio != 3)
+                                {
+                                    i++;
+                                    <tr>
+                                        <td>@i</td>
+                                        <td>@s.Descripcion</td>
+                                        <td>@s.Fecha_Inicio.ToString("dd/MM/yyyy")</td>
+                                        <td>@s.Fecha_Fin.ToString("dd/MM/yyyy")</td>
+                                        <td>
+                                            <form action="@Url.Action("DescargarArchivo", "Archivo")" method="post">
+                                                <input name="IdArchivo" type="hidden" value="@s.Id_Problema" />
+                                                <button class="btn btn-sm btn-icon btn-warning" type="submit" title="Descargar Proforma">
+                                                    <i class="fa fa-download"></i>
+                                                </button>
+                                            </form>
+                                        </td>
+
+                                        <td>
+                                            @foreach (var x in archivos)
+                                            {
+                                                if (s.Id_Problema == x.Id_Problema && s.Id_Tecnico == x.Id_Tecnico)
+                                                {
+                                                    <p>@x.Precio</p>
+                                                }
+                                            }
+                                        </td>
+
+                                        <td>
+                                            @{ foreach (var t in ltecnico)
+                                                {
+                                                    if (s.Id_Tecnico == t.Id_Tecnico)
+                                                    {
+                                                        <p>@t.Nombre @t.Apellido</p>
+                                                    }
+
+                                                }
+                                            }
+                                        </td>
+
+                                        @if (s.Id_Estado_Servicio == 1)
+                                        {
+                                            <td> <span class="badge badge-success">Pendiente</span></td>
+                                        }
+                                        @if (s.Id_Estado_Servicio == 2)
+                                        {
+                                            <td> <span class="badge badge-warning">En Revisión</span></td>
+                                            <td>
+                                                <a href="~/Servicio/Modificar/@s.Id_Problema" class="btn btn-success btn-sm" title="Aceptar"><i class="fas fa-check"></i> </a>
+                                                <a href="~/Servicio/Guardar2/@s.Id_Servicio" class="btn btn-danger btn-sm" title="Rechazar"><i class="fas fa-times"></i> </a>
+                                            </td>
+                                        }
+                                        @if (s.Id_Estado_Servicio == 3)
+                                        {
+                                            <td> <span class="badge badge-primary">En Proceso</span></td>
+                                        }
+                                        @if (s.Id_Estado_Servicio == 4)
+                                        {
+                                            <td> <span class="badge badge-danger">Finalizado</span></td>
+                                            <td>
+                                                <a href="~/Servicio/Modificar/@s.Id_Problema" class="btn btn-success btn-sm btn disabled" title="Aceptar"><i class="fas fa-check"></i> </a>
+                                                <a href="~/Servicio/Guardar2/@s.Id_Servicio" class="btn btn-danger btn-sm btn disabled" title="Rechazar"><i class="fas fa-times"></i> </a>
+                                            </td>
+                                        }
+                                        @if (s.Id_Estado_Servicio == 5)
+                                        {
+                                            <td> <span class="badge badge-dark">Rechazado</span></td>
+                                            <td>
+                                                <a href="~/Servicio/Modificar/@s.Id_Problema" class="btn btn-success btn-sm btn disabled" title="Aceptar"><i class="fas fa-check"></i> </a>
+                                                <a href="~/Servicio/Guardar2/@s.Id_Servicio" class="btn btn-danger btn-sm btn disabled" title="Rechazar"><i class="fas fa-times"></i> </a>
+                                            </td>
+                                        }
+
+
+
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

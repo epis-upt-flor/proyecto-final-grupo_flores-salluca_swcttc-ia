@@ -60,6 +60,7 @@ namespace SistemaArtemis.Controllers
                     usuario.Id_Tipo_Usuario = Convert.ToInt32(reader["Id_Tipo_Usuario"]);
                     usuario.Id_Usuario = Convert.ToInt32(reader["Id_Usuario"]);
                     Session["Correo"] = usuario.Correo;
+                    
                 }                 
             }
 
@@ -70,6 +71,7 @@ namespace SistemaArtemis.Controllers
             else if (usuario.Id_Tipo_Usuario == 2)
             {
                 var tecnico = new Tecnico().Listar().Find(x => x.Id_Usuario == usuario.Id_Usuario);
+                ViewBag.codigotecnico= tecnico.Id_Usuario;
                 Session["Id_Tecnico"] = tecnico.Id_Tecnico;         
                 return RedirectToAction("Index/"+ tecnico.Id_Tecnico, "Tecnico");
             }

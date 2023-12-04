@@ -1,0 +1,87 @@
+﻿@model SistemaArtemis.Models.Cliente
+@{
+    ViewBag.Title = "Perfil";
+    Layout = "~/Views/Shared/_ClienteLayout.cshtml";
+}
+
+@using (Html.BeginForm("Guardar", "Cliente", FormMethod.Post, new { id = "frm-categoria" }))
+{
+
+    //@Html.HiddenFor(x => x.id)
+    @Html.HiddenFor(x => x.Id_Cliente)
+    <div class="content-wrapper">
+
+        <div class="card shadow mb-6">
+            <div class="card-header py-3 bg-second-primary">
+                <h6 class="m-0 font-weight-bold text-white"><i class="fas fa-user"></i> Mis Datos</h6>
+            </div>
+            <div class="card-body">
+                <form>
+                    <div class="form-row">
+                        <div class="form-group col-sm-12">
+                            <img id="imgFoto" src="https://img.freepik.com/vector-premium/actualizacion-datos-o-sincronizacion-proceso-barras-personas-planas-actualizacion-computadora-portatil-telefono-inteligente_123447-4910.jpg?w=826" class="rounded mx-auto d-block" style="width: 200px; height: 200px;">
+                        </div>
+
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-sm-12">
+
+                            @Html.LabelFor(x => x.Nombre)
+                            @Html.TextBoxFor(x => x.Nombre, new { @class = "form-control", @readonly = "readonly" })
+                            @Html.ValidationMessageFor(x => x.Nombre, null, new { @class = "label label-danger" })
+
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-sm-12">
+
+                            @Html.LabelFor(x => x.Apellido)
+                            @Html.TextBoxFor(x => x.Apellido, new { @class = "form-control", @readonly = "readonly" })
+                            @Html.ValidationMessageFor(x => x.Apellido, null, new { @class = "label label-danger" })
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-sm-12">
+
+                            @Html.LabelFor(x => x.Telefono)
+                            @Html.TextBoxFor(x => x.Telefono, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.Telefono, null, new { @class = "label label-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-sm-12">
+
+                            @Html.LabelFor(x => x.Estado)
+                            @Html.TextBoxFor(x => x.Estado, new { @class = "form-control", @readonly = "readonly" })
+
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-sm-12">
+
+                            @*Html.LabelFor(x => x.Id_Usuario)*@
+                            @Html.TextBoxFor(x => x.Id_Usuario, new { @class = "form-control", @hidden = "hidden" })
+
+                        </div>
+                    </div>
+
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <button type="submit" class="btn btn-success btn-sm btn-block" id="btnGuardarCambios">Guardar</button>
+
+                        </div>
+                        <div class="col-sm-3">
+                            <a href="~/Cliente" class="btn btn-danger  btn-sm btn-block">Cancelar</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+    </div>
+
+}
+

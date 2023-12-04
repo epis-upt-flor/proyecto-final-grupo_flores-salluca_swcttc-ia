@@ -14,6 +14,10 @@ Modificado por: [JFSV]
 */
 
 
+using SistemaArtemis.Models;
+using System.Collections.Generic;
+using System;
+
 namespace SistemaArtemis.Models
 {
     using System;
@@ -23,8 +27,10 @@ namespace SistemaArtemis.Models
     using System.Data.Entity;
     using System.Data.Entity.Spatial;
     using System.Linq;
+    using System.Reflection;
     using System.Runtime.InteropServices.WindowsRuntime;
     using System.Web.Mvc;
+    using System.Web.Services.Description;
 
     [Table("Servicio")]
     public partial class Servicio
@@ -55,7 +61,7 @@ namespace SistemaArtemis.Models
 
         public int Id_Problema { get; set; }
 
-        public int Id_Estado_Servicio { get; set; }
+        public int Id_Estado_Servicio { get; set; }    
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Calificacion> Calificacion { get; set; }
@@ -66,8 +72,57 @@ namespace SistemaArtemis.Models
 
         public virtual Tecnico Tecnico { get; set; }
 
+        public List<Servicio> data()
+        {
+            var datos=new List<Servicio>();
+            try
+            {
+                using (var db = new Model1())
+                {
+                    var resultados = db.Tecnico
+                        .Join(db.Servicio, t => t.Id_Tecnico, s => s.Id_Tecnico, (t, s) => new { Tecnico = t, Servicio = s })
+                        .Join(db.Calificacion, ts => ts.Servicio.Id_Servicio, c => c.Id_Servicio, (ts, c) => new { ts.Tecnico, ts.Servicio, Calificacion = c })
+                        .Join(db.Codigo, tsc => tsc.Calificacion.Id_Codigo, cd => cd.Id_Codigo, (tsc, cd) => new
+                        {
+                            IdTecnico = tsc.Tecnico.Id_Tecnico,
+                            Nombre = tsc.Tecnico.Nombre,
+                            Apellido = tsc.Tecnico.Apellido,
+                            IdCodigo = cd.Id_Codigo,
+                            Puntaje = cd.Descripcion,
+                            Servicio = tsc.Servicio // Agrega la propiedad Servicio al resultado
+                        })
+                        .Where(result => result.Servicio.Id_Estado_Servicio == 3)
+                        .ToList();
+                }
 
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return datos;
+        }
         public List<Servicio> Listar()  //ok
+        {
+            var serv = new List<Servicio>();
+            try
+            {
+                using (var db = new Model1())
+                {
+                    serv = db.Servicio
+                           .Include("Tecnico")
+                           .Include("Problema")
+                           .Where(s => s.Id_Estado_Servicio == 1) // cambie validar
+                     .ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return serv;
+        }
+        public List<Servicio> ListarTrabajosAceptados()  //ok
         {
             var serv = new List<Servicio>();
             try
@@ -87,7 +142,6 @@ namespace SistemaArtemis.Models
             }
             return serv;
         }
-
 
         /// <summary> Esta función recupera una lista de problemas asociados con una identificación de cliente específica.
         /// <param name="id">El parámetro id es un número entero que representa el id del usuario para el que queremos listar los problemas.</param>
@@ -140,7 +194,7 @@ namespace SistemaArtemis.Models
                             .Include("Tecnico")
                             .Include("Estado_Servicio")
                             .Include("Problema")
-                            .Where(x => x.Id_Tecnico == itecnico && x.Id_Estado_Servicio == 2)
+                            .Where(x => x.Id_Tecnico == itecnico)// && x.Id_Estado_Servicio == 2)
                             .ToList();
                     }
 
@@ -153,6 +207,29 @@ namespace SistemaArtemis.Models
             return misservicios;
         }
 
+
+
+        public List<Servicio> Mispostulantes()
+        {
+            var serv = new List<Servicio>();
+            try
+            {
+                using (var db = new Model1())
+                {
+                    serv = db.Servicio
+                           .Include("Tecnico")
+                           .Include("Problema")
+                           .Where(s => s.Id_Estado_Servicio != 3) // cambie validar
+                     .ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return serv;
+        }
+
         /// <summary>Esta función guarda los cambios realizados en un objeto de servicio en una base de datos utilizando Entity Framework.
         public void Guardar()
         {
@@ -162,7 +239,7 @@ namespace SistemaArtemis.Models
                 {
                     if (this.Id_Servicio > 0)
                     {
-                        db.Entry(this).State = EntityState.Modified;
+                        db.Entry(this).State = EntityState.Added;
                     }
                     else
                     {
@@ -178,24 +255,23 @@ namespace SistemaArtemis.Models
         }
 
 
-
-        public Servicio Obtener(int id)
+        //Servicio Obtener(int id)
+        public List<Servicio> Obtener(int id)
         {
-            var servicio = new Servicio();
+            var servicio = new List<Servicio>();
             try
             {
                 using (var db = new Model1())
                 {
                     servicio = db.Servicio.Include("Problema")
                         .Where(x => x.Id_Problema == id)
-                        .SingleOrDefault();
+                        .ToList();
                 }
             }
             catch (Exception)
             {
                 throw;
             }
-
             return servicio;
         }
 
@@ -378,7 +454,9 @@ namespace SistemaArtemis.Models
             }
 
             return serviciosRealizados;
-        }      
+        }
+
+
 
 
     }

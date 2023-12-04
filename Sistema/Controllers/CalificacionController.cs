@@ -26,6 +26,8 @@ namespace SistemaArtemis.Controllers
     {
         // GET: Calificacion
         static string cadena = "Data Source=.;Initial Catalog=ArtemisBD;Integrated security=true";
+        ////static string cadena = "Data Source=artemis.database.windows.net;Initial Catalog=ArtemisBD;user id=administrador;password=upt.2023";
+
 
         Model1 db = new Model1();
 
@@ -33,6 +35,7 @@ namespace SistemaArtemis.Controllers
         private Calificacion objcalifica = new Calificacion();
         private Problema objproblema = new Problema();
         private Servicio objservicio = new Servicio();
+        private Tecnico objtecnico=new Tecnico();
 
   
         public ActionResult Index(int? id)
@@ -115,8 +118,12 @@ namespace SistemaArtemis.Controllers
 
         public ActionResult VerCalificacion(int id)
         {
+            ViewBag.ltecnico = objtecnico.Listar();
             return View(objcalifica.VerCalificacion(id));
         }
+
+
+        
 
     }
 }

@@ -53,6 +53,9 @@ namespace SistemaArtemis.Models
 
         public int Id_Usuario { get; set; }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Archivos> Archivos { get; set; }
+
         public virtual Especialidad Especialidad { get; set; }
 
         public virtual Estado_Tecnico Estado_Tecnico { get; set; }

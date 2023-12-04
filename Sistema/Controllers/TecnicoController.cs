@@ -31,6 +31,7 @@ namespace SistemaArtemis.Controllers
         private Problema objproblema = new Problema();
         private Servicio objServicio = new Servicio();
         private Calificacion objCalificacion = new Calificacion();
+        private Cliente objCliente = new Cliente();
 
         public ActionResult Index(int id = 0) //ok
         {
@@ -39,6 +40,33 @@ namespace SistemaArtemis.Controllers
             ViewBag.ObtenerTotalServiciosFaltaAprobarEstado = objservicio.ObtenerTotalServiciosFaltaAprobarEstado(id);
             ViewBag.ObtenerTotalServiciosEnProceso = objservicio.ObtenerTotalServiciosEnProceso(id);
             ViewBag.ObtenerTotalTipoEspecialidadPorTecnico = objtecnico.ObtenerTotalTipoEspecialidadPorTecnico(id);
+
+
+            var grafico = (db.Servicio.Where(s => s.Id_Tecnico == id)
+                                .GroupBy(s => new { s.Id_Tecnico, s.Id_Estado_Servicio })
+                                .Select(g => new
+                                {
+                                    IdEstadoServicio = g.Key.Id_Estado_Servicio,
+                                    CantidadServicios = g.Count()
+                                }));
+
+            ViewBag.datosgrafiTecnico = grafico;
+
+            ViewBag.datosgrafiTecnico2 = (from s in db.Servicio
+                                          join c in db.Calificacion on s.Id_Servicio equals c.Id_Servicio
+                                          join cd in db.Codigo on c.Id_Codigo equals cd.Id_Codigo
+                                          where s.Id_Tecnico == id
+                                          group new { s, cd } by new { s.Id_Tecnico, cd.Descripcion } into grupo
+                                          select new
+                                          {
+                                              IdTecnico = grupo.Key.Id_Tecnico,
+                                              CodigoDescripcion = grupo.Key.Descripcion,
+                                              CantidadServicios = grupo.Count()
+                                          });
+
+
+
+
             return View();
         }
 
@@ -79,6 +107,7 @@ namespace SistemaArtemis.Controllers
         /// <returns> El método `ListarMisServicios` está devolviendo una vista con los datos obtenidos del método`MisServicios` del objeto `objservicio`, que toma un parámetro `id`.
         public ActionResult ListarMisServicios(int id)  //ok
         {
+            ViewBag.listacliente = objCliente.Listar();
             return View(objservicio.MisServicios(id));
         }
 

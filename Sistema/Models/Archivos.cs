@@ -26,7 +26,7 @@ namespace SistemaArtemis.Models
     [Table("Archivos")]
     public partial class Archivos
     {
-        [Key]
+         [Key]
         public int IdArchivo { get; set; }
 
         [StringLength(100)]
@@ -38,6 +38,13 @@ namespace SistemaArtemis.Models
         public string Extension { get; set; }
 
         public int? Id_Problema { get; set; }
+
+        public int? Id_Tecnico { get; set; }
+
+        public decimal? Precio { get; set; }
+
+        public virtual Tecnico Tecnico { get; set; }
+
 
 
         public List<Archivos> Listar(int id)
@@ -57,5 +64,22 @@ namespace SistemaArtemis.Models
             }
             return archivo;
         }
-    }
+        public List<Archivos> ListarTodo()
+        {
+            var archivo = new List<Archivos>();
+            try
+            {
+                using (var db = new Model1())
+                {
+                    archivo = db.Archivos.Include("Tecnico").ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return archivo;
+        }
+
+}
 }

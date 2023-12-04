@@ -30,6 +30,9 @@ namespace SistemaArtemis.Controllers
         Tecnico objTecnico = new Tecnico();
         Cliente objCliente = new Cliente();
         private Model1 db = new Model1();
+        Servicio objservicio = new Servicio();
+        
+
         // GET: Cliente
         public ActionResult Index(int id = 0)  //ok
         {
@@ -39,8 +42,26 @@ namespace SistemaArtemis.Controllers
             ViewBag.ObtenerTotalTecnicosDisponibleNoDisponibles = objTecnico.ObtenerTotalTecnicosDisponibleNoDisponibles();
             ViewBag.ObtenerTotalTecnicoDisponibles = objTecnico.ObtenerTotalTecnicoDisponibles();
 
+
+            var grafico = (from t in db.Tecnico
+                           join s in db.Servicio on t.Id_Tecnico equals s.Id_Tecnico
+                           join c in db.Calificacion on s.Id_Servicio equals c.Id_Servicio
+                           join cd in db.Codigo on c.Id_Codigo equals cd.Id_Codigo
+                           where s.Id_Tecnico == t.Id_Tecnico
+                           select new
+                           {
+                               IdTecnico = t.Id_Tecnico,
+                               Nombre = t.Nombre,
+                               Apellido = t.Apellido,
+                               IdCodigo = cd.Id_Codigo,
+                               Puntaje = cd.Descripcion
+                           }).ToList();
+            ViewBag.datosgraficos = grafico;
+
             return View();
-        }       
+        }
+
+        
         public ActionResult ListarTecnicos() //ok
         {
             return View(objTecnico.Listar());
@@ -53,5 +74,6 @@ namespace SistemaArtemis.Controllers
             else
                 return Redirect("~/Cliente"); 
         }
+
     }
 }
